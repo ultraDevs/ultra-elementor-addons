@@ -1,0 +1,38 @@
+$medium_device: 'only screen and (min-width: 992px) and (max-width: 1200px)';
+$tab_device:'only screen and (min-width: 768px) and (max-width: 991px)';
+$small_mobile:'(max-width: 767px)';
+$large_mobile: 'only screen and (min-width: 480px) and (max-width: 767px)';
+$desktop: '(min-width: 1281px)';
+.ua-box {
+    transition: 0.2s;
+    padding: 20px 20px 20px 20px;
+    cursor: pointer;
+    .ua-box__icon {
+        color: #fff;
+        text-align: center;
+        font-size: 50px;
+        @media #{$small_mobile} {
+            float: none !important;
+            margin-bottom: 1em;
+        }
+        i {
+            padding: 15px;
+            text-align: center;
+        }
+    }
+    .ua-box__title {
+        margin: 0 0 5px 0;
+        color: #FFFFFF;
+        text-align: center;
+        @media #{$small_mobile} {
+            // margin-left: 0px;
+            margin-bottom: 5px;
+        }
+    }
+    .ua-box__content {
+        color: #FFFFFF;
+        @media #{$small_mobile} {
+            // margin-left: 0px;
+        }
+    }
+}

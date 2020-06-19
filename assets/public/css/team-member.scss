@@ -1,0 +1,64 @@
+.ua-team-members {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.10), 0 15px 12px rgba(0, 0, 0, 0.02);
+    padding: 1em;
+    // // width: 250px;
+    // // border: 1px solid #ececec;
+    border-radius: 10px;
+    background: #fff;
+    transition: all 0.4s ease-in-out;
+    .tm__s1 {
+        .ua-tm__avatar {
+            text-align: center;
+            img {
+                width: 100px;
+                height: 100px;
+                border-radius: 100%;
+            }
+        }
+        .ua-tm__info {
+            padding: 10px;
+            h3 {
+                text-align: center;
+                color: #333;
+                padding: 0;
+                margin: 0;
+            }
+            h4 {
+                text-align: center;
+                color: #312b2b;
+            }
+            p {
+                padding: 5px 0;
+                text-align: center;
+                color: #312b2b;
+                margin-bottom: 10px;
+            }
+        }
+        .ua-tm__bottom {
+            // position: absolute;
+            background: red;
+            border-radius: 10px;
+            padding: 20px;
+            // left: 15px;
+            // right: 15px;
+            margin-bottom: -50px;
+            .ua-tm__social {
+                display: flex;
+                justify-content: center;
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    li {
+                        float: left;
+                        padding-right: 10px;
+                        a {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

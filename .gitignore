@@ -1,0 +1,5 @@
+.DS_Store
+wp-admin
+wp-includes
+composer.json
+composer.lock

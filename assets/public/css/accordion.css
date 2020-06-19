@@ -1,0 +1,28 @@
+.ua-accordion {
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.ua-accordion .ua-accordion-header {
+  padding: 10px;
+  cursor: pointer;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.ua-accordion .ua-accordion-header:hover {
+  position: relative;
+  z-index: 5;
+}
+
+.ua-accordion .ua-accordion-header .ua-accordion-icon {
+  float: right;
+  padding-right: 10px;
+}
+
+.ua-accordion .ua-accordion-body__contents {
+  padding: 10px;
+  color: #3b566e;
+  display: none;
+}
+/*# sourceMappingURL=accordion.css.map */

@@ -1,0 +1,148 @@
+.ua-team-members-c {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.10), 0 15px 12px rgba(0, 0, 0, 0.02);
+    padding: 1em;
+    background: #fff;
+    transition: all 0.4s ease-in-out;
+    margin: 30px 10px 50px 10px;
+    .tm__s1 {
+        .ua-tm__avatar {
+            display: flex;
+            justify-content: center;
+            img {
+                width: 100px;
+                height: 100px;
+                border-radius: 100%;
+            }
+        }
+        .ua-tm__info {
+            padding: 10px;
+            h3 {
+                text-align: center;
+                color: #333;
+                padding: 0;
+                margin: 0;
+            }
+            h4 {
+                text-align: center;
+                color: #312b2b;
+                margin: 0;
+            }
+            p {
+                padding: 5px 0;
+                text-align: center;
+                color: #312b2b;
+                margin: 0 0 10px 0;
+            }
+        }
+        .ua-tm__bottom {
+            // position: absolute;
+            background: red;
+            border-radius: 10px;
+            padding: 20px;
+            // left: 15px;
+            // right: 15px;
+            margin-bottom: -50px;
+            .ua-tm__social {
+                display: flex;
+                justify-content: center;
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    li {
+                        float: left;
+                        padding-right: 10px;
+                        a {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ua-m-info .ua-m-social a i.fa-facebook:hover {
+    background-color: #3b5998;
+}
+
+.ua-m-info .ua-m-social a i.fa-linkedin:hover {
+    background-color: #007bb6;
+}
+
+.ua-m-info .ua-m-social a i.fa-instagram:hover {
+    background-color: #e46880;
+}
+
+.ua-m-info .ua-m-social a i.fa-twitter:hover {
+    background-color: #1a9ec4;
+}
+
+.ua-tm-carousel-c {
+    ul.slick-dots {
+        list-style: none;
+        text-align: center;
+        li {
+            background: #f00395;
+            width: 10px;
+            border-radius: 10px;
+            height: 10px;
+            display: inline-block;
+            margin-right: 5px;
+            cursor: pointer;
+            &:hover {
+                background: #4b00e7;
+                width: 30px;
+            }
+            button {
+                display: none;
+                &::before {
+                    content: '';
+                }
+            }
+        }
+    }
+}
+
+ul.slick-dots li.slick-active {
+    background: #4b00e7;
+    width: 30px;
+}
+
+
+/** Navs **/
+
+.slick-prev {
+    left: -75px !important;
+}
+
+.slick-next {
+    right: -75px !important;
+}
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 45%;
+    color: #fff !important;
+    background: #4b00e7 !important;
+    padding: 5px 5px !important;
+    transition: all 0.3s ease-in-out;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 50% !important;
+    i {
+        font-size: 50px;
+    }
+    &:hover,
+    &:focus {
+        color: #FFF !important;
+        outline: none;
+        background: #f30d55 !important;
+    }
+    &::before,
+    &::after {
+        content: '' !important;
+    }
+}
