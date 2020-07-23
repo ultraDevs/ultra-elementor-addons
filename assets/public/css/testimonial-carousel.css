@@ -1,0 +1,157 @@
+.ua-testimonial-carousel {
+  overflow: hidden;
+}
+
+/** Testimonials **/
+.ua-testimonial-c {
+  background: #f7fafd;
+  padding: 4em 0;
+  position: relative;
+}
+
+.ua-testimonial-c .owl-item .center .t_txt {
+  background: -webkit-gradient(linear, left top, right top, from(#f30d55), to(#5820e5));
+  background: linear-gradient(to right, #f30d55 0%, #5820e5 100%);
+}
+
+.ua-testimonial-c .center .t_item {
+  opacity: 1;
+}
+
+.ua-testimonial-c .center .t_txt,
+.ua-testimonial-c .t_item:hover .t_txt {
+  background: -webkit-gradient(linear, left top, right top, from(#f30d55), to(#5820e5));
+  background: linear-gradient(to right, #f30d55 0%, #5820e5 100%);
+  -webkit-box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.4);
+          box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.4);
+}
+
+.ua-testimonial-c .center .t_txt::after {
+  border-top: 30px solid #5820e5;
+}
+
+.ua-testimonial-c .t_item:hover .t_txt::after {
+  border-top: 30px solid #5820e5;
+}
+
+.ua-testimonial-c .t_item {
+  padding: 0 15px;
+  opacity: 0.4;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+
+.ua-testimonial-c .t_item:hover {
+  opacity: 1;
+}
+
+.ua-testimonial-c .t_item .t_txt {
+  color: #fff;
+  position: relative;
+  padding: 34px 45px;
+  font-size: 14px;
+  line-height: 26px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+}
+
+.ua-testimonial-c .t_item .t_txt::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -30px;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  width: 30px;
+  margin: 0 auto;
+}
+
+.ua-testimonial-c .t_item .client_info {
+  text-align: center;
+}
+
+.ua-testimonial-c .t_item .client_info .c_img img {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, 0.5);
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.ua-testimonial-c .t_item .client_info .c_o_info h2 {
+  color: #3b566e;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0.5em 0;
+}
+
+.ua-testimonial-c .t_item .client_info .c_o_info h3 {
+  color: #3b566e;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0 0 1em 0;
+}
+
+/** Owl Carousel **/
+.owl-dots {
+  display: block !important;
+  margin-top: 1.5em !important;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background-color: #f30d55;
+  width: 40px !important;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+  background-color: #5820e5;
+}
+
+.owl-theme .owl-dots .owl-dot {
+  outline: none;
+}
+
+.owl-nav {
+  display: block !important;
+}
+
+.owl-nav button {
+  position: absolute;
+  top: 50%;
+  padding: 5px 5px !important;
+  background: #f30d55;
+  color: #fff !important;
+  margin: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50% !important;
+}
+
+.owl-nav button:hover {
+  background: #5820e5;
+}
+
+.owl-nav button i {
+  font-size: 50px;
+}
+
+.owl-nav button:focus {
+  outline: none;
+}
+
+.owl-nav button.owl-prev {
+  left: 0;
+}
+
+.owl-nav button.owl-next {
+  right: 0;
+}
+/*# sourceMappingURL=testimonial-carousel.css.map */

@@ -1,12 +1,1 @@
-.DS_Store
-wp-admin
-wp-includes
-composer.json
-composer.lock
-Controls_Helper.php
-inc/Widgets/Default.php
-WP ASSETS
 
-.sass-cache/
-*.css.map
-*.scss

@@ -45,11 +45,6 @@ final class Ultra_Elementor_Addons
     public function __construct() {
         add_action( 'init', [ $this, 'i18n'] );
         add_action( 'plugin_loaded', [ $this, 'init'] );
-        
-        // if ( ! get_option( 'elementor_icon_manager_needs_update' ) ) {
-        //     add_option( 'elementor_icon_manager_needs_update', 'yes' );
-        //     add_option( 'elementor_load_fa4_shim', 'yes' );
-        // }
     }
 
     /**
@@ -205,9 +200,6 @@ if ( function_exists( 'ultra_addons_fs' ) ) {
                     'menu'                => array(
                         'slug'           => 'ultra-addons',
                     ),
-                    // Set the SDK to work in a sandbox mode (for development & testing).
-                    // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-                    'secret_key'          => 'sk_^e(Jd^Xy+!$:8M[2q_0qbwa5pQ$y;',
                 ) );
             }
 
