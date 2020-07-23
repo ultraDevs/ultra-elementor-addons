@@ -1,9 +1,0 @@
-.elementor-element .icon [class^=ua-]::after {
-    content: '';
-    position: absolute;
-    right: 3px;
-    top: 3px;
-    background: url('../images/ua_icon.svg') no-repeat;
-    width: 23px;
-    height: 35px;
-}
