@@ -253,7 +253,7 @@ class AnimatedHeadlines extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => self::W_NAME . 'first_heading_typography',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => 
                     '{{WRAPPER}} .ua-animated-heading .ua-a-h-wrapper .ua-a-h-title .ua-a-t-first',
             ]
@@ -310,7 +310,7 @@ class AnimatedHeadlines extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => self::W_NAME . 'second_heading_typography',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => 
                     '{{WRAPPER}} .ua-animated-heading .ua-a-h-wrapper .ua-a-h-title .ua-a-t-second',
             ]

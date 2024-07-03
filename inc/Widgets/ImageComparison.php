@@ -348,7 +348,7 @@ class ImageComparison extends Widgets_Base
                         Group_Control_Typography::get_type(),
                         [
                             'name' => 'before_typo',
-                            'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                            // 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                             'selector' => '{{WRAPPER}} .ua-image-comparison .twentytwenty-before-label:before',
                         ]
                     );
@@ -411,7 +411,7 @@ class ImageComparison extends Widgets_Base
                         Group_Control_Typography::get_type(),
                         [
                             'name' => 'after_typo',
-                            'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                            // 'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                             'selector' => '{{WRAPPER}} .ua-image-comparison .twentytwenty-after-label:after',
                         ]
                     );

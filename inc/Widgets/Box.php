@@ -446,7 +446,7 @@ class Box extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => self::W_NAME . 'title_typo',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ua-box__title'
             ]
         );
@@ -518,7 +518,7 @@ class Box extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => self::W_NAME . 'content_typo',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 'selector' => '{{WRAPPER}} .ua-box__content'
                 
             ]

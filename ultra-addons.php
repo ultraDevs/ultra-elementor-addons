@@ -147,7 +147,7 @@ final class Ultra_Elementor_Addons
     /**
      * Register category
      */
-    public function add_category( Elements_Manager $elements_Manager ) {
+    public function add_category( $elements_Manager ) {
         $elements_Manager->add_category(
             'ultra_addons_category',
             [

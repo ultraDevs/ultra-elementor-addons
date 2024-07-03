@@ -257,7 +257,7 @@ class Testimonial extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 't_content_typo',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ua-testimonial .t_txt',
             ]
         );
@@ -297,7 +297,7 @@ class Testimonial extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 't_f_name_typo',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 'selector' => '{{WRAPPER}} .ua-testimonial .c_o_info h2',
             ]
         );
@@ -327,7 +327,7 @@ class Testimonial extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 't_f_title_typo',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_3,
                 'selector' => '{{WRAPPER}} .ua-testimonial .c_o_info h3',
             ]
         );

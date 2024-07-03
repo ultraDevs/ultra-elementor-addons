@@ -299,10 +299,18 @@ class Accordion extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => self::W_NAME . 't_h_typo',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ua-accordion .ua-accordion-header',
             ]
         );
+
+        // $this->add_group_control(
+		// 	\Elementor\Group_Control_Typography::get_type(),
+		// 	[
+		// 		'name' => 'content_typography',
+        //         'selector' => '{{WRAPPER}} .ua-accordion .ua-accordion-header',
+		// 	]
+		// );
+
 
         $this->end_controls_tab();
 
@@ -447,7 +455,7 @@ class Accordion extends Widgets_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => self::W_NAME . 't_c_typo',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                // 'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 'selector' => '{{WRAPPER}} .ua-accordion .ua-accordion-body__contents',
             ]
         );

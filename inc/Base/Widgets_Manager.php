@@ -17,7 +17,7 @@ class Widgets_Manager {
      */
     public static function init() {
         // Register custom widgets
-        add_action( 'elementor/widgets/widgets_registered', [ __CLASS__, 'register' ] );
+        add_action( 'elementor/widgets/register', [ __CLASS__, 'register' ] );
     }
 
     /**
@@ -105,7 +105,7 @@ class Widgets_Manager {
     /**
      * Register
      */
-    public static function register() {
+    public static function register( $widgets_manager ) {
         $inactive_widgets = self::get_inactive_widgets();
         foreach ( self::get_free_widgets_map() as $widget_key => $data) {
             if ( ultra_addons_fs()->is_not_paying() ) {
@@ -114,12 +114,12 @@ class Widgets_Manager {
                 }
             }
             if ( ! in_array( $widget_key, $inactive_widgets )) {
-                self::register_widget( ucfirst( $widget_key ) );
+                self::register_widget( $widgets_manager, ucfirst( $widget_key ) );
             }
         }
     }
 
-    public static function register_widget( $widget_key) {
+    public static function register_widget( $widgets_manager, $widget_key) {
         $key = preg_replace_callback('/_([a-z]?)/', function($match) {
             return strtoupper($match[1]);
         }, ucfirst( $widget_key ) );
@@ -128,7 +128,8 @@ class Widgets_Manager {
 
         if ( file_exists( $widget_file ) ) {
             $widget_class = 'UltraAddons_Inc\Widgets\\' . $key;
-            \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new $widget_class );
+            $widgets_manager->register( new $widget_class );
         }
     }
+
 }
