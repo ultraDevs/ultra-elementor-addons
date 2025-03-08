@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "ac2426f0670f4eb4493f5ed185ae6789",
     "packages": [
         {
             "name": "freemius/wordpress-sdk",
             "version": "2.11.0",
-            "version_normalized": "2.11.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Freemius/wordpress-sdk.git",
@@ -27,9 +32,7 @@
                 "szepeviktor/phpstan-wordpress": "^1.3",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "time": "2025-02-09T07:06:24+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "start.php"
@@ -54,12 +57,11 @@
                 "issues": "https://github.com/Freemius/wordpress-sdk/issues",
                 "source": "https://github.com/Freemius/wordpress-sdk/tree/2.11.0"
             },
-            "install-path": "../freemius/wordpress-sdk"
+            "time": "2025-02-09T07:06:24+00:00"
         },
         {
             "name": "pablo-sg-pacheco/wp-namespace-autoloader",
             "version": "dev-master",
-            "version_normalized": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pablo-sg-pacheco/wp-namespace-autoloader.git",
@@ -81,7 +83,6 @@
                 "squizlabs/php_codesniffer": "dev-master",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "time": "2022-12-02T14:49:51+00:00",
             "default-branch": true,
             "type": "library",
             "extra": {
@@ -91,7 +92,6 @@
                     }
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Pablo_Pacheco\\WP_Namespace_Autoloader\\": "src"
@@ -119,9 +119,18 @@
                 "issues": "https://github.com/pablo-sg-pacheco/wp-namespace-autoloader/issues",
                 "source": "https://github.com/pablo-sg-pacheco/wp-namespace-autoloader/tree/master"
             },
-            "install-path": "../pablo-sg-pacheco/wp-namespace-autoloader"
+            "time": "2022-12-02T14:49:51+00:00"
         }
     ],
-    "dev": true,
-    "dev-package-names": []
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "pablo-sg-pacheco/wp-namespace-autoloader": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

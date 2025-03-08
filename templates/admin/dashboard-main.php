@@ -3,7 +3,7 @@
 defined('ABSPATH') || die();
 ?>
 <div class="wrap">
-    <h1 class="screen-reader-text"> <?php _e('Ultra Elementor Addons', 'ultra-addons'); ?></h1>
+    <h1 class="screen-reader-text"> <?php _e('Ultra Elementor Addons', 'ultra-elementor-addons'); ?></h1>
     <form action="" class="ua-dashboard-form" method="POST">
         <div class="ua-db-tabs">
             <ul class="ua-tabs__nav">

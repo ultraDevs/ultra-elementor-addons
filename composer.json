@@ -1,0 +1,24 @@
+{
+	"name": "mhimon/ultra-elementor-addons",
+	"autoload": {
+		"psr-4": {
+			"UltraElementorAddons\\": "includes/"
+		},
+		"files": [
+			"includes/functions.php"
+		]
+	},
+	"authors": [
+		{
+			"name": "Mahbub Hasan Imon",
+			"email": "mahbubhasanimon@gmail.com"
+		}
+	],
+	"require": {
+		"pablo-sg-pacheco/wp-namespace-autoloader": "dev-master",
+		"freemius/wordpress-sdk": "^2.11"
+	},
+	"config": {
+		"preferred-install": "dist"
+	}
+}
