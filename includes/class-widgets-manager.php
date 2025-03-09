@@ -64,7 +64,7 @@ class Widgets_Manager {
 				'demo'    => \ultra_addons_get_addons_demo_link( 'animated-headlines' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
-				// 'class' 
+				'class'   => 'UltraElementorAddons\Widgets\Animated_Headlines',
 			],
 			'accordion'             => [
 				'title'   => __( 'Accordion', 'ultra-elementor-addons' ),
@@ -72,6 +72,7 @@ class Widgets_Manager {
 				'demo'    => ultra_addons_get_addons_demo_link( 'accordion' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Accordion',
 			],
 			'box'                   => [
 				'title'   => __( 'Box', 'ultra-elementor-addons' ),
@@ -87,6 +88,7 @@ class Widgets_Manager {
 				'demo'    => ultra_addons_get_addons_demo_link( 'testimonial' ),
 				'enqueue' => [ 'css' ],
 				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Testimonial',
 			],
 			'testimonial_carousel'  => [
 				'title'   => __( 'Testimonial Carousel', 'ultra-elementor-addons' ),
@@ -94,6 +96,7 @@ class Widgets_Manager {
 				'demo'    => ultra_addons_get_addons_demo_link( 'testimonial-carousel' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => true,
+				'class'   => 'UltraElementorAddons\Widgets\Testimonial_Carousel',
 			],
 			'team_members_carousel' => [
 				'title'   => __( 'Team Members Carousel', 'ultra-elementor-addons' ),
@@ -101,6 +104,7 @@ class Widgets_Manager {
 				'demo'    => ultra_addons_get_addons_demo_link( 'team-members-carousel' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => true,
+				'class'   => 'UltraElementorAddons\Widgets\Team_Members_Carousel',
 			],
 			'team_member'           => [
 				'title'   => __( 'Team Member', 'ultra-elementor-addons' ),
@@ -108,6 +112,7 @@ class Widgets_Manager {
 				'demo'    => ultra_addons_get_addons_demo_link( 'team-member' ),
 				'enqueue' => [ 'css' ],
 				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Team_Member',
 			],
 			'image_comparison'      => [
 				'title'   => __( 'Image Comparison', 'ultra-elementor-addons' ),
@@ -115,6 +120,7 @@ class Widgets_Manager {
 				'demo'    => ultra_addons_get_addons_demo_link( 'image-comparison' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Image_Comparison',
 			],
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );
@@ -156,16 +162,11 @@ class Widgets_Manager {
 	 *
 	 * @param object $widgets_manager Elementor Widgets Manager.
 	 * @param string $widget_key Widget Key.
+	 * @param array  $data Widget Data.
+	 *
+	 * @return void
 	 */
 	public static function register_widget( $widgets_manager, $widget_key, $data ) {
-		$key = preg_replace_callback(
-			'/_([a-z]?)/',
-			function ( $match ) {
-				return strtoupper( $match[1] );
-			},
-			ucfirst( $widget_key )
-		);
-
 		if ( isset( $data['class'] ) ) {
 			$widgets_manager->register( new $data['class']() );
 		}

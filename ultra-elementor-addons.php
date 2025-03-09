@@ -9,7 +9,7 @@ use UltraElementorAddons\Updater;
  * Plugin Name:     Ultra Elementor Addons
  * Plugin URI:      https://ultradevs.com/ultra-elementor-addons
  * Description:     <a href="https://ultradevs.com/ultra-elementor-addons">Ultra Elementor Addons</a> is a collection of helpful widget for Elementor.
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author:          ultraDevs
  * Author URI:      https://ultradevs.com
  * License: GPLv2
@@ -26,7 +26,7 @@ use Elementor\Elements_Manager;
 use UltraElementorAddons\Widgets_Manager;
 
 define( 'ULTRA_ADDONS_TD', 'ultra-elementor-addons' );
-define( 'ULTRA_ADDONS_VERSION', '1.0.0' );
+define( 'ULTRA_ADDONS_VERSION', '2.0.0' );
 define( 'ULTRA_ADDONS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ULTRA_ADDONS_URL', plugin_dir_url( __FILE__ ) );
 define( 'ULTRA_ADDONS_ASSETS', ULTRA_ADDONS_URL . 'assets/' );

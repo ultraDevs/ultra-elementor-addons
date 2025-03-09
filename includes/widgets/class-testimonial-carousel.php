@@ -9,7 +9,7 @@
 namespace UltraElementorAddons\Widgets;
 
 use Elementor\Repeater;
-use UltraElementorAddons\Base\Widgets_Base;
+use UltraElementorAddons\Widgets_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
@@ -20,7 +20,7 @@ use Elementor\Group_Control_Box_Shadow;
 
 defined( 'ABSPATH' ) || die();
 
-class TestimonialCarousel extends Widgets_Base {
+class Testimonial_Carousel extends Widgets_Base {
 
 	const W_NAME = 'ua_testimonial_';
 	/**

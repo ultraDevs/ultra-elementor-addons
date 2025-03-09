@@ -1,10 +1,10 @@
 === Ultra Elementor Addons ===
 Contributors: ultradevs
 Donate link: https://ultradevs.com/donate
-Tags: elementor, elementor addons, elementor widgets, helpful widgets, essential widgets
+Tags: elementor, elementor addons, elementor widgets
 Requires at least: 4.4
-Tested up to: 5.4.2
-Stable tag: 1.0.0
+Tested up to: 6.7.2
+Stable tag: 2.0.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -59,8 +59,9 @@ No, You must install and active Elementor plugin to make this plugin work.
 
 == Changelog ==
 
-
-== Upgrade Notice ==
+= 2.0.0 - 09 March 2025 =
+* Refactor the code
+* Removed Deprecated Code
 
 = 1.0.0 - 19/07/2020 =
 * Initial Stable Release

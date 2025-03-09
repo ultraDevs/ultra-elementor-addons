@@ -384,7 +384,7 @@ class Box extends Widgets_Base {
 		$this->add_control(
 			self::W_NAME . 'title_color',
 			[
-				'label'     => __( ' Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#fff',
 				'selectors' => [

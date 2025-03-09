@@ -8,7 +8,7 @@
 
 namespace UltraElementorAddons\Widgets;
 
-use UltraElementorAddons\Base\Widgets_Base;
+use UltraElementorAddons\Widgets_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
@@ -19,7 +19,7 @@ use Elementor\Group_Control_Background;
 
 defined( 'ABSPATH' ) || die();
 
-class ImageComparison extends Widgets_Base {
+class Image_Comparison extends Widgets_Base {
 
 	const W_NAME = 'ua_ic_';
 	/**

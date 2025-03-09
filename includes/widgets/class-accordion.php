@@ -9,7 +9,7 @@
 namespace UltraElementorAddons\Widgets;
 
 use Elementor\Repeater;
-use UltraElementorAddons\Base\Widgets_Base;
+use UltraElementorAddons\Widgets_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
