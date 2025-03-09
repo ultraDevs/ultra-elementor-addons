@@ -12,7 +12,7 @@ use Elementor\Repeater;
 use UltraElementorAddons\Widgets_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Utils;
 use Elementor\Control_Media;
 use Elementor\Group_Control_Image_Size;
@@ -24,8 +24,9 @@ defined( 'ABSPATH' ) || die();
 class Team_Members_Carousel extends Widgets_Base {
 
 	const W_NAME = 'ua_tmc_';
+
 	/**
-	 * Retrieve the widgte name
+	 * Retrieve the widget name
 	 *
 	 * @return string Widget Name
 	 */
@@ -34,7 +35,7 @@ class Team_Members_Carousel extends Widgets_Base {
 	}
 
 	/**
-	 * Retrieve the widgte title
+	 * Retrieve the widget title
 	 *
 	 * @return string Widget title
 	 */
@@ -43,7 +44,7 @@ class Team_Members_Carousel extends Widgets_Base {
 	}
 
 	/**
-	 * Retrieve the widgte icon
+	 * Retrieve the widget icon
 	 *
 	 * @return string Widget Name
 	 */
@@ -61,9 +62,9 @@ class Team_Members_Carousel extends Widgets_Base {
 	}
 
 	/**
-	 * Retrieve the list of scripts the widget depened on.
+	 * Retrieve the list of scripts the widget depends on.
 	 *
-	 * @return array Widget scripts dependies.
+	 * @return array Widget scripts dependencies.
 	 */
 	public function get_script_depends() {
 		return [
@@ -159,7 +160,7 @@ class Team_Members_Carousel extends Widgets_Base {
 				'dynamic' => [
 					'active' => true,
 				],
-				'default' => __( 'Ownder', 'ultra-elementor-addons' ),
+				'default' => __( 'Owner', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -194,7 +195,7 @@ class Team_Members_Carousel extends Widgets_Base {
 				'label'       => __( 'Twitter URL', 'ultra-elementor-addons' ),
 				'type'        => Controls_Manager::URL,
 				'default'     => [
-					'url'         => 'https://tritter.com/mh_imon',
+					'url'         => 'https://twitter.com/mh_imon',
 					'is_external' => true,
 				],
 				'condition'   => [
@@ -690,7 +691,7 @@ class Team_Members_Carousel extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tm_name_style_typo',
-				// 'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'   => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .ua-tm__info h3',
 			]
 		);
@@ -759,7 +760,7 @@ class Team_Members_Carousel extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tm_designation_style_typo',
-				// 'scheme'   => Scheme_Typography::TYPOGRAPHY_2,
+				'scheme'   => Typography::TYPOGRAPHY_2,
 				'selector' => '{{WRAPPER}} .ua-tm__info h4',
 			]
 		);
@@ -828,7 +829,7 @@ class Team_Members_Carousel extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tm_content_style_typo_t',
-				// 'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
+				'scheme'   => Typography::TYPOGRAPHY_3,
 				'selector' => '{{WRAPPER}} .ua-tm__info p',
 			]
 		);
