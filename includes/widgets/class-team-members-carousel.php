@@ -690,7 +690,7 @@ class Team_Members_Carousel extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tm_name_style_typo',
-				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+				// 'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .ua-tm__info h3',
 			]
 		);
@@ -759,7 +759,7 @@ class Team_Members_Carousel extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tm_designation_style_typo',
-				'scheme'   => Scheme_Typography::TYPOGRAPHY_2,
+				// 'scheme'   => Scheme_Typography::TYPOGRAPHY_2,
 				'selector' => '{{WRAPPER}} .ua-tm__info h4',
 			]
 		);
@@ -828,7 +828,7 @@ class Team_Members_Carousel extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tm_content_style_typo_t',
-				'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
+				// 'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
 				'selector' => '{{WRAPPER}} .ua-tm__info p',
 			]
 		);

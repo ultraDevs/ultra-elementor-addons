@@ -95,7 +95,7 @@ class Widgets_Manager {
 				'icon'    => 'eicon-testimonial-carousel',
 				'demo'    => ultra_addons_get_addons_demo_link( 'testimonial-carousel' ),
 				'enqueue' => [ 'css', 'js' ],
-				'is_pro'  => true,
+				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Testimonial_Carousel',
 			],
 			'team_members_carousel' => [
@@ -103,7 +103,7 @@ class Widgets_Manager {
 				'icon'    => 'ua-icon eicon-person',
 				'demo'    => ultra_addons_get_addons_demo_link( 'team-members-carousel' ),
 				'enqueue' => [ 'css', 'js' ],
-				'is_pro'  => true,
+				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Team_Members_Carousel',
 			],
 			'team_member'           => [
