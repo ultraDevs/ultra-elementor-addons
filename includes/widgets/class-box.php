@@ -84,7 +84,7 @@ class Box extends Widgets_Base {
 		$this->start_controls_section(
 			self::W_NAME . 'box_content_sections',
 			[
-				'label' => __( 'Content' ),
+				'label' => __( 'Content', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -538,18 +538,18 @@ class Box extends Widgets_Base {
 					Icons_Manager::render_icon( $settings['b_icon'], [ 'aria-hidden' => 'true' ] );
 				} else {
 					?>
-					<i class="<?php echo $settings['icon']; ?>" aria-hidden="true"></i>
+					<i class="<?php echo esc_html( $settings['icon'] ); ?>" aria-hidden="true"></i>
 					<?php
 				}
 				?>
 			</div>
 			<h4 class="ua-box__title" <?php $this->get_render_attribute_string( self::W_NAME . 'b_title' ); ?>>
-				<?php echo $settings[ self::W_NAME . 'b_title' ]; ?>
+				<?php echo esc_html( $settings[ self::W_NAME . 'b_title' ] ); ?>
 			</h4>
 			<div class="ua-box__content">
-				<?php echo $settings[ self::W_NAME . 'contents' ]; ?>
+				<?php echo esc_html( $settings[ self::W_NAME . 'contents' ] ); ?>
 			</div>
-		</div>    
+		</div>
 		<?php
 	}
 }

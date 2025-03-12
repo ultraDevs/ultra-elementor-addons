@@ -1,3 +1,7 @@
+<?php
+defined( 'ABSPATH' ) || die();
+?>
+
 <h1>Welcome ❤️</h1>
 
 <h3>You can ask for any type of custom widget <a target="__blank" href="https://addons.ultradevs.com/custom-widgets">Here</a> ( Please Upgrade to any plan ) </h3>

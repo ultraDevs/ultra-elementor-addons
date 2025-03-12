@@ -462,20 +462,20 @@ class Accordion extends Widgets_Base {
 		$this->add_render_attribute( 'ua_accordion', 'id', 'ua-accordion-' . esc_attr( $this->get_id() ) );
 
 		?>
-		<div class="ua-accordion accordion-<?php echo esc_attr( $this->get_id() ); ?>" <?php echo 'data-accordion-id="' . esc_attr( $this->get_id() ) . '"'; ?> data-speed="<?php echo $settings[ self::W_NAME . 'speed' ]; ?>" <?php echo $this->get_render_attribute_string( 'ua_accordion' ); ?>>
+		<div class="ua-accordion accordion-<?php echo esc_attr( $this->get_id() ); ?>" <?php echo 'data-accordion-id="' . esc_attr( $this->get_id() ) . '"'; ?> data-speed="<?php echo esc_attr( $settings[ self::W_NAME . 'speed' ] ); ?>" <?php echo esc_attr( $this->get_render_attribute_string( 'ua_accordion' ) ); ?>>
 			<?php
 			foreach ( $settings[ self::W_NAME . 'accordions' ] as $key => $accordion ) {
 				$a_count = $key + 1;
 
 				?>
-				<div class="ua-accordion__item" <?php echo $this->get_render_attribute_string( self::W_NAME . 'item' ); ?>>
+				<div class="ua-accordion__item" <?php $this->print_render_attribute_string( self::W_NAME . 'item' ); ?>>
 					<div class="ua-accordion-header 
 					<?php
 					if ( $accordion[ self::W_NAME . 'default_item' ] == 'yes' ) {
 						echo 'ua-a-active';}
 					?>
-					" <?php echo $this->get_render_attribute_string( self::W_NAME . 'title' ); ?>>
-						<?php echo $accordion[ self::W_NAME . 'title' ]; ?> 
+					" <?php $this->print_render_attribute_string( self::W_NAME . 'title' ); ?>>
+						<?php echo esc_html( $accordion[ self::W_NAME . 'title' ] ); ?> 
 						<div class="ua-accordion-icon"><i class="eicon-plus-circle-o"></i></div>
 					</div>
 					<div class="ua-accordion-body__contents" 
@@ -483,8 +483,8 @@ class Accordion extends Widgets_Base {
 					if ( $accordion[ self::W_NAME . 'default_item' ] == 'yes' ) {
 						echo 'style="display:block;"';}
 					?>
-					<?php echo $this->get_render_attribute_string( self::W_NAME . 'contents' ); ?>>
-						<?php echo $accordion[ self::W_NAME . 'contents' ]; ?>
+					<?php $this->print_render_attribute_string( self::W_NAME . 'contents' ); ?>>
+						<?php echo esc_html( $accordion[ self::W_NAME . 'contents' ] ); ?>
 					</div>
 				</div>
 			

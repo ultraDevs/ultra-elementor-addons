@@ -553,8 +553,8 @@ class Image_Comparison extends Widgets_Base {
 		);
 		?>
 		<div class="ua-image-comparison" id="ua-image-comparison" class="twentytwenty-container" data-config='<?php echo wp_json_encode( $data ); ?>'>
-			<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size', 'before_image' ); ?>
-			<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size', 'after_image' ); ?>
+			<?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size', 'before_image' ) ); ?>
+			<?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size', 'after_image' ) ); ?>
 		</div>
 		<?php
 	}

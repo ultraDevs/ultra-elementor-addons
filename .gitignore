@@ -1,1 +1,7 @@
 .DS_Store
+.editorconfig
+phpcs.xml
+readme.md
+composer.lock
+.git*
+node_modules

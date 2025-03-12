@@ -84,7 +84,18 @@ class Dashboard {
 				continue;
 			}
 
-			add_submenu_page( self::PAGE_SLUG, sprintf( __( '%s - Ultra Elementor Addons', 'ultra-elementor-addons' ), $value['title'] ), $value['title'], 'manage_options', self::PAGE_SLUG . '#' . $key, [ __CLASS__, 'view_main' ] );
+			add_submenu_page(
+				self::PAGE_SLUG,
+				sprintf(
+					/* translators: %s: Page Title */
+					__( '%s - Ultra Elementor Addons', 'ultra-elementor-addons' ),
+					$value['title']
+				),
+				$value['title'],
+				'manage_options',
+				self::PAGE_SLUG . '#' . $key,
+				[ __CLASS__, 'view_main' ]
+			);
 		}
 	}
 

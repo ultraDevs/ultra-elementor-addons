@@ -36,7 +36,11 @@ abstract class Widgets_Base extends Widget_Base {
 				'ua_not_paying_msg',
 				[
 					'type' => Controls_Manager::RAW_HTML,
-					'raw'  => __( sprintf( 'Upgrade to <a href="%s" target="_blank">Pro Version</a> for more features, customization options & widgets!', ultra_addons_fs()->get_upgrade_url() ), 'ultra-elementor-addons' ),
+					'raw'  => sprintf(
+						/* translators: 1: Upgrade URL */
+						__( 'Upgrade to <a href="%s" target="_blank">Pro Version</a> for more features, customization options & widgets!', 'ultra-elementor-addons' ),
+						ultra_addons_fs()->get_upgrade_url()
+					),
 				]
 			);
 			$this->end_controls_section();

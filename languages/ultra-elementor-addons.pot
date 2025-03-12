@@ -1,0 +1,708 @@
+# Copyright (C) 2025 ultraDevs
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ultra Elementor Addons 2.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ultra-elementor-addons\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-03-12T06:08:11+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: ultra-elementor-addons\n"
+
+#. Plugin Name of the plugin
+#: ultra-elementor-addons.php
+#: templates/admin/dashboard-main.php:5
+#: ultra-elementor-addons.php:211
+#: ultra-elementor-addons.php:229
+#: ultra-elementor-addons.php:245
+msgid "Ultra Elementor Addons"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: ultra-elementor-addons.php
+msgid "https://ultradevs.com/ultra-elementor-addons"
+msgstr ""
+
+#. Description of the plugin
+#: ultra-elementor-addons.php
+msgid "<a href=\"https://ultradevs.com/ultra-elementor-addons\">Ultra Elementor Addons</a> is a collection of helpful widget for Elementor."
+msgstr ""
+
+#. Author of the plugin
+#: ultra-elementor-addons.php
+msgid "ultraDevs"
+msgstr ""
+
+#. Author URI of the plugin
+#: ultra-elementor-addons.php
+msgid "https://ultradevs.com"
+msgstr ""
+
+#: includes/class-dashboard.php:72
+msgid "Dashboard - Ultra Elementor Addons"
+msgstr ""
+
+#: includes/class-dashboard.php:73
+#: includes/widgets/class-animated-headlines.php:138
+#: ultra-elementor-addons.php:193
+msgid "Ultra Addons"
+msgstr ""
+
+#. translators: %s: Page Title
+#: includes/class-dashboard.php:91
+msgid "%s - Ultra Elementor Addons"
+msgstr ""
+
+#: includes/class-widgets-base.php:31
+msgid "Upgrade to Pro"
+msgstr ""
+
+#. translators: 1: Upgrade URL
+#: includes/class-widgets-base.php:41
+#: includes/widgets/class-team-member.php:276
+msgid "Upgrade to <a href=\"%s\" target=\"_blank\">Pro Version</a> for more features, customization options & widgets!"
+msgstr ""
+
+#: includes/class-widgets-manager.php:62
+#: includes/widgets/class-animated-headlines.php:37
+msgid "Animated Headlines"
+msgstr ""
+
+#: includes/class-widgets-manager.php:70
+#: includes/widgets/class-accordion.php:39
+msgid "Accordion"
+msgstr ""
+
+#: includes/class-widgets-manager.php:78
+#: includes/widgets/class-box.php:39
+msgid "Box"
+msgstr ""
+
+#: includes/class-widgets-manager.php:86
+#: includes/widgets/class-testimonial.php:41
+msgid "Testimonial"
+msgstr ""
+
+#: includes/class-widgets-manager.php:110
+#: includes/widgets/class-team-member.php:43
+msgid "Team Member"
+msgstr ""
+
+#: includes/class-widgets-manager.php:118
+#: includes/widgets/class-image-comparison.php:40
+msgid "Image Comparison"
+msgstr ""
+
+#: includes/functions.php:43
+msgid "H1"
+msgstr ""
+
+#: includes/functions.php:44
+msgid "H2"
+msgstr ""
+
+#: includes/functions.php:45
+msgid "H3"
+msgstr ""
+
+#: includes/functions.php:46
+msgid "H4"
+msgstr ""
+
+#: includes/functions.php:47
+msgid "H5"
+msgstr ""
+
+#: includes/functions.php:48
+msgid "H6"
+msgstr ""
+
+#: includes/functions.php:49
+msgid "P"
+msgstr ""
+
+#: includes/functions.php:50
+#: includes/functions.php:63
+msgid "Div"
+msgstr ""
+
+#: includes/functions.php:51
+msgid "Span"
+msgstr ""
+
+#: includes/functions.php:64
+msgid "Section"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:30
+msgid "ua-accordion"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:90
+#: includes/widgets/class-animated-headlines.php:85
+#: includes/widgets/class-box.php:87
+#: includes/widgets/class-team-member.php:91
+#: includes/widgets/class-team-member.php:651
+#: includes/widgets/class-testimonial.php:78
+#: includes/widgets/class-testimonial.php:233
+msgid "Content"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:97
+msgid "Speed (ms)"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:109
+msgid "Active ?"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:118
+#: includes/widgets/class-accordion.php:120
+msgid "Accordion Title"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:130
+msgid "Accordion Content"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:132
+msgid "Accordion Content "
+msgstr ""
+
+#: includes/widgets/class-accordion.php:145
+msgid "Panel 1"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:148
+msgid "Panel 2"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:165
+#: includes/widgets/class-box.php:143
+#: includes/widgets/class-testimonial.php:139
+msgid "Styles"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:173
+#: includes/widgets/class-box.php:262
+#: includes/widgets/class-box.php:340
+#: includes/widgets/class-image-comparison.php:352
+#: includes/widgets/class-image-comparison.php:415
+#: includes/widgets/class-image-comparison.php:520
+#: includes/widgets/class-team-member.php:389
+#: includes/widgets/class-team-member.php:496
+#: includes/widgets/class-testimonial.php:375
+msgid "Border Radius"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:185
+msgid "Item Margin Bottom"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:203
+msgid "Border"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:219
+#: includes/widgets/class-accordion.php:264
+#: includes/widgets/class-accordion.php:313
+#: includes/widgets/class-accordion.php:358
+#: includes/widgets/class-animated-headlines.php:222
+#: includes/widgets/class-animated-headlines.php:279
+#: includes/widgets/class-box.php:161
+#: includes/widgets/class-box.php:202
+#: includes/widgets/class-image-comparison.php:264
+#: includes/widgets/class-image-comparison.php:283
+#: includes/widgets/class-image-comparison.php:319
+#: includes/widgets/class-image-comparison.php:382
+#: includes/widgets/class-image-comparison.php:496
+#: includes/widgets/class-team-member.php:297
+#: includes/widgets/class-team-member.php:341
+#: includes/widgets/class-team-member.php:728
+msgid "Background Color"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:233
+msgid "Tab Header"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:241
+#: includes/widgets/class-accordion.php:421
+#: includes/widgets/class-animated-headlines.php:234
+#: includes/widgets/class-animated-headlines.php:291
+#: includes/widgets/class-box.php:238
+#: includes/widgets/class-image-comparison.php:363
+#: includes/widgets/class-image-comparison.php:426
+#: includes/widgets/class-team-member.php:365
+#: includes/widgets/class-team-member.php:559
+#: includes/widgets/class-team-member.php:628
+#: includes/widgets/class-team-member.php:697
+msgid "Padding"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:257
+#: includes/widgets/class-box.php:154
+#: includes/widgets/class-image-comparison.php:258
+#: includes/widgets/class-team-member.php:290
+#: includes/widgets/class-testimonial.php:151
+msgid "Normal"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:276
+#: includes/widgets/class-accordion.php:325
+#: includes/widgets/class-accordion.php:370
+#: includes/widgets/class-box.php:387
+#: includes/widgets/class-image-comparison.php:331
+#: includes/widgets/class-image-comparison.php:394
+#: includes/widgets/class-image-comparison.php:451
+#: includes/widgets/class-team-member.php:521
+#: includes/widgets/class-team-member.php:590
+#: includes/widgets/class-team-member.php:659
+#: includes/widgets/class-team-member.php:740
+msgid "Color"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:306
+#: includes/widgets/class-box.php:195
+#: includes/widgets/class-image-comparison.php:277
+#: includes/widgets/class-team-member.php:334
+#: includes/widgets/class-testimonial.php:190
+msgid "Hover"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:337
+msgid "Border Color"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:351
+msgid "Active"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:401
+msgid "Tab Content"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:409
+msgid "Content Background Color"
+msgstr ""
+
+#: includes/widgets/class-accordion.php:433
+#: includes/widgets/class-animated-headlines.php:211
+#: includes/widgets/class-animated-headlines.php:268
+#: includes/widgets/class-box.php:459
+msgid "Text Color"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:28
+msgid "ua-animated-headlines"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:92
+msgid "Title HTML Tag"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:102
+#: includes/widgets/class-animated-headlines.php:203
+msgid "First Heading"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:104
+msgid "I Love"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:114
+msgid "Second Titles"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:116
+msgid "New"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:129
+#: ultra-elementor-addons.php:230
+msgid "PHP"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:132
+msgid "WordPress"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:135
+#: ultra-elementor-addons.php:194
+#: ultra-elementor-addons.php:212
+msgid "Elementor"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:151
+#: includes/widgets/class-animated-headlines.php:183
+msgid "Style"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:158
+#: includes/widgets/class-box.php:287
+#: includes/widgets/class-box.php:399
+#: includes/widgets/class-box.php:486
+#: includes/widgets/class-team-member.php:470
+#: includes/widgets/class-team-member.php:533
+#: includes/widgets/class-team-member.php:602
+#: includes/widgets/class-team-member.php:671
+msgid "Alignment"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:162
+#: includes/widgets/class-box.php:291
+#: includes/widgets/class-box.php:403
+#: includes/widgets/class-box.php:490
+#: includes/widgets/class-team-member.php:474
+#: includes/widgets/class-team-member.php:537
+#: includes/widgets/class-team-member.php:606
+#: includes/widgets/class-team-member.php:675
+msgid "Left"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:166
+#: includes/widgets/class-box.php:295
+#: includes/widgets/class-box.php:407
+#: includes/widgets/class-box.php:494
+#: includes/widgets/class-team-member.php:478
+#: includes/widgets/class-team-member.php:541
+#: includes/widgets/class-team-member.php:610
+#: includes/widgets/class-team-member.php:679
+msgid "Center"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:170
+#: includes/widgets/class-box.php:299
+#: includes/widgets/class-box.php:411
+#: includes/widgets/class-box.php:498
+#: includes/widgets/class-team-member.php:482
+#: includes/widgets/class-team-member.php:545
+#: includes/widgets/class-team-member.php:614
+#: includes/widgets/class-team-member.php:683
+msgid "Right"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:187
+msgid "Rotate 1"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:188
+msgid "Typing"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:189
+msgid "Loading Bar"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:190
+msgid "Slide"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:191
+msgid "Clip"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:192
+msgid "Zoom"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:193
+msgid "Push"
+msgstr ""
+
+#: includes/widgets/class-animated-headlines.php:261
+msgid "Second Heading"
+msgstr ""
+
+#: includes/widgets/class-box.php:30
+msgid "ua-box"
+msgstr ""
+
+#: includes/widgets/class-box.php:95
+#: includes/widgets/class-box.php:106
+#: includes/widgets/class-box.php:279
+msgid "Box Icon"
+msgstr ""
+
+#: includes/widgets/class-box.php:120
+#: includes/widgets/class-box.php:122
+#: includes/widgets/class-box.php:379
+msgid "Box Title"
+msgstr ""
+
+#: includes/widgets/class-box.php:132
+#: includes/widgets/class-box.php:134
+#: includes/widgets/class-box.php:451
+msgid "Box Content"
+msgstr ""
+
+#: includes/widgets/class-box.php:173
+#: includes/widgets/class-box.php:214
+msgid "Icon Background Color"
+msgstr ""
+
+#: includes/widgets/class-box.php:250
+#: includes/widgets/class-box.php:325
+#: includes/widgets/class-box.php:425
+#: includes/widgets/class-box.php:471
+#: includes/widgets/class-team-member.php:377
+msgid "Margin"
+msgstr ""
+
+#: includes/widgets/class-box.php:313
+#: includes/widgets/class-image-comparison.php:508
+msgid "Icon Color"
+msgstr ""
+
+#: includes/widgets/class-box.php:360
+msgid "Icon Size"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:31
+msgid "ua-image-comparison"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:88
+msgid "Images & Label"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:99
+#: includes/widgets/class-image-comparison.php:120
+#: includes/widgets/class-image-comparison.php:312
+msgid "Before"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:105
+#: includes/widgets/class-image-comparison.php:138
+msgid "Image"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:118
+#: includes/widgets/class-image-comparison.php:151
+#: includes/widgets/class-image-comparison.php:300
+msgid "Label"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:132
+#: includes/widgets/class-image-comparison.php:153
+#: includes/widgets/class-image-comparison.php:376
+msgid "After"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:176
+msgid "Settings"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:183
+msgid "Visibility Ratio"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:201
+msgid "Orientation"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:204
+msgid "Vertical"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:205
+msgid "Horizontal"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:214
+msgid "Hide Overlay"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:216
+msgid "Yes"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:217
+msgid "No"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:226
+msgid "Move Handle"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:229
+msgid "On Swipe"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:230
+msgid "On Click"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:231
+msgid "On Hover"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:246
+msgid "Overlay"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:443
+msgid "Divider"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:463
+#: includes/widgets/class-team-member.php:416
+msgid "Width"
+msgstr ""
+
+#: includes/widgets/class-image-comparison.php:488
+msgid "Handler"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:34
+msgid "ua-team-member"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:98
+#: includes/widgets/class-testimonial.php:85
+msgid "Description"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:103
+msgid "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum delectus, reiciendis dolorum voluptas repellat debitis voluptatem doloremque nisi quasi deleniti et mollitia vero laborum adipisci veniam dignissimos perspiciatis nemo facere?"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:110
+#: includes/widgets/class-team-member.php:408
+#: includes/widgets/class-testimonial.php:97
+#: includes/widgets/class-testimonial.php:332
+msgid "Avatar"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:135
+#: includes/widgets/class-team-member.php:513
+#: includes/widgets/class-testimonial.php:111
+#: includes/widgets/class-testimonial.php:113
+#: includes/widgets/class-testimonial.php:272
+msgid "Name"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:140
+msgid "MH Imon"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:147
+#: includes/widgets/class-team-member.php:582
+msgid "Designation"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:152
+msgid "Ownder"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:161
+#: includes/widgets/class-team-member.php:220
+msgid "Social Links"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:168
+msgid "Display social profiles?"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:180
+#: includes/widgets/class-team-member.php:191
+msgid "Icon"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:206
+msgid "Link"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:213
+msgid "Enter URL here"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:247
+msgid "General Styles"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:256
+#: includes/widgets/class-team-member.php:268
+msgid "Style Preset"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:443
+msgid "Height"
+msgstr ""
+
+#: includes/widgets/class-team-member.php:720
+msgid "Social Icon"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:87
+msgid "Testimonial Content"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:123
+#: includes/widgets/class-testimonial.php:125
+#: includes/widgets/class-testimonial.php:302
+msgid "Title"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:159
+#: includes/widgets/class-testimonial.php:198
+msgid "Background"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:176
+#: includes/widgets/class-testimonial.php:215
+msgid "Triangle Arrow Background"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:241
+msgid "Color "
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:264
+msgid "Footer Content"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:281
+msgid "Name Color"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:311
+msgid "Title Color"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:341
+msgid "Image Width"
+msgstr ""
+
+#: includes/widgets/class-testimonial.php:358
+msgid "Image Height"
+msgstr ""
+
+#: templates/admin/dashboard-main.php:21
+msgid "Save"
+msgstr ""
+
+#: templates/admin/dashboard-widgets.php:11
+msgid "Nonce validation failed!"
+msgstr ""
+
+#. translators: 1: Plugin name 2: Elementor
+#: ultra-elementor-addons.php:192
+msgid "%1$s requires %2$s to be installed and activated. Please activate %2$s to continue."
+msgstr ""
+
+#. translators: 1: Plugin name 2: Elementor 3: Required Elementor version
+#. translators: 1: Plugin name 2: PHP 3: Required PHP version
+#: ultra-elementor-addons.php:210
+#: ultra-elementor-addons.php:228
+msgid " %1$s requires %2$s version %3$s or greater."
+msgstr ""
+
+#: ultra-elementor-addons.php:253
+msgid "Ultra Addons Pro"
+msgstr ""

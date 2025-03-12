@@ -404,16 +404,15 @@ class Testimonial extends Widgets_Base {
 			<div class="ua-testimonial">
 				<div class="t_item">
 					<div class="t_txt" <?php $this->print_render_attribute_string( 't_content' ); ?>>
-						<?php echo $settings['t_content']; ?>
+						<?php echo esc_html( $settings['t_content'] ); ?>
 					</div>
 					<div class="client_info text-center">
 						<div class="c_img">
-							<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'medium', 't_author_avatar' ); ?>
-							
+							<?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'medium', 't_author_avatar' ) ); ?>
 						</div>
 						<div class="c_o_info">
-							<h2 <?php $this->print_render_attribute_string( 't_author' ); ?>><?php echo $settings['t_author']; ?></h2>
-							<h3 <?php $this->print_render_attribute_string( 't_a_title' ); ?>><?php echo $settings['t_a_title']; ?></h3>
+							<h2 <?php $this->print_render_attribute_string( 't_author' ); ?>><?php echo esc_html( $settings['t_author'] ); ?></h2>
+							<h3 <?php $this->print_render_attribute_string( 't_a_title' ); ?>><?php echo esc_html( $settings['t_a_title'] ); ?></h3>
 						</div>
 					</div>
 				</div>

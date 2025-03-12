@@ -9,7 +9,7 @@ use UltraElementorAddons\Updater;
  * Plugin Name:     Ultra Elementor Addons
  * Plugin URI:      https://ultradevs.com/ultra-elementor-addons
  * Description:     <a href="https://ultradevs.com/ultra-elementor-addons">Ultra Elementor Addons</a> is a collection of helpful widget for Elementor.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author:          ultraDevs
  * Author URI:      https://ultradevs.com
  * License: GPLv2
@@ -26,7 +26,7 @@ use Elementor\Elements_Manager;
 use UltraElementorAddons\Widgets_Manager;
 
 define( 'ULTRA_ADDONS_TD', 'ultra-elementor-addons' );
-define( 'ULTRA_ADDONS_VERSION', '2.0.0' );
+define( 'ULTRA_ADDONS_VERSION', '2.0.1' );
 define( 'ULTRA_ADDONS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ULTRA_ADDONS_URL', plugin_dir_url( __FILE__ ) );
 define( 'ULTRA_ADDONS_ASSETS', ULTRA_ADDONS_URL . 'assets/' );
@@ -183,9 +183,12 @@ final class Ultra_Elementor_Addons {
 	 * Missing main plugin admin notice
 	 */
 	public function admin_notice_missing_main_plugin() {
-		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
+		if ( isset( $_GET['activate'] ) ) {
+			unset( $_GET['activate'] );
+		}
 		if ( ! is_plugin_active( 'elementor/elementor.php' ) ) {
 			$message = sprintf(
+				/* translators: 1: Plugin name 2: Elementor */
 				esc_html__( '%1$s requires %2$s to be installed and activated. Please activate %2$s to continue.', 'ultra-elementor-addons' ),
 				'<strong>' . esc_html__( 'Ultra Addons', 'ultra-elementor-addons' ) . '</strong>',
 				'<strong>' . esc_html__( 'Elementor', 'ultra-elementor-addons' ) .'</strong>'
@@ -203,6 +206,7 @@ final class Ultra_Elementor_Addons {
 		}
 
 		$message = sprintf(
+			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
 			esc_html__( ' %1$s requires %2$s version %3$s or greater.', 'ultra-elementor-addons' ),
 			'<strong>' . esc_html__( 'Ultra Elementor Addons', 'ultra-elementor-addons' ) . '</strong>',
 			'<strong>' . esc_html__( 'Elementor', 'ultra-elementor-addons' ) . '</strong>',
@@ -220,6 +224,7 @@ final class Ultra_Elementor_Addons {
 		}
 
 		$message = sprintf(
+			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
 			esc_html__( ' %1$s requires %2$s version %3$s or greater.', 'ultra-elementor-addons' ),
 			'<strong>' . esc_html__( 'Ultra Elementor Addons', 'ultra-elementor-addons') . '</strong>',
 			'<strong>' . esc_html__( 'PHP', 'ultra-elementor-addons' ) . '</strong>',
@@ -251,10 +256,5 @@ final class Ultra_Elementor_Addons {
 		);
 	}
 }
-
-
-// if ( class_exists( 'UltraAddons_Inc\\Init' ) ) {
-// 	UltraAddons_Inc\Init::register_services();
-// }
 
 Ultra_Elementor_Addons::instance();

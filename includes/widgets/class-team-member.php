@@ -271,7 +271,11 @@ class Team_Member extends Widgets_Base {
 					'options'     => [
 						'tm__s1' => 'Default',
 					],
-					'description' => __( sprintf( 'Upgrade to <a href="%s" target="_blank">Pro Version</a>', ultra_addons_fs()->get_upgrade_url() ), 'ultra-elementor-addons' ),
+					'description' => sprintf(
+						/* translators: 1: Upgrade URL */
+						__( 'Upgrade to <a href="%s" target="_blank">Pro Version</a> for more features, customization options & widgets!', 'ultra-elementor-addons' ),
+						ultra_addons_fs()->get_upgrade_url()
+					),
 				]
 			);
 		}
@@ -759,14 +763,14 @@ class Team_Member extends Widgets_Base {
 
 		?>
 		<div class="ua-team-members" id="ua-tm-<?php echo esc_attr( $this->get_id() ); ?>">
-			<div class="ua-t-m <?php echo $settings['tm_style']; ?>">
+			<div class="ua-t-m <?php echo esc_attr( $settings['tm_style'] ); ?>">
 				<div class="ua-tm__avatar">
-					<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'tm_m_avatar_size', 'tm_m_avatar' ); ?>
+					<?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'tm_m_avatar_size', 'tm_m_avatar' ) ); ?>
 				</div>
 				<div class="ua-tm__info">
-					<h3 <?php $this->print_render_attribute_string( 'tm_name' ); ?>><?php echo $settings['tm_name']; ?></h3>
-					<h4 <?php $this->print_render_attribute_string( 'tm_designation' ); ?>><?php echo $settings['tm_designation']; ?></h4>
-					<p <?php $this->print_render_attribute_string( 'tm_content' ); ?>><?php echo $settings['tm_content']; ?></p>
+					<h3 <?php $this->print_render_attribute_string( 'tm_name' ); ?>><?php echo esc_html( $settings['tm_name'] ); ?></h3>
+					<h4 <?php $this->print_render_attribute_string( 'tm_designation' ); ?>><?php echo esc_html( $settings['tm_designation'] ); ?></h4>
+					<p <?php $this->print_render_attribute_string( 'tm_content' ); ?>><?php echo esc_html( $settings['tm_content'] ); ?></p>
 				</div>
 				<?php
 				if ( 'yes' == $settings['tm_enable_social_profiles'] ) {
@@ -792,7 +796,7 @@ class Team_Member extends Widgets_Base {
 							Icons_Manager::render_icon( $social_link['s_icon'], [ 'aria-hidden' => 'true' ] );
 						} else {
 							?>
-									<i class="<?php echo $social_link['icon']; ?>" aria-hidden="true"></i>
+									<i class="<?php echo esc_html( $social_link['icon'] ); ?>" aria-hidden="true"></i>
 								<?php
 						}
 						?>

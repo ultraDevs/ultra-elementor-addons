@@ -318,22 +318,22 @@ class Animated_Headlines extends Widgets_Base {
 		?>
 		<div class="ua-animated-heading" id="ua-animated-heading-<?php echo esc_attr( $this->get_id() ); ?>">
 			<div class="ua-a-h-wrapper">
-				<<?php echo $settings['ua_a_h_title_tag']; ?> class="ua-a-h-title <?php echo $settings[ self::W_NAME . 'a_style' ]; ?>">
+				<<?php echo esc_attr( $settings['ua_a_h_title_tag'] ); ?> class="ua-a-h-title <?php echo esc_attr( $settings[ self::W_NAME . 'a_style' ] ); ?>">
 					<span class="ua-a-t-first">
-						<?php echo $settings['ua_a_h_first_heading']; ?>
+						<?php echo esc_html( $settings['ua_a_h_first_heading'] ); ?>
 					</span>
 					<span class="ua-a-t-second">
 						<?php
 						foreach ( $settings['tabs'] as $key => $tab ) {
 							?>
 							<b class="ua-a-h-s-h <?php echo ( $key == 0 ) ? 'is-visible' : ''; ?>">
-								<?php echo $tab['ua_a_h_second_heading']; ?>
+								<?php echo esc_html( $tab['ua_a_h_second_heading'] ); ?>
 							</b>
 							<?php
 						}
 						?>
 					</span>
-				</<?php echo $settings['ua_a_h_title_tag']; ?>>
+				</<?php echo esc_attr( $settings['ua_a_h_title_tag'] ); ?>>
 			</div>
 		</div>
 		<?php
