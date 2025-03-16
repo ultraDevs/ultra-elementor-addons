@@ -25,7 +25,7 @@ use Elementor\Elements_Manager;
 use UltraElementorAddons\Widgets_Manager;
 
 define( 'ULTRA_ADDONS_TD', 'ultra-elementor-addons' );
-define( 'ULTRA_ADDONS_VERSION', '2.0.1' );
+define( 'ULTRA_ADDONS_VERSION', '2.0.2' );
 define( 'ULTRA_ADDONS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ULTRA_ADDONS_URL', plugin_dir_url( __FILE__ ) );
 define( 'ULTRA_ADDONS_ASSETS', ULTRA_ADDONS_URL . 'assets/' );
