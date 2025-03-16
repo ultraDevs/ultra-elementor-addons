@@ -59,6 +59,9 @@ No, You must install and active Elementor plugin to make this plugin work.
 
 == Changelog ==
 
+= 2.0.2 - 16 March 2025 =
+* Fixed WP Coding Standard Issues.
+
 = 2.0.1 - 12 March 2025 =
 * Fixed WP Coding Standard Issues.
 

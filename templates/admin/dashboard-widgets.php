@@ -11,7 +11,7 @@ if ( isset( $_POST['save-w']) ) {
 		wp_die( esc_html__( 'Nonce validation failed!', 'ultra-elementor-addons' ) );
 	}
 
-	$widgets   = ! empty( $_POST['widgets'] ) ? $_POST['widgets'] : []; // @phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$widgets   = ! empty( $_POST['widgets'] ) ? wp_unslash( $_POST['widgets'] ) : []; // @phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	$i_widgets = array_diff( array_keys( $all_widgets ), $widgets );
 	self::save_inactive_widgets( $i_widgets );
 	wp_safe_redirect( admin_url( 'admin.php?page=ultra-addons#widgets' ) );

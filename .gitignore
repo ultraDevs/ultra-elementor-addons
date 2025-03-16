@@ -3,5 +3,5 @@
 phpcs.xml
 readme.md
 composer.lock
-.git*
+.git/
 node_modules

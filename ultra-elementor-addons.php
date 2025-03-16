@@ -1,5 +1,4 @@
 <?php
-
 use UltraElementorAddons\Assets_Manager;
 use UltraElementorAddons\Dashboard;
 use UltraElementorAddons\Updater;
@@ -9,7 +8,7 @@ use UltraElementorAddons\Updater;
  * Plugin Name:     Ultra Elementor Addons
  * Plugin URI:      https://ultradevs.com/ultra-elementor-addons
  * Description:     <a href="https://ultradevs.com/ultra-elementor-addons">Ultra Elementor Addons</a> is a collection of helpful widget for Elementor.
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author:          ultraDevs
  * Author URI:      https://ultradevs.com
  * License: GPLv2
@@ -137,7 +136,7 @@ final class Ultra_Elementor_Addons {
 	 * Load Textdomain
 	 */
 	public function i18n() {
-		load_plugin_textdomain( 'ultra-elementor-addons', false, ULTRA_ADDONS_PATH . '/languages' );
+		load_plugin_textdomain( 'ultra-elementor-addons', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -176,16 +175,13 @@ final class Ultra_Elementor_Addons {
 
 		// Widget Manager.
 		Widgets_Manager::get_instance()->init();
-
 	}
 
 	/**
 	 * Missing main plugin admin notice
 	 */
 	public function admin_notice_missing_main_plugin() {
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
+
 		if ( ! is_plugin_active( 'elementor/elementor.php' ) ) {
 			$message = sprintf(
 				/* translators: 1: Plugin name 2: Elementor */
@@ -193,7 +189,7 @@ final class Ultra_Elementor_Addons {
 				'<strong>' . esc_html__( 'Ultra Addons', 'ultra-elementor-addons' ) . '</strong>',
 				'<strong>' . esc_html__( 'Elementor', 'ultra-elementor-addons' ) .'</strong>'
 			);
-			printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
+			printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', wp_kses_post( $message ) );
 		}
 	}
 
@@ -201,10 +197,6 @@ final class Ultra_Elementor_Addons {
 	 *  Min Elementor version admin notice
 	 */
 	public function admin_notice_minimum_elementor_version() {
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
-
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
 			esc_html__( ' %1$s requires %2$s version %3$s or greater.', 'ultra-elementor-addons' ),
@@ -212,16 +204,13 @@ final class Ultra_Elementor_Addons {
 			'<strong>' . esc_html__( 'Elementor', 'ultra-elementor-addons' ) . '</strong>',
 			ULTRA_ADDONS_MIN_ELEMENTOR_VER
 		);
-		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
+		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', wp_kses_post( $message ) );
 	}
 
 	/**
 	 *  Min PHP version admin notice
 	 */
 	public function admin_notice_minimum_php_version() {
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
 
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
@@ -230,7 +219,7 @@ final class Ultra_Elementor_Addons {
 			'<strong>' . esc_html__( 'PHP', 'ultra-elementor-addons' ) . '</strong>',
 			ULTRA_ADDONS_MIN_PHP_VER
 		);
-		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
+		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>',  wp_kses_post( $message ) );
 	}
 
 	/**
