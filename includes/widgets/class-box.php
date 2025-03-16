@@ -531,7 +531,7 @@ class Box extends Widgets_Base {
 		$is_new = empty( $settings['icon'] );
 
 		?>
-		<div class="ua-box">
+		<div class="ud-info-box">
 			<div class="ua-box__icon">
 				<?php
 				if ( $is_new || $migrated ) {
@@ -543,12 +543,20 @@ class Box extends Widgets_Base {
 				}
 				?>
 			</div>
-			<h4 class="ua-box__title" <?php $this->get_render_attribute_string( self::W_NAME . 'b_title' ); ?>>
+
+			<div class="ud-info-box__details">
+				<h2 class="ua-box__title" <?php $this->get_render_attribute_string( self::W_NAME . 'b_title' ); ?>>
 				<?php echo esc_html( $settings[ self::W_NAME . 'b_title' ] ); ?>
-			</h4>
-			<div class="ua-box__content">
-				<?php echo esc_html( $settings[ self::W_NAME . 'contents' ] ); ?>
+				</h2>
+				<p>
+					<?php echo esc_html( $settings[ self::W_NAME . 'contents' ] ); ?>
+				</p>
+
+				<div class="ud-info-box__btn">
+					<a href="#">More Details</a>
+				</div>
 			</div>
+
 		</div>
 		<?php
 	}
