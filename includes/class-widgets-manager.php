@@ -122,6 +122,14 @@ class Widgets_Manager {
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Image_Comparison',
 			],
+			'breadcrumb'  => [
+				'title'   => __( 'Breadcrumb', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-breadcrumbs',
+				'demo'    => ultra_addons_get_addons_demo_link( 'breadcrumb' ),
+				'enqueue' => [ 'css', 'js' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Breadcrumb',
+			],
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );
 		return $widgets;
