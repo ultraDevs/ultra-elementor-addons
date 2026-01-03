@@ -42,7 +42,7 @@ class Breadcrumb extends Widgets_Base {
 		return [ 'ua-style-breadcrumb' ];
 	}
 
-	protected function register_controls() {
+	protected function ua_register_controls() {
 
 		$this->start_controls_section(
 			'section_content',
