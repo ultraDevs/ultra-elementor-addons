@@ -8,7 +8,11 @@
   align-items: center;
   text-decoration: none;
   font-size: 14px;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.orivo-breadcrumb-blocks__item i,
+.orivo-breadcrumb-blocks__item svg {
+  transition: color 0.3s ease, fill 0.3s ease;
 }
 .orivo-breadcrumb-blocks--layout-1 {
   gap: 10px;
@@ -74,6 +78,7 @@
   clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
   border-radius: 6px 0 0 6px;
   padding-left: 24px;
+  gap: 8px;
 }
 .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item:last-child {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 20px 50%);
@@ -87,8 +92,6 @@
   z-index: 2;
 }
 .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item--active {
-  background: #28a745;
-  color: white;
   font-weight: 600;
   z-index: 1;
 }
@@ -161,11 +164,7 @@
   left: 100%;
 }
 .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item--active {
-  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-  border-color: #dc3545;
-  color: white;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
 }
 .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item--active::before {
   display: none;

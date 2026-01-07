@@ -61,21 +61,29 @@ class Breadcrumb extends Widgets_Base {
 			]
 		);
 
-		$repeater = new Repeater();
-
-		$repeater->add_control(
-			'icon',
+		$this->add_control(
+			'home_icon',
 			[
-				'label' => __( 'Icon', 'ultra-elementor-addons' ),
+				'label' => __( 'Home Icon', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
-					'value' => '',
-					'library' => 'fa-solid', // default icon library
+					'value' => 'fas fa-home',
+					'library' => 'fa-solid',
 				],
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
+			'home_text',
+			[
+				'label'       => __( 'Home Text', 'ultra-elementor-addons' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => __( 'Home', 'ultra-elementor-addons' ),
+				'label_block' => true,
+			]
+		);
+
+		$this->add_control(
 			'icon_size',
 			[
 				'label' => __( 'Icon Size', 'ultra-elementor-addons' ),
@@ -90,75 +98,95 @@ class Breadcrumb extends Widgets_Base {
 					'unit' => 'px',
 					'size' => 16,
 				],
-			]
-		);
-
-		$repeater->add_control(
-			'text',
-			[
-				'label'       => __( 'Text', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => __( 'Home', 'ultra-elementor-addons' ),
-				'label_block' => true,
-			]
-		);
-
-		$repeater->add_control(
-			'link',
-			[
-				'label'       => __( 'Link', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::URL,
-				'placeholder' => 'https://',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item i, {{WRAPPER}} .orivo-breadcrumb-blocks__item svg' => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 
 		$this->add_control(
-			'breadcrumbs',
+			'icon_gap',
 			[
-				'label'       => __( 'Breadcrumb Items', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'default'     => [
-					[
-						'icon' => [ 'value' => 'fas fa-home', 'library' => 'fa-solid' ],
-						'text' => 'Home',
-						'link' => [ 'url' => '#' ],
-					],
-					[ 'text' => 'Products', 'link' => [ 'url' => '#' ] ],
-					[ 'text' => 'Electronics', 'link' => [ 'url' => '#' ] ],
-					[ 'text' => 'Mobile Phones' ],
+				'label'      => __( 'Icon Gap', 'ultra-elementor-addons' ),
+				'description' => __( 'Space between icon and text', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem' ],
+				'range'      => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+					'em' => [ 'min' => 0, 'max' => 5 ],
+					'rem' => [ 'min' => 0, 'max' => 5 ],
 				],
-				'title_field' => '{{{ text }}}',
+				'default'    => [
+					'unit' => 'px',
+					'size' => 8,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item' => 'gap: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 
 		$this->end_controls_section();
 
 
-		// ----------------- General Item Style -----------------
+		// ----------------- Normal State -----------------
 		$this->start_controls_section(
-			'section_style_items',
+			'section_style_normal',
 			[
-				'label' => __( 'General Item Style', 'ultra-elementor-addons' ),
+				'label' => __( 'Normal', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
-			'item_color',
+			'normal_text_color',
 			[
 				'label'     => __( 'Text Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks__item' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item:not(.orivo-breadcrumb-blocks__item--active)' => 'color: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'item_hover_color',
+			'normal_icon_color',
 			[
-				'label'     => __( 'Hover Text Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item:not(.orivo-breadcrumb-blocks__item--active) i, {{WRAPPER}} .orivo-breadcrumb-blocks__item:not(.orivo-breadcrumb-blocks__item--active) svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'normal_bg_color',
+			[
+				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-1 .orivo-breadcrumb-blocks__item, {{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item, {{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item, {{WRAPPER}} .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item:not(.orivo-breadcrumb-blocks__item--active)' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+
+		// ----------------- Hover State -----------------
+		$this->start_controls_section(
+			'section_style_hover',
+			[
+				'label' => __( 'Hover', 'ultra-elementor-addons' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'hover_text_color',
+			[
+				'label'     => __( 'Text Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active)' => 'color: {{VALUE}};',
@@ -167,13 +195,114 @@ class Breadcrumb extends Widgets_Base {
 		);
 
 		$this->add_control(
-			'item_active_color',
+			'hover_icon_color',
 			[
-				'label'     => __( 'Active Text Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks__item--active' => 'color: {{VALUE}} ',
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active) i, {{WRAPPER}} .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active) svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
 				],
+			]
+		);
+
+		$this->add_control(
+			'hover_bg_color',
+			[
+				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-1 .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active), {{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active), {{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active), {{WRAPPER}} .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item:not(.orivo-breadcrumb-blocks__item--active):hover' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+
+		// ----------------- Active State -----------------
+		$this->start_controls_section(
+			'section_style_active',
+			[
+				'label' => __( 'Active', 'ultra-elementor-addons' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'active_text_color',
+			[
+				'label'     => __( 'Text Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item--active' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'active_icon_color',
+			[
+				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item--active i, {{WRAPPER}} .orivo-breadcrumb-blocks__item--active svg' => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'active_bg_color',
+			[
+				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item--active, {{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item--active, {{WRAPPER}} .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item--active' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'active_hover_text_color',
+			[
+				'label'     => __( 'Hover Text Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item--active:hover' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'active_hover_icon_color',
+			[
+				'label'     => __( 'Hover Icon Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item--active:hover i, {{WRAPPER}} .orivo-breadcrumb-blocks__item--active:hover svg' => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'active_hover_bg_color',
+			[
+				'label'     => __( 'Hover Background Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item--active:hover, {{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item--active:hover, {{WRAPPER}} .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item--active:hover' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+
+		// ----------------- Typography -----------------
+		$this->start_controls_section(
+			'section_style_typography',
+			[
+				'label' => __( 'Typography', 'ultra-elementor-addons' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -183,6 +312,18 @@ class Breadcrumb extends Widgets_Base {
 				'name'     => 'typography',
 				'label'    => __( 'Typography', 'ultra-elementor-addons' ),
 				'selector' => '{{WRAPPER}} .orivo-breadcrumb-blocks__item span',
+			]
+		);
+
+		$this->end_controls_section();
+
+
+		// ----------------- Separator -----------------
+		$this->start_controls_section(
+			'section_style_separator',
+			[
+				'label' => __( 'Separator', 'ultra-elementor-addons' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -232,122 +373,6 @@ class Breadcrumb extends Widgets_Base {
 		$this->end_controls_section();
 
 
-		// ----------------- Layout 3 - Connected Box -----------------
-		$this->start_controls_section(
-			'section_style_layout_3',
-			[
-				'label'     => __( 'Layout 3 - Connected Box', 'ultra-elementor-addons' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [ 'layout' => 'layout-3' ],
-			]
-		);
-
-		$this->add_control(
-			'layout_3_item_bg',
-			[
-				'label'     => __( 'Item Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'layout_3_hover_bg',
-			[
-				'label'     => __( 'Hover Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active)' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'layout_3_active_bg',
-			[
-				'label'     => __( 'Active Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item--active' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'layout_3_padding',
-			[
-				'label'      => __( 'Item Padding', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-3 .orivo-breadcrumb-blocks__item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-
-		// ----------------- Layout 4 - Dot -----------------
-		$this->start_controls_section(
-			'section_style_layout_4',
-			[
-				'label'     => __( 'Layout 4 - Dot', 'ultra-elementor-addons' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [ 'layout' => 'layout-4' ],
-			]
-		);
-
-		$this->add_control(
-			'layout_4_item_bg',
-			[
-				'label'     => __( 'Item Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'layout_4_hover_bg',
-			[
-				'label'     => __( 'Hover Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item:hover:not(.orivo-breadcrumb-blocks__item--active)' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'layout_4_active_bg',
-			[
-				'label'     => __( 'Active Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item--active' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'layout_4_padding',
-			[
-				'label'      => __( 'Item Padding', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-4 .orivo-breadcrumb-blocks__item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-
 		// ----------------- Layout 5 - Modern -----------------
 		$this->start_controls_section(
 			'section_style_layout_5',
@@ -355,42 +380,6 @@ class Breadcrumb extends Widgets_Base {
 				'label'     => __( 'Layout 5 - Modern', 'ultra-elementor-addons' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 'layout' => 'layout-5' ],
-			]
-		);
-
-		// Item BG
-		$this->add_control(
-			'l5_item_bg',
-			[
-				'label'     => __( 'Item Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item:not(.orivo-breadcrumb-blocks__item--active)' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		// Hover BG
-		$this->add_control(
-			'l5_hover_bg',
-			[
-				'label'     => __( 'Hover Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item:not(.orivo-breadcrumb-blocks__item--active):hover' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		// Active BG (always active)
-		$this->add_control(
-			'l5_active_bg',
-			[
-				'label'     => __( 'Active Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-breadcrumb-blocks--layout-5 .orivo-breadcrumb-blocks__item--active' => 'background-color: {{VALUE}} ',
-				],
 			]
 		);
 
@@ -474,8 +463,9 @@ class Breadcrumb extends Widgets_Base {
 
 		// Home
 		$breadcrumbs[] = [
-			'text' => 'Home',
+			'text' => $settings['home_text'],
 			'link' => home_url(),
+			'type' => 'home',
 		];
 
 		if ( is_category() || is_single() ) {
@@ -490,11 +480,13 @@ class Breadcrumb extends Widgets_Base {
 					$breadcrumbs[] = [
 						'text' => $parent_cat->name,
 						'link' => get_category_link( $parent_cat->term_id ),
+						'type' => 'category',
 					];
 				}
 				$breadcrumbs[] = [
 					'text' => $category->name,
 					'link' => get_category_link( $category->term_id ),
+					'type' => 'category',
 				];
 			}
 
@@ -502,6 +494,7 @@ class Breadcrumb extends Widgets_Base {
 				$breadcrumbs[] = [
 					'text' => get_the_title(),
 					'link' => '',
+					'type' => 'current',
 				];
 			}
 		} elseif ( is_page() ) {
@@ -512,22 +505,26 @@ class Breadcrumb extends Widgets_Base {
 					$breadcrumbs[] = [
 						'text' => get_the_title( $parent_id ),
 						'link' => get_permalink( $parent_id ),
+						'type' => 'page',
 					];
 				}
 			}
 			$breadcrumbs[] = [
 				'text' => get_the_title(),
 				'link' => '',
+				'type' => 'current',
 			];
 		} elseif ( is_archive() ) {
 			$breadcrumbs[] = [
 				'text' => post_type_archive_title( '', false ),
 				'link' => '',
+				'type' => 'archive',
 			];
 		} elseif ( is_search() ) {
 			$breadcrumbs[] = [
 				'text' => 'Search Results',
 				'link' => '',
+				'type' => 'search',
 			];
 		}
 
@@ -536,12 +533,22 @@ class Breadcrumb extends Widgets_Base {
 		foreach ( $breadcrumbs as $index => $item ) {
 			$is_last = ( $index === $last_index );
 
+			// Output icon for home item only
+			$icon_html = '';
+			if ( 'home' === $item['type'] && ! empty( $settings['home_icon']['value'] ) ) {
+				ob_start();
+				\Elementor\Icons_Manager::render_icon( $settings['home_icon'], [ 'aria-hidden' => 'true' ] );
+				$icon_html = ob_get_clean();
+			}
+
 			if ( ! $is_last && ! empty( $item['link'] ) ) {
 				echo '<a class="orivo-breadcrumb-blocks__item" href="' . esc_url( $item['link'] ) . '">';
+				echo $icon_html;
 				echo '<span>' . esc_html( $item['text'] ) . '</span>';
 				echo '</a>';
 			} else {
 				echo '<span class="orivo-breadcrumb-blocks__item orivo-breadcrumb-blocks__item--active" aria-current="page">';
+				echo $icon_html;
 				echo '<span>' . esc_html( $item['text'] ) . '</span>';
 				echo '</span>';
 			}
@@ -559,7 +566,7 @@ class Breadcrumb extends Widgets_Base {
         $separators = [
             'layout-1' => '›',
             'layout-2' => '/',
-            'layout-4' => '•',
+            'layout-4' => '',
             'layout-5' => '〉',
         ];
 
