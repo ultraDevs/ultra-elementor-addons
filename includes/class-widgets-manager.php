@@ -124,11 +124,19 @@ class Widgets_Manager {
 			],
 			'breadcrumb'  => [
 				'title'   => __( 'Breadcrumb', 'ultra-elementor-addons' ),
-				'icon'    => 'eicon-breadcrumbs',
+				'icon'    => 'eicon-breadcrumb',
 				'demo'    => ultra_addons_get_addons_demo_link( 'breadcrumb' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Breadcrumb',
+			],
+			'button'      => [
+				'title'   => __( 'Button', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-button',
+				'demo'    => ultra_addons_get_addons_demo_link( 'button' ),
+				'enqueue' => [ 'css', 'js' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Button',
 			],
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );

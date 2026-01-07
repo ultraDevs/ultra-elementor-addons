@@ -24,7 +24,7 @@ class Breadcrumb extends Widgets_Base {
     }
 
     public function get_icon() {
-        return 'eicon-breadcrumbs';
+        return 'eicon-breadcrumb';
     }
 
     public function get_categories() {
@@ -161,6 +161,7 @@ class Breadcrumb extends Widgets_Base {
 		);
 
 		$this->add_control(
+<<<<<<< HEAD
 			'normal_bg_color',
 			[
 				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
@@ -303,6 +304,16 @@ class Breadcrumb extends Widgets_Base {
 			[
 				'label' => __( 'Typography', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+=======
+			'item_hover_color',
+			[
+				'label'     => __( 'Item Hover Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-breadcrumb-blocks__item:hover' => 'color: {{VALUE}};',
+				],
+				'separator' => 'before',
+>>>>>>> bd1cb74 (update)
 			]
 		);
 
