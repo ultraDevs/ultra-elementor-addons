@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: rgb(210, 235, 232);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 50px 0;
+}
+
+.btn-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.btn-showcase h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.btn-showcase .btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.orivo-btn-blocks {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 6px;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.orivo-btn-blocks__icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orivo-btn-blocks__icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.orivo-btn-blocks__text {
+  display: inline-block;
+}
+.orivo-btn-blocks--solid {
+  background-color: #22c55e;
+  color: #fff;
+  border: none;
+}
+.orivo-btn-blocks--solid:hover {
+  background-color: #16a34a;
+}
+.orivo-btn-blocks--outline {
+  background-color: transparent;
+  color: #22c55e;
+  border: 2px solid #22c55e;
+}
+.orivo-btn-blocks--outline:hover {
+  background-color: #22c55e;
+  color: #fff;
+}
+.orivo-btn-blocks--pill {
+  background-color: #3b82f6;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px 24px;
+}
+.orivo-btn-blocks--pill:hover {
+  background-color: #2563eb;
+}
+.orivo-btn-blocks--rounded {
+  background-color: #f59e0b;
+  color: #fff;
+  border-radius: 12px;
+}
+.orivo-btn-blocks--rounded:hover {
+  background-color: #d97706;
+}
+.orivo-btn-blocks--icon {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.orivo-btn-blocks--icon--solid {
+  background-color: #22c55e;
+  color: #fff;
+  border: none;
+}
+.orivo-btn-blocks--icon--outline {
+  background-color: transparent;
+  color: #22c55e;
+  border: 2px solid #22c55e;
+}
+.orivo-btn-blocks--icon--outline:hover {
+  background-color: #22c55e;
+  color: #fff;
+}
+.orivo-btn-blocks--icon--pill {
+  background-color: #3b82f6;
+  color: #fff;
+  border-radius: 50px;
+}
+.orivo-btn-blocks--icon--pill:hover {
+  background-color: #2563eb;
+}
+.orivo-btn-blocks--icon--rounded {
+  background-color: #f59e0b;
+  color: #fff;
+}
+.orivo-btn-blocks--icon--rounded:hover {
+  background-color: #d97706;
+}
+.orivo-btn-blocks--icon__text {
+  display: none;
+}
+.orivo-btn-blocks--text-only {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.orivo-btn-blocks--text-only__icon {
+  display: none;
+}
+.orivo-btn-blocks--icon-right {
+  flex-direction: row-reverse;
+  gap: 8px;
+}
+
+/* Icon Color Support - Fallbacks */
+.orivo-btn-blocks__icon {
+  flex-shrink: 0;
+}
+.orivo-btn-blocks__icon i {
+  line-height: 1;
+}
+.orivo-btn-blocks__icon img {
+  object-fit: contain;
+}
+
+/* Icon Color Classes (will be overridden by dynamic styles) */
+.orivo-btn-blocks--solid .orivo-btn-blocks__icon i,
+.orivo-btn-blocks--solid .orivo-btn-blocks__icon svg {
+  color: inherit;
+  stroke: inherit;
+}
+.orivo-btn-blocks--outline .orivo-btn-blocks__icon i,
+.orivo-btn-blocks--outline .orivo-btn-blocks__icon svg {
+  color: inherit;
+  stroke: inherit;
+}
+.orivo-btn-blocks--pill .orivo-btn-blocks__icon i,
+.orivo-btn-blocks--pill .orivo-btn-blocks__icon svg {
+  color: inherit;
+  stroke: inherit;
+}
+.orivo-btn-blocks--rounded .orivo-btn-blocks__icon i,
+.orivo-btn-blocks--rounded .orivo-btn-blocks__icon svg {
+  color: inherit;
+  stroke: inherit;
+}
+
+/* Button Size Variants */
+.orivo-btn-blocks--small {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.orivo-btn-blocks--small.orivo-btn-blocks--icon {
+  width: 32px;
+  height: 32px;
+}
+
+.orivo-btn-blocks--large {
+  font-size: 16px;
+  padding: 14px 24px;
+  border-radius: 8px;
+}
+.orivo-btn-blocks--large.orivo-btn-blocks--icon {
+  width: 48px;
+  height: 48px;
+}
+
+.orivo-btn-blocks--xl {
+  font-size: 18px;
+  padding: 18px 32px;
+  border-radius: 10px;
+}
+.orivo-btn-blocks--xl.orivo-btn-blocks--icon {
+  width: 56px;
+  height: 56px;
+}
+
+/* Text Transform */
+.orivo-btn-blocks--uppercase {
+  text-transform: uppercase;
+}
+.orivo-btn-blocks--lowercase {
+  text-transform: lowercase;
+}
+.orivo-btn-blocks--capitalize {
+  text-transform: capitalize;
+}
+
+/* Position Classes */
+.orivo-btn-blocks.position-center {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.orivo-btn-blocks.position-right {
+  margin-left: auto !important;
+}
+.orivo-btn-blocks.position-left {
+  margin-left: 0 !important;
+}
