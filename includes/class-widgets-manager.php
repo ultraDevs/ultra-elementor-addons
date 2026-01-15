@@ -138,6 +138,14 @@ class Widgets_Manager {
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Button',
 			],
+			'flipbox'     => [
+				'title'   => __( 'Flipbox', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-flip-box',
+				'demo'    => ultra_addons_get_addons_demo_link( 'flipbox' ),
+				'enqueue' => [ 'css', 'js' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Flipbox',
+			],
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );
 		return $widgets;

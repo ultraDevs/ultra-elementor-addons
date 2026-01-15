@@ -1,9 +1,3 @@
-/**
- * Button Widget Script
- *
- * @package Ultra_Elementor_Addons
- */
-
 (function($) {
     'use strict';
 
