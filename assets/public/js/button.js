@@ -1,21 +1,31 @@
-(function( $ ) {
-	'use strict';
+/**
+ * Button Widget Script
+ *
+ * @package Ultra_Elementor_Addons
+ */
 
-	/**
-	 * Button Widget
-	 */
-	var ButtonWidget = function( $scope, $ ) {
-		// Button Widget JS functionality
-		var $button = $scope.find('.orivo-btn-blocks');
-		
-		$button.on('hover', function() {
-			$(this).addClass('active');
-		});
-	};
+(function($) {
+    'use strict';
 
-	// jQuery ready event
-	$(window).on('elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction('frontend/element_ready/ua-button.default', ButtonWidget);
-	});
+    $(document).ready(function() {
+        // Button hover effects
+        $('.orivo-btn-blocks').on('mouseenter', function() {
+            $(this).addClass('ua-btn-hover');
+        }).on('mouseleave', function() {
+            $(this).removeClass('ua-btn-hover');
+        });
 
-})( jQuery );
+        // Button click effects
+        $('.orivo-btn-blocks').on('click', function(e) {
+            if ($(this).is('a') && $(this).attr('href')) {
+                // Allow normal link behavior
+                return;
+            }
+            e.preventDefault();
+            $(this).addClass('ua-btn-active');
+            setTimeout(function() {
+                $(this).removeClass('ua-btn-active');
+            }.bind(this), 200);
+        });
+    });
+})(jQuery);
