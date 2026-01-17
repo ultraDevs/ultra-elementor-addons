@@ -5,6 +5,7 @@ namespace UltraElementorAddons\Widgets;
 use Elementor\Repeater;
 use UltraElementorAddons\Widgets_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Background;
@@ -156,31 +157,6 @@ class Flipbox extends Widgets_Base {
 			]
 		);
 
-		// Per-item Front BG (works for layouts 1/2/3/4/7/8 on .orivo-flip-blocks__front)
-		$repeater->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name' => 'front_bg',
-				'label' => __( 'Front Background', 'ultra-elementor-addons' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} .orivo-flip-blocks__front',
-			]
-		);
-
-		// For split layouts (5/6) - per item background for left/right or top/bottom
-		$repeater->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name' => 'split_bg',
-				'label' => __( 'Split Background (Layout 5/6)', 'ultra-elementor-addons' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} .orivo-flip-blocks__left,
-				               {{WRAPPER}} {{CURRENT_ITEM}} .orivo-flip-blocks__right,
-				               {{WRAPPER}} {{CURRENT_ITEM}} .orivo-flip-blocks__top,
-				               {{WRAPPER}} {{CURRENT_ITEM}} .orivo-flip-blocks__bottom',
-			]
-		);
-
 		$repeater->end_controls_tab();
 
 		/* ================= BACK TAB ================= */
@@ -232,17 +208,6 @@ class Flipbox extends Widgets_Base {
 				'label' => __( 'Description', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'default' => __( 'ব্যবহারকারীদের অভিজ্ঞতা উন্নত করতে আকর্ষণীয় এবং কার্যকরী ইন্টারফেস ডিজাইন করি।', 'ultra-elementor-addons' ),
-			]
-		);
-
-		// Per-item Back BG (works for layouts that use .orivo-flip-blocks__back)
-		$repeater->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name' => 'back_bg',
-				'label' => __( 'Back Background', 'ultra-elementor-addons' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} .orivo-flip-blocks__back',
 			]
 		);
 
@@ -341,6 +306,165 @@ class Flipbox extends Widgets_Base {
 			]
 		);
 
+		// Front Icon
+		$this->add_control(
+			'front_icon_heading',
+			[
+				'label' => __( 'Icon Style', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'front_icon_color',
+			[
+				'label' => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__icon svg' => 'stroke: {{VALUE}} !important; fill: none !important;',
+					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__icon i' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'front_icon_size',
+			[
+				'label' => __( 'Icon Size', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [ 'min' => 20, 'max' => 150 ],
+				],
+				'default' => [ 'unit' => 'px', 'size' => 70 ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__icon' => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'front_icon_spacing',
+			[
+				'label' => __( 'Icon Spacing', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+				],
+				'default' => [ 'unit' => 'px', 'size' => 0 ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__icon' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Front Content Spacing
+		$this->add_control(
+			'front_content_heading',
+			[
+				'label' => __( 'Content Spacing', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'front_title_spacing',
+			[
+				'label' => __( 'Title Spacing', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+				],
+				'default' => [ 'unit' => 'px', 'size' => 0 ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Front Border
+		$this->add_control(
+			'front_border_heading',
+			[
+				'label' => __( 'Border', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'front_border',
+				'selector' => '{{WRAPPER}} .orivo-flip-blocks__front',
+			]
+		);
+
+		// Front Background
+		$this->add_control(
+			'front_bg_heading',
+			[
+				'label' => __( 'Front Background', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'front_background',
+				'label' => __( 'Background', 'ultra-elementor-addons' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .orivo-flip-blocks__front',
+			]
+		);
+
+		// Split Layout Background (Layout 5 & 6)
+		$this->add_control(
+			'split_bg_heading',
+			[
+				'label' => __( 'Split Layout Backgrounds', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'description' => __( 'For Layout 5 & 6 only', 'ultra-elementor-addons' ),
+				'condition' => [
+					'layout' => [ 'layout-5', 'layout-6' ],
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'split_left_background',
+				'label' => __( 'Left/Top Background', 'ultra-elementor-addons' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .orivo-flip-blocks__left, {{WRAPPER}} .orivo-flip-blocks__top',
+				'condition' => [
+					'layout' => [ 'layout-5', 'layout-6' ],
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'split_right_background',
+				'label' => __( 'Right/Bottom Background', 'ultra-elementor-addons' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .orivo-flip-blocks__right, {{WRAPPER}} .orivo-flip-blocks__bottom',
+				'condition' => [
+					'layout' => [ 'layout-5', 'layout-6' ],
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/* =======================
@@ -398,6 +522,125 @@ class Flipbox extends Widgets_Base {
 			]
 		);
 
+		// Back Icon
+		$this->add_control(
+			'back_icon_heading',
+			[
+				'label' => __( 'Icon Style', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'back_icon_color',
+			[
+				'label' => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__icon svg' => 'stroke: {{VALUE}} !important; fill: none !important;',
+					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__icon i' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'back_icon_size',
+			[
+				'label' => __( 'Icon Size', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [ 'min' => 20, 'max' => 150 ],
+				],
+				'default' => [ 'unit' => 'px', 'size' => 70 ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__icon' => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'back_icon_spacing',
+			[
+				'label' => __( 'Icon Spacing', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+				],
+				'default' => [ 'unit' => 'px', 'size' => 0 ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__icon' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Back Content Spacing
+		$this->add_control(
+			'back_content_heading',
+			[
+				'label' => __( 'Content Spacing', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'back_title_spacing',
+			[
+				'label' => __( 'Title Spacing', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+				],
+				'default' => [ 'unit' => 'px', 'size' => 0 ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Back Border
+		$this->add_control(
+			'back_border_heading',
+			[
+				'label' => __( 'Border', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'back_border',
+				'selector' => '{{WRAPPER}} .orivo-flip-blocks__back',
+			]
+		);
+
+		// Back Background
+		$this->add_control(
+			'back_bg_heading',
+			[
+				'label' => __( 'Back Background', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'back_background',
+				'label' => __( 'Background', 'ultra-elementor-addons' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .orivo-flip-blocks__back',
+			]
+		);
+
 		$this->end_controls_section();
 
 		/* =======================
@@ -427,11 +670,96 @@ class Flipbox extends Widgets_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'content_padding',
+			[
+				'label' => __( 'Content Padding', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'default' => [
+					'top' => 40,
+					'right' => 40,
+					'bottom' => 40,
+					'left' => 40,
+					'unit' => 'px',
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks__content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'card_spacing_heading',
+			[
+				'label' => __( 'Card Spacing', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'grid_gap',
+			[
+				'label' => __( 'Grid Gap', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [ 'min' => 0, 'max' => 100 ],
+				],
+				'default' => [ 'unit' => 'px', 'size' => 20 ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-flip-blocks-grid' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'card_box_shadow',
 				'selector' => '{{WRAPPER}} .orivo-flip-blocks__front, {{WRAPPER}} .orivo-flip-blocks__back, {{WRAPPER}} .orivo-flip-blocks--layout-5, {{WRAPPER}} .orivo-flip-blocks--layout-6',
+			]
+		);
+
+		// Border Radius for all layouts
+		$this->add_control(
+			'card_border_radius_heading',
+			[
+				'label' => __( 'Border Radius', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_border_radius',
+			[
+				'label' => __( 'Card Border Radius', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'default' => [
+					'top' => 25,
+					'right' => 25,
+					'bottom' => 25,
+					'left' => 25,
+					'unit' => 'px',
+					'isLinked' => true,
+				],
+				'selectors' => [
+					// For layouts 1-4, 7-8: apply to front and back faces
+					'{{WRAPPER}} .orivo-flip-blocks__front' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-flip-blocks__back' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					// For layouts 5-6: apply to main container and split panels
+					'{{WRAPPER}} .orivo-flip-blocks--layout-5' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-flip-blocks--layout-6' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-flip-blocks__left' => 'border-radius: {{TOP}}{{UNIT}} 0 0 {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-flip-blocks__right' => 'border-radius: 0 {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} 0;',
+					'{{WRAPPER}} .orivo-flip-blocks__top' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} 0 0;',
+					'{{WRAPPER}} .orivo-flip-blocks__bottom' => 'border-radius: 0 0 {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -462,7 +790,7 @@ class Flipbox extends Widgets_Base {
 		];
 
 		echo '<div class="' . esc_attr( implode( ' ', $wrap_classes ) ) . '">';
-		echo '<div class="orivo-flip-blocks-grid" style="display:grid; gap:20px;">';
+		echo '<div class="orivo-flip-blocks-grid">';
 
 		if ( empty( $items ) ) {
 			echo '</div></div>';
@@ -498,12 +826,14 @@ class Flipbox extends Widgets_Base {
 			echo $open_tag;
 
 			if ( 'layout-5' === $layout ) {
+				$front_icon_class = empty( $item['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+				$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
 				?>
 				<div class="orivo-flip-blocks__left"></div>
 				<div class="orivo-flip-blocks__right"></div>
 
 				<div class="orivo-flip-blocks__back orivo-flip-blocks__content">
-					<div class="orivo-flip-blocks__icon">
+					<div class="<?php echo esc_attr( $back_icon_class ); ?>">
 						<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
 					</div>
 					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['back_title'] ?? '' ); ?></h3>
@@ -511,7 +841,7 @@ class Flipbox extends Widgets_Base {
 				</div>
 
 				<div class="orivo-flip-blocks__front orivo-flip-blocks__content">
-					<div class="orivo-flip-blocks__icon">
+					<div class="<?php echo esc_attr( $front_icon_class ); ?>">
 						<?php if ( ! empty( $item['front_icon']['value'] ) ) { Icons_Manager::render_icon( $item['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
 					</div>
 					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['front_title'] ?? '' ); ?></h3>
@@ -519,12 +849,14 @@ class Flipbox extends Widgets_Base {
 				</div>
 				<?php
 			} elseif ( 'layout-6' === $layout ) {
+				$front_icon_class = empty( $item['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+				$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
 				?>
 				<div class="orivo-flip-blocks__top"></div>
 				<div class="orivo-flip-blocks__bottom"></div>
 
 				<div class="orivo-flip-blocks__back orivo-flip-blocks__content">
-					<div class="orivo-flip-blocks__icon">
+					<div class="<?php echo esc_attr( $back_icon_class ); ?>">
 						<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
 					</div>
 					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['back_title'] ?? '' ); ?></h3>
@@ -532,7 +864,7 @@ class Flipbox extends Widgets_Base {
 				</div>
 
 				<div class="orivo-flip-blocks__front orivo-flip-blocks__content">
-					<div class="orivo-flip-blocks__icon">
+					<div class="<?php echo esc_attr( $front_icon_class ); ?>">
 						<?php if ( ! empty( $item['front_icon']['value'] ) ) { Icons_Manager::render_icon( $item['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
 					</div>
 					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['front_title'] ?? '' ); ?></h3>
@@ -540,11 +872,13 @@ class Flipbox extends Widgets_Base {
 				</div>
 				<?php
 			} else {
+				$front_icon_class = empty( $item['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+				$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
 				?>
 				<div class="orivo-flip-blocks__inner">
 					<div class="orivo-flip-blocks__front">
 						<div class="orivo-flip-blocks__content">
-							<div class="orivo-flip-blocks__icon">
+							<div class="<?php echo esc_attr( $front_icon_class ); ?>">
 								<?php if ( ! empty( $item['front_icon']['value'] ) ) { Icons_Manager::render_icon( $item['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
 							</div>
 							<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['front_title'] ?? '' ); ?></h3>
@@ -554,7 +888,7 @@ class Flipbox extends Widgets_Base {
 
 					<div class="orivo-flip-blocks__back">
 						<div class="orivo-flip-blocks__content">
-							<div class="orivo-flip-blocks__icon">
+							<div class="<?php echo esc_attr( $back_icon_class ); ?>">
 								<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
 							</div>
 							<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['back_title'] ?? '' ); ?></h3>

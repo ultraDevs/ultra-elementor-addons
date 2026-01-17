@@ -1,0 +1,179 @@
+.orivo-tabs--blocks {
+  background: radial-gradient(800px 400px at 10% -10%, rgba(99, 102, 241, 0.2666666667), transparent), radial-gradient(600px 300px at 90% 10%, rgba(34, 211, 238, 0.2), transparent), #0f172a;
+  max-width: 1100px;
+  margin: 0 auto 80px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
+}
+.orivo-tabs--blocks__nav {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.orivo-tabs--blocks__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orivo-tabs--blocks__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.orivo-tabs--blocks__tab {
+  flex: 1;
+  padding: 14px 22px;
+  background: none;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.orivo-tabs--blocks__tab:hover {
+  color: #ffffff;
+}
+.orivo-tabs--blocks__tab.is-active {
+  color: #ffffff;
+}
+.orivo-tabs--blocks__tab--icon-left {
+  flex-direction: row;
+  gap: 8px;
+}
+.orivo-tabs--blocks__tab--icon-right {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.orivo-tabs--blocks__tab__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orivo-tabs--blocks__tab__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.orivo-tabs--blocks__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(135deg, #6366f1, #22d3ee);
+  border-radius: 14px;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s, height 0.35s;
+  will-change: transform, width, height;
+  z-index: 1;
+}
+.orivo-tabs--blocks__content {
+  padding: 48px;
+}
+.orivo-tabs--blocks__panel {
+  display: none;
+}
+.orivo-tabs--blocks__panel.is-active {
+  display: block;
+  animation: content 0.45s ease;
+}
+.orivo-tabs--blocks__panel h3 {
+  font-size: 28px;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+.orivo-tabs--blocks__panel p {
+  color: #94a3b8;
+  max-width: 680px;
+  line-height: 1.8;
+}
+.orivo-tabs--blocks--vertical {
+  display: flex;
+  flex-direction: row;
+}
+.orivo-tabs--blocks--vertical .orivo-tabs--blocks__nav {
+  flex-direction: column;
+  width: 260px;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: none;
+  flex-shrink: 0;
+}
+.orivo-tabs--blocks--vertical .orivo-tabs--blocks__tab {
+  width: 100%;
+  justify-content: flex-start;
+  flex: none;
+}
+.orivo-tabs--blocks--vertical .orivo-tabs--blocks__indicator {
+  width: 100%;
+  height: auto;
+  left: 0;
+  top: 0;
+}
+.orivo-tabs--blocks--vertical .orivo-tabs--blocks__content {
+  flex: 1;
+}
+.orivo-tabs--blocks--pills__nav {
+  border-radius: 999px;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 20px auto;
+}
+.orivo-tabs--blocks--pills__indicator {
+  border-radius: 999px;
+}
+.orivo-tabs--blocks--minimal__nav {
+  background: none;
+}
+.orivo-tabs--blocks--minimal__indicator {
+  background: linear-gradient(90deg, #6366f1, transparent);
+  box-shadow: none;
+}
+
+@keyframes content {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 768px) {
+  .orivo-tabs--blocks--vertical {
+    flex-direction: column;
+  }
+  .orivo-tabs--blocks--vertical .orivo-tabs--blocks__nav {
+    width: 100%;
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .orivo-tabs--blocks--vertical .orivo-tabs--blocks__tab {
+    justify-content: center;
+    flex: 1;
+  }
+  .orivo-tabs--blocks--vertical .orivo-tabs--blocks__content {
+    padding: 28px;
+  }
+  .orivo-tabs--blocks__content {
+    padding: 28px;
+  }
+}

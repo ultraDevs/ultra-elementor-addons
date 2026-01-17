@@ -146,6 +146,14 @@ class Widgets_Manager {
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Flipbox',
 			],
+			'tab'         => [
+				'title'   => __( 'Tab Blocks', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-tabs',
+				'demo'    => ultra_addons_get_addons_demo_link( 'tab' ),
+				'enqueue' => [ 'css', 'js' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Tab',
+			],
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );
 		return $widgets;
