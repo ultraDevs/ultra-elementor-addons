@@ -138,22 +138,38 @@ class Widgets_Manager {
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Button',
 			],
-			'flipbox'     => [
-				'title'   => __( 'Flipbox', 'ultra-elementor-addons' ),
+			'flip_box'     => [
+				'title'   => __( 'Flip Box', 'ultra-elementor-addons' ),
 				'icon'    => 'eicon-flip-box',
-				'demo'    => ultra_addons_get_addons_demo_link( 'flipbox' ),
+				'demo'    => ultra_addons_get_addons_demo_link( 'flip-box' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
-				'class'   => 'UltraElementorAddons\Widgets\Flipbox',
+				'class'   => 'UltraElementorAddons\Widgets\Flip_Box',
 			],
 			'tab'         => [
-				'title'   => __( 'Tab Blocks', 'ultra-elementor-addons' ),
+				'title'   => __( 'Tab', 'ultra-elementor-addons' ),
 				'icon'    => 'eicon-tabs',
 				'demo'    => ultra_addons_get_addons_demo_link( 'tab' ),
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Tab',
 			],
+			'icon_box'    => [
+				'title'   => __( 'Icon Box', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-icons',
+				'demo'    => ultra_addons_get_addons_demo_link( 'icon-box' ),
+				'enqueue' => [ 'css' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Icon_Box',
+			],
+			'counter'     => [
+				'title'   => __( 'Counter', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-counter',
+				'demo'    => ultra_addons_get_addons_demo_link( 'counter' ),
+				'enqueue' => [ 'css', 'js' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Counter',
+			]
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );
 		return $widgets;

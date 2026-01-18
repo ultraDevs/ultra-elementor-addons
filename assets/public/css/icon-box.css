@@ -1,0 +1,179 @@
+/* ================================================================
+   Icon Box Widget - Ultra Elementor Addons
+   ================================================================ */
+
+/* Base Wrapper */
+.ua-icon-box-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.ua-icon-box-align-left {
+	justify-content: flex-start;
+}
+
+.ua-icon-box-align-center {
+	justify-content: center;
+}
+
+.ua-icon-box-align-right {
+	justify-content: flex-end;
+}
+
+/* Link Wrapper */
+.ua-icon-box-link {
+	display: inline-block;
+	text-decoration: none;
+}
+
+/* Base Icon Box */
+.ua-icon-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	border: 2px solid transparent;
+	margin: 0;
+	padding: 0;
+}
+
+/* Icon */
+.ua-icon-box-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	transition: all 0.3s ease;
+}
+
+.ua-icon-box-icon i,
+.ua-icon-box-icon svg {
+	display: block;
+	width: 1em;
+	height: 1em;
+}
+
+.ua-icon-box-icon svg {
+	fill: currentColor;
+}
+
+/* ================================================================
+   Style 1 - Rounded Background
+   ================================================================ */
+.ua-icon-box-style1 {
+	border-radius: 16px;
+}
+
+/* ================================================================
+   Style 2 - Circle Background
+   ================================================================ */
+.ua-icon-box-style2 {
+	border-radius: 50%;
+}
+
+/* ================================================================
+   Style 3 - Rounded Border
+   ================================================================ */
+.ua-icon-box-style3 {
+	background-color: transparent;
+	border-style: solid;
+	border-radius: 16px;
+}
+
+/* ================================================================
+   Style 4 - Circle Border
+   ================================================================ */
+.ua-icon-box-style4 {
+	background-color: transparent;
+	border-style: solid;
+	border-radius: 50%;
+}
+
+/* ================================================================
+   Style 5 - Icon Only
+   ================================================================ */
+.ua-icon-box-style5 {
+	background-color: transparent;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* ================================================================
+   Hover Animations
+   ================================================================ */
+
+/* Fade */
+.ua-icon-box-wrapper.ua-icon-box-animation-fade .ua-icon-box:hover {
+	opacity: 0.8;
+}
+
+/* Slide Up */
+.ua-icon-box-wrapper.ua-icon-box-animation-slide-up .ua-icon-box {
+	transform: translateY(0);
+}
+
+.ua-icon-box-wrapper.ua-icon-box-animation-slide-up .ua-icon-box:hover {
+	transform: translateY(-5px);
+}
+
+/* Slide Down */
+.ua-icon-box-wrapper.ua-icon-box-animation-slide-down .ua-icon-box {
+	transform: translateY(0);
+}
+
+.ua-icon-box-wrapper.ua-icon-box-animation-slide-down .ua-icon-box:hover {
+	transform: translateY(5px);
+}
+
+/* Zoom In */
+.ua-icon-box-wrapper.ua-icon-box-animation-zoom-in .ua-icon-box {
+	transform: scale(1);
+}
+
+.ua-icon-box-wrapper.ua-icon-box-animation-zoom-in .ua-icon-box:hover {
+	transform: scale(1.1);
+}
+
+/* Zoom Out */
+.ua-icon-box-wrapper.ua-icon-box-animation-zoom-out .ua-icon-box {
+	transform: scale(1);
+}
+
+.ua-icon-box-wrapper.ua-icon-box-animation-zoom-out .ua-icon-box:hover {
+	transform: scale(0.9);
+}
+
+/* Rotate */
+.ua-icon-box-wrapper.ua-icon-box-animation-rotate .ua-icon-box-icon {
+	transform: rotate(0deg);
+}
+
+.ua-icon-box-wrapper.ua-icon-box-animation-rotate .ua-icon-box:hover .ua-icon-box-icon {
+	transform: rotate(180deg);
+}
+
+/* Bounce */
+.ua-icon-box-wrapper.ua-icon-box-animation-bounce .ua-icon-box:hover {
+	animation: ua-icon-bounce 0.5s ease;
+}
+
+@keyframes ua-icon-bounce {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+/* ================================================================
+   Responsive
+   ================================================================ */
+@media (max-width: 767px) {
+	.ua-icon-box-wrapper {
+		justify-content: center;
+	}
+}

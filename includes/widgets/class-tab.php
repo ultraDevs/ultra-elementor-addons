@@ -20,7 +20,7 @@ class Tab extends Widgets_Base {
 	}
 
 	public function get_title() {
-		return __( 'Tab Blocks', 'ultra-elementor-addons' );
+		return __( 'Tab', 'ultra-elementor-addons' );
 	}
 
 	public function get_icon() {
@@ -51,7 +51,7 @@ class Tab extends Widgets_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => __( 'Tab Blocks', 'ultra-elementor-addons' ),
+				'label' => __( 'Tab', 'ultra-elementor-addons' ),
 			]
 		);
 

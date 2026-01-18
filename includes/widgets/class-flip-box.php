@@ -13,14 +13,14 @@ use Elementor\Icons_Manager;
 
 defined( 'ABSPATH' ) || die();
 
-class Flipbox extends Widgets_Base {
+class Flip_Box extends Widgets_Base {
 
 	public function get_name() {
 		return 'ua_flipbox';
 	}
 
 	public function get_title() {
-		return __( 'Flip Blocks', 'ultra-elementor-addons' );
+		return __( 'Flip Box', 'ultra-elementor-addons' );
 	}
 
 	public function get_icon() {
@@ -323,7 +323,7 @@ class Flipbox extends Widgets_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__icon svg' => 'stroke: {{VALUE}} !important; fill: none !important;',
+					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__icon svg' => 'fill: {{VALUE}} !important; stroke: {{VALUE}} !important;',
 					'{{WRAPPER}} .orivo-flip-blocks__front .orivo-flip-blocks__icon i' => 'color: {{VALUE}} !important;',
 				],
 			]
@@ -539,7 +539,7 @@ class Flipbox extends Widgets_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__icon svg' => 'stroke: {{VALUE}} !important; fill: none !important;',
+					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__icon svg' => 'fill: {{VALUE}} !important; stroke: {{VALUE}} !important;',
 					'{{WRAPPER}} .orivo-flip-blocks__back .orivo-flip-blocks__icon i' => 'color: {{VALUE}} !important;',
 				],
 			]
