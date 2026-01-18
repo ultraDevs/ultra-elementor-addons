@@ -24,7 +24,7 @@ class Breadcrumb extends Widgets_Base {
     }
 
     public function get_icon() {
-        return 'eicon-breadcrumb';
+        return 'ua-icon eicon-breadcrumb';
     }
 
     public function get_categories() {
