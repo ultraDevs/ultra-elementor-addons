@@ -1,40 +1,71 @@
-function initTabs(selector='[data-tabs--blocks]'){
-  document.querySelectorAll(selector).forEach(tabs=>{
-    const nav = tabs.querySelector('.orivo-tabs--blocks__nav');
-    const indicator = tabs.querySelector('.orivo-tabs--blocks__indicator');
-    const btns = tabs.querySelectorAll('.orivo-tabs--blocks__tab');
-    const panels = tabs.querySelectorAll('.orivo-tabs--blocks__panel');
+(function($) {
+	'use strict';
 
-    function moveIndicator(btn){
-      const r = btn.getBoundingClientRect();
-      const n = nav.getBoundingClientRect();
-      indicator.style.width = r.width + 'px';
-      indicator.style.height = r.height + 'px';
-      indicator.style.transform = `translate(${r.left-n.left}px,${r.top-n.top}px)`;
-    }
+	var UaTabBlocks = function($scope, $) {
+		var $tabsContainer = $scope.find('[data-tabs--blocks]');
 
-    btns.forEach(btn=>{
-      btn.onclick = ()=>{
-        btns.forEach(b=>b.classList.remove('is-active'));
-        panels.forEach(p=>p.classList.remove('is-active'));
+		if ($tabsContainer.length === 0) {
+			return;
+		}
 
-        btn.classList.add('is-active');
-        const panel = tabs.querySelector('#'+btn.dataset.tab);
-        if(panel) panel.classList.add('is-active');
+		var $indicator = $tabsContainer.find('.orivo-tabs--blocks__indicator');
+		var $btns = $tabsContainer.find('.orivo-tabs--blocks__tab');
+		var $panels = $tabsContainer.find('.orivo-tabs--blocks__panel');
 
-        moveIndicator(btn);
-      };
+		function moveIndicator($btn) {
+			var btnOffset = $btn.position();
 
-      // Set indicator on load
-      if(btn.classList.contains('is-active')) moveIndicator(btn);
-    });
+			$indicator.css({
+				'width': $btn.outerWidth(),
+				'height': $btn.outerHeight(),
+				'transform': 'translate(' + btnOffset.left + 'px, ' + btnOffset.top + 'px)'
+			});
+		}
 
-    tabs.refreshTabs = ()=>{
-      btns.forEach(btn=>{
-        if(btn.classList.contains('is-active')) moveIndicator(btn);
-      });
-    };
-  });
-}
+		$btns.on('click', function(e) {
+			e.preventDefault();
 
-initTabs();
+			var $clickedBtn = $(this);
+
+			// Remove active from all
+			$btns.removeClass('is-active');
+			$panels.removeClass('is-active');
+
+			// Add active to clicked
+			$clickedBtn.addClass('is-active');
+
+			var tabId = $clickedBtn.data('tab');
+			$('#' + tabId).addClass('is-active');
+
+			moveIndicator($clickedBtn);
+		});
+
+		// Initialize
+		var $activeBtn = $btns.filter('.is-active');
+		if ($activeBtn.length > 0) {
+			setTimeout(function() {
+				moveIndicator($activeBtn);
+			}, 10);
+		}
+
+		$(window).on('resize', function() {
+			var $currentActive = $btns.filter('.is-active');
+			if ($currentActive.length > 0) {
+				moveIndicator($currentActive);
+			}
+		});
+	};
+
+	$(window).on('elementor/frontend/init', function() {
+		// Try both underscore and hyphen versions
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/ua_tab.default',
+			UaTabBlocks
+		);
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/ua-tab.default',
+			UaTabBlocks
+		);
+	});
+
+})(jQuery);

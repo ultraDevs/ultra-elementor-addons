@@ -201,24 +201,7 @@ class Tab extends Widgets_Base {
 				],
 			]
 		);
-
-		$this->add_control(
-			'container_overflow',
-			[
-				'label' => __( 'Overflow', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'hidden',
-				'options' => [
-					'hidden' => __( 'Hidden', 'ultra-elementor-addons' ),
-					'visible' => __( 'Visible', 'ultra-elementor-addons' ),
-					'auto' => __( 'Auto', 'ultra-elementor-addons' ),
-				],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-tabs--blocks' => 'overflow: {{VALUE}};',
-				],
-			]
-		);
-
+		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -297,6 +280,18 @@ class Tab extends Widgets_Base {
 		);
 
 		$this->add_responsive_control(
+			'nav_border_radius',
+			[
+				'label' => __( 'Border Radius', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-tabs--blocks__nav' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
 			'nav_padding',
 			[
 				'label' => __( 'Padding', 'ultra-elementor-addons' ),
@@ -365,6 +360,39 @@ class Tab extends Widgets_Base {
 			]
 		);
 
+		// Indicator Toggle
+		$this->add_control(
+			'show_indicator',
+			[
+				'label' => __( 'Show Indicator', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'label_on' => __( 'Yes', 'ultra-elementor-addons' ),
+				'label_off' => __( 'No', 'ultra-elementor-addons' ),
+				'return_value' => 'yes',
+				'prefix_class' => 'ua-show-indicator-',
+			]
+		);
+
+		// Normal State
+		$this->start_controls_tabs( 'tabs_normal_tabs' );
+
+		$this->start_controls_tab(
+			'tabs_normal_tab',
+			[
+				'label' => __( 'Normal', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'tab_typography',
+				'label' => __( 'Typography', 'ultra-elementor-addons' ),
+				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__tab',
+			]
+		);
+
 		$this->add_control(
 			'tab_color',
 			[
@@ -377,35 +405,13 @@ class Tab extends Widgets_Base {
 			]
 		);
 
-		$this->add_control(
-			'tab_hover_color',
-			[
-				'label' => __( 'Hover Color', 'ultra-elementor-addons' ),
-				'type'  => Controls_Manager::COLOR,
-				'default' => '#ffffff',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-tabs--blocks__tab:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'tab_active_color',
-			[
-				'label' => __( 'Active Color', 'ultra-elementor-addons' ),
-				'type'  => Controls_Manager::COLOR,
-				'default' => '#ffffff',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-tabs--blocks__tab.is-active' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
 		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+			Group_Control_Background::get_type(),
 			[
-				'name' => 'tab_typography',
-				'label' => __( 'Typography', 'ultra-elementor-addons' ),
+				'name' => 'tab_background',
+				'label' => __( 'Background', 'ultra-elementor-addons' ),
+				'types' => [ 'classic', 'gradient' ],
+				'exclude' => [ 'image' ],
 				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__tab',
 			]
 		);
@@ -430,49 +436,95 @@ class Tab extends Widgets_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'tab_border_radius',
 			[
 				'label' => __( 'Border Radius', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
-				'default' => [
-					'top' => 14,
-					'right' => 14,
-					'bottom' => 14,
-					'left' => 14,
-					'unit' => 'px',
-					'isLinked' => true,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .orivo-tabs--blocks__tab' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
-		$this->add_control(
-			'tab_transition',
+		$this->end_controls_tab();
+
+		// Active State
+		$this->start_controls_tab(
+			'tabs_active_tab',
 			[
-				'label' => __( 'Transition Duration', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 's', 'ms' ],
-				'range' => [
-					's' => [ 'min' => 0, 'max' => 3, 'step' => 0.1 ],
-					'ms' => [ 'min' => 100, 'max' => 3000, 'step' => 100 ],
-				],
-				'default' => [ 'unit' => 's', 'size' => 0.35 ],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-tabs--blocks__tab' => 'transition: {{SIZE}}{{UNIT}};',
-				],
+				'label' => __( 'Active', 'ultra-elementor-addons' ),
 			]
 		);
 
 		$this->add_control(
-			'tab_icon_heading',
+			'tab_active_color',
 			[
-				'label' => __( 'Icon', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'label' => __( 'Color', 'ultra-elementor-addons' ),
+				'type'  => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-tabs--blocks__tab.is-active' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'tab_active_background',
+				'label' => __( 'Background', 'ultra-elementor-addons' ),
+				'types' => [ 'classic', 'gradient' ],
+				'exclude' => [ 'image' ],
+				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__tab.is-active',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		// Hover State
+		$this->start_controls_tab(
+			'tabs_hover_tab',
+			[
+				'label' => __( 'Hover', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'tab_hover_color',
+			[
+				'label' => __( 'Color', 'ultra-elementor-addons' ),
+				'type'  => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-tabs--blocks__tab:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'tab_hover_background',
+				'label' => __( 'Background', 'ultra-elementor-addons' ),
+				'types' => [ 'classic', 'gradient' ],
+				'exclude' => [ 'image' ],
+				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__tab:hover',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		// Icon Section with tabs
+		$this->start_controls_tabs( 'tabs_icon_tabs' );
+
+		$this->start_controls_tab(
+			'tabs_icon_normal_tab',
+			[
+				'label' => __( 'Icon Normal', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -504,6 +556,52 @@ class Tab extends Widgets_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tabs_icon_active_tab',
+			[
+				'label' => __( 'Icon Active', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'tab_icon_active_color',
+			[
+				'label' => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type'  => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-tabs--blocks__tab.is-active .orivo-tabs--blocks__icon svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .orivo-tabs--blocks__tab.is-active .orivo-tabs--blocks__icon i' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tabs_icon_hover_tab',
+			[
+				'label' => __( 'Icon Hover', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'tab_icon_hover_color',
+			[
+				'label' => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type'  => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-tabs--blocks__tab:hover .orivo-tabs--blocks__icon svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .orivo-tabs--blocks__tab:hover .orivo-tabs--blocks__icon i' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
 		$this->add_control(
 			'tab_icon_gap',
 			[
@@ -517,6 +615,7 @@ class Tab extends Widgets_Base {
 				'selectors' => [
 					'{{WRAPPER}} .orivo-tabs--blocks__tab--icon-left' => 'gap: {{SIZE}}{{UNIT}};',
 				],
+				'separator' => 'before',
 			]
 		);
 
@@ -530,6 +629,19 @@ class Tab extends Widgets_Base {
 			[
 				'label' => __( 'Indicator', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'show_indicator' => 'yes',
+				],
+			]
+		);
+
+		// Indicator Tabs
+		$this->start_controls_tabs( 'indicator_tabs' );
+
+		$this->start_controls_tab(
+			'indicator_normal_tab',
+			[
+				'label' => __( 'Normal', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -542,19 +654,16 @@ class Tab extends Widgets_Base {
 				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__indicator',
 				'fields_options' => [
 					'background' => [
-						'default' => 'gradient',
+						'default' => 'classic',
 					],
 					'color' => [
 						'default' => '#6366f1',
-					],
-					'color_b' => [
-						'default' => '#22d3ee',
 					],
 				],
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'indicator_border_radius',
 			[
 				'label' => __( 'Border Radius', 'ultra-elementor-addons' ),
@@ -574,6 +683,10 @@ class Tab extends Widgets_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
 		$this->add_control(
 			'indicator_transition',
 			[
@@ -587,6 +700,7 @@ class Tab extends Widgets_Base {
 				'selectors' => [
 					'{{WRAPPER}} .orivo-tabs--blocks__indicator' => 'transition: transform {{SIZE}}{{UNIT}}, width {{SIZE}}{{UNIT}}, height {{SIZE}}{{UNIT}};',
 				],
+				'separator' => 'before',
 			]
 		);
 
@@ -623,19 +737,30 @@ class Tab extends Widgets_Base {
 			]
 		);
 
-		$this->add_control(
-			'content_title_heading',
+		// Content Tabs
+		$this->start_controls_tabs( 'content_tabs' );
+
+		// Title Tab
+		$this->start_controls_tab(
+			'content_title_tab',
 			[
 				'label' => __( 'Title', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'content_title_typography',
+				'label' => __( 'Typography', 'ultra-elementor-addons' ),
+				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__panel h3',
 			]
 		);
 
 		$this->add_control(
 			'content_title_color',
 			[
-				'label' => __( 'Title Color', 'ultra-elementor-addons' ),
+				'label' => __( 'Color', 'ultra-elementor-addons' ),
 				'type'  => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
@@ -644,19 +769,10 @@ class Tab extends Widgets_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name' => 'content_title_typography',
-				'label' => __( 'Title Typography', 'ultra-elementor-addons' ),
-				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__panel h3',
-			]
-		);
-
 		$this->add_responsive_control(
 			'content_title_spacing',
 			[
-				'label' => __( 'Title Bottom Spacing', 'ultra-elementor-addons' ),
+				'label' => __( 'Bottom Spacing', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -669,24 +785,13 @@ class Tab extends Widgets_Base {
 			]
 		);
 
-		$this->add_control(
-			'content_text_heading',
-			[
-				'label' => __( 'Text', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
+		$this->end_controls_tab();
 
-		$this->add_control(
-			'content_text_color',
+		// Description Tab
+		$this->start_controls_tab(
+			'content_description_tab',
 			[
-				'label' => __( 'Text Color', 'ultra-elementor-addons' ),
-				'type'  => Controls_Manager::COLOR,
-				'default' => '#94a3b8',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-tabs--blocks__panel p' => 'color: {{VALUE}};',
-				],
+				'label' => __( 'Description', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -694,8 +799,20 @@ class Tab extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_typography',
-				'label' => __( 'Content Typography', 'ultra-elementor-addons' ),
+				'label' => __( 'Typography', 'ultra-elementor-addons' ),
 				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__panel p',
+			]
+		);
+
+		$this->add_control(
+			'content_text_color',
+			[
+				'label' => __( 'Color', 'ultra-elementor-addons' ),
+				'type'  => Controls_Manager::COLOR,
+				'default' => '#94a3b8',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-tabs--blocks__panel p' => 'color: {{VALUE}};',
+				],
 			]
 		);
 
@@ -716,21 +833,9 @@ class Tab extends Widgets_Base {
 			]
 		);
 
-		$this->add_control(
-			'content_line_height',
-			[
-				'label' => __( 'Line Height', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'em' ],
-				'range' => [
-					'em' => [ 'min' => 1, 'max' => 3, 'step' => 0.1 ],
-				],
-				'default' => [ 'unit' => 'em', 'size' => 1.8 ],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-tabs--blocks__panel p' => 'line-height: {{SIZE}};',
-				],
-			]
-		);
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'content_animation_heading',
@@ -742,9 +847,32 @@ class Tab extends Widgets_Base {
 		);
 
 		$this->add_control(
+			'content_animation_enable',
+			[
+				'label' => __( 'Enable Animation', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'label_on' => __( 'Yes', 'ultra-elementor-addons' ),
+				'label_off' => __( 'No', 'ultra-elementor-addons' ),
+				'return_value' => 'yes',
+				'prefix_class' => 'ua-content-animation-',
+			]
+		);
+
+		// Animation Tabs
+		$this->start_controls_tabs( 'content_animation_tabs' );
+
+		$this->start_controls_tab(
+			'content_animation_duration_tab',
+			[
+				'label' => __( 'Duration', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
 			'content_animation_duration',
 			[
-				'label' => __( 'Animation Duration', 'ultra-elementor-addons' ),
+				'label' => __( 'Duration', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 's', 'ms' ],
 				'range' => [
@@ -757,10 +885,19 @@ class Tab extends Widgets_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'content_animation_distance_tab',
+			[
+				'label' => __( 'Distance from Btm', 'ultra-elementor-addons' ),
+			]
+		);
+
 		$this->add_control(
 			'content_animation_distance',
 			[
-				'label' => __( 'Slide Distance', 'ultra-elementor-addons' ),
+				'label' => __( 'Distance', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -768,10 +905,17 @@ class Tab extends Widgets_Base {
 				],
 				'default' => [ 'unit' => 'px', 'size' => 18 ],
 				'selectors' => [
-					'{{WRAPPER}} @keyframes content' => 'from { opacity: 0; transform: translateY({{SIZE}}{{UNIT}}); } to { opacity: 1; transform: none; }',
+					'{{WRAPPER}} .orivo-tabs--blocks__panel.is-active' => '--slide-distance: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'content_animation_enable' => 'yes',
 				],
 			]
 		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
