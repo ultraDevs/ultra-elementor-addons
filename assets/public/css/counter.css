@@ -1,12 +1,4 @@
-/* ================================================================
-   Counter Widget - Ultra Elementor Addons
-   ================================================================ */
-
-/* Base Container */
 .orivo-counter-blocks {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 30px;
 	margin: 0;
 	padding: 0;
 }
@@ -14,13 +6,8 @@
 .orivo-counter-blocks__item {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
-	padding: 30px;
-	margin: 0;
-	background: #ffffff;
-	border-radius: 10px;
-	text-align: center;
 }
 
 .orivo-counter-blocks__item > a {
@@ -28,7 +15,7 @@
 	color: inherit;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	width: 100%;
 }
 
@@ -36,9 +23,6 @@
    Layout 1 - Icon + Number + Title
    ================================================================ */
 .orivo-counter-blocks--layout-1 {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 30px;
 	margin: 0;
 	padding: 0;
 }
@@ -56,9 +40,7 @@
 	width: auto;
 	height: auto;
 	font-size: 48px;
-	color: #6366F1;
 	line-height: 1;
-	margin-bottom: 15px;
 }
 
 .orivo-counter-blocks--layout-1 .orivo-counter-blocks__icon i,
@@ -73,20 +55,12 @@
 	stroke: currentColor;
 }
 
-.orivo-counter-blocks--layout-1 .orivo-counter-blocks__number {
-	background: linear-gradient(135deg, #6366f1, #10b981);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
-}
-
 /* ================================================================
    Layout 2 - Circular Progress
    ================================================================ */
 .orivo-counter-blocks--layout-2 {
 	display: flex;
 	justify-content: center;
-	gap: 80px;
 	flex-wrap: wrap;
 	margin: 0;
 	padding: 0;
@@ -95,7 +69,6 @@
 .orivo-counter-blocks--layout-2 .orivo-counter-blocks__item {
 	background: transparent;
 	box-shadow: none;
-	padding: 30px;
 }
 
 .orivo-counter-blocks--layout-2 .orivo-counter-blocks__icon {
@@ -142,12 +115,11 @@
 }
 
 /* ================================================================
-   Layout 3 - Number + Bar Progress (Your Design)
+   Layout 3 - Number + Bar Progress
    ================================================================ */
 .orivo-counter-blocks--layout-3 {
 	display: flex;
 	justify-content: center;
-	gap: 100px;
 	flex-wrap: wrap;
 	margin: 0;
 	padding: 0;
@@ -156,7 +128,6 @@
 .orivo-counter-blocks--layout-3 .orivo-counter-blocks__item {
 	background: transparent;
 	box-shadow: none;
-	padding: 30px;
 }
 
 .orivo-counter-blocks--layout-3 .orivo-counter-blocks__icon {
@@ -166,7 +137,6 @@
 .orivo-counter-blocks--layout-3 .orivo-counter-blocks__number {
 	font-size: 78px;
 	color: white;
-	
 }
 
 .orivo-counter-blocks--layout-3 .orivo-counter-blocks__title {
@@ -178,7 +148,7 @@
 	position: relative;
 	width: 100%;
 	max-width: 220px;
-	margin: 0 auto 0px;
+	margin: 0 0 0px;
 	height: 14px;
 	background: #334155;
 	border-radius: 8px;
@@ -191,7 +161,7 @@
 	left: 0;
 	height: 100%;
 	width: 0;
-	background: linear-gradient(90deg, #10b981, #34d399);
+	background: #6366F1;
 	border-radius: 8px;
 	transition: width 1.5s ease-out;
 	box-shadow: 0 0 25px rgba(16, 185, 129, 0.8);
@@ -204,7 +174,6 @@
 	font-size: 48px;
 	font-weight: 700;
 	color: #1F2937;
-	
 	line-height: 1.2;
 	display: block;
 }
@@ -227,6 +196,39 @@
 	font-weight: 500;
 	color: #6B7280;
 	line-height: 1.5;
+}
+
+/* ================================================================
+   Alignment
+   ================================================================ */
+.orivo-counter-blocks--align-left {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.orivo-counter-blocks--align-left .orivo-counter-blocks__icon {
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.orivo-counter-blocks--align-center {
+	align-items: center;
+	text-align: center;
+}
+
+.orivo-counter-blocks--align-center .orivo-counter-blocks__icon {
+	align-items: center;
+	justify-content: center;
+}
+
+.orivo-counter-blocks--align-right {
+	align-items: flex-end;
+	text-align: right;
+}
+
+.orivo-counter-blocks--align-right .orivo-counter-blocks__icon {
+	align-items: flex-end;
+	justify-content: flex-end;
 }
 
 /* ================================================================

@@ -2,7 +2,6 @@
 
 namespace UltraElementorAddons\Widgets;
 
-use Elementor\Repeater;
 use UltraElementorAddons\Widgets_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
@@ -51,7 +50,7 @@ class Counter extends Widgets_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => __( 'Counter', 'ultra-elementor-addons' ),
+				'label' => __( 'Counter Content', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -69,51 +68,203 @@ class Counter extends Widgets_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'columns',
-			[
-				'label'   => __( 'Columns', 'ultra-elementor-addons' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '3',
-				'options' => [
-					'1' => '1',
-					'2' => '2',
-					'3' => '3',
-					'4' => '4',
-					'5' => '5',
-					'6' => '6',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-counter-blocks' => 'grid-template-columns: repeat({{VALUE}}, minmax(0, 1fr));',
-				],
-			]
-		);
-
 		$this->add_control(
-			'heading_separator',
-			[
-				'type' => Controls_Manager::DIVIDER,
-			]
-		);
-
-		$repeater = new Repeater();
-
-		$repeater->add_control(
 			'counter_icon',
 			[
 				'label' => __( 'Icon', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
-					'value' => 'fas fa-trophy',
+					'value'   => 'fas fa-trophy',
 					'library' => 'fa-solid',
 				],
 				'condition' => [
-					'counter_layout!' => 'layout-2',
+					'layout' => 'layout-1',
 				],
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
+			'counter_icon_heading',
+			[
+				'label'     => __( 'Icon Styling', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'layout' => 'layout-1',
+				],
+			]
+		);
+
+		/* ========================
+		 * Icon Tabs
+		 * ======================== */
+		$this->start_controls_tabs( 'icon_style_tabs', [ 'condition' => [ 'layout' => 'layout-1' ] ] );
+
+		/* Style Tab */
+		$this->start_controls_tab(
+			'icon_tab_style',
+			[
+				'label' => __( 'Style', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'counter_icon_color',
+			[
+				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#1F2937',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-counter-blocks__icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
+				],
+				'global'    => [
+					'active' => true,
+				],
+			]
+		);
+
+		$this->add_control(
+			'counter_icon_background',
+			[
+				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'background-color: {{VALUE}};',
+				],
+				'global'    => [
+					'active' => true,
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'counter_icon_border',
+				'label'    => __( 'Border', 'ultra-elementor-addons' ),
+				'selector' => '{{WRAPPER}} .orivo-counter-blocks__icon',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'counter_icon_box_shadow',
+				'selector' => '{{WRAPPER}} .orivo-counter-blocks__icon',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/* Size Tab */
+		$this->start_controls_tab(
+			'icon_tab_size',
+			[
+				'label' => __( 'Size', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'counter_icon_size',
+			[
+				'label'      => __( 'Icon Size', 'ultra-elementor-addons' ),
+				'description' => __( 'Size of the icon itself', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 10, 'max' => 100 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 48 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-counter-blocks__icon i, {{WRAPPER}} .orivo-counter-blocks__icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'counter_icon_box_size',
+			[
+				'label'      => __( 'Box Size', 'ultra-elementor-addons' ),
+				'description' => __( 'Size of the icon container', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 40, 'max' => 200 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 80 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; min-width: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/* Box Tab */
+		$this->start_controls_tab(
+			'icon_tab_box',
+			[
+				'label' => __( 'Box', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'counter_icon_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'default'    => [
+					'top'      => '0',
+					'right'    => '0',
+					'bottom'   => '0',
+					'left'     => '0',
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'counter_icon_padding',
+			[
+				'label'      => __( 'Padding', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'default'    => [
+					'top'      => '0',
+					'right'    => '0',
+					'bottom'   => '0',
+					'left'     => '0',
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->add_control(
+			'counter_content_heading',
+			[
+				'label' => __( 'Counter Content', 'ultra-elementor-addons' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
 			'counter_number',
 			[
 				'label'       => __( 'Number', 'ultra-elementor-addons' ),
@@ -126,7 +277,7 @@ class Counter extends Widgets_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'counter_prefix',
 			[
 				'label'       => __( 'Prefix', 'ultra-elementor-addons' ),
@@ -136,7 +287,7 @@ class Counter extends Widgets_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'counter_suffix',
 			[
 				'label'       => __( 'Suffix', 'ultra-elementor-addons' ),
@@ -146,7 +297,7 @@ class Counter extends Widgets_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'counter_title',
 			[
 				'label'       => __( 'Title', 'ultra-elementor-addons' ),
@@ -156,7 +307,7 @@ class Counter extends Widgets_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'counter_percent',
 			[
 				'label'       => __( 'Progress Percentage', 'ultra-elementor-addons' ),
@@ -172,54 +323,18 @@ class Counter extends Widgets_Base {
 					],
 				],
 				'condition'   => [
-					'counter_layout!' => 'layout-1',
+					'layout!' => 'layout-1',
 				],
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'counter_link',
 			[
 				'label'         => __( 'Link', 'ultra-elementor-addons' ),
 				'type'          => Controls_Manager::URL,
 				'placeholder'   => 'https://example.com',
 				'show_external' => true,
-			]
-		);
-
-		$this->add_control(
-			'counters',
-			[
-				'label'       => __( 'Counters', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'default'     => [
-					[
-						'counter_icon'    => [
-							'value'   => 'fas fa-trophy',
-							'library' => 'fa-solid',
-						],
-						'counter_number'  => 1250,
-						'counter_title'   => __( 'Projects Completed', 'ultra-elementor-addons' ),
-					],
-					[
-						'counter_icon'    => [
-							'value'   => 'fas fa-users',
-							'library' => 'fa-solid',
-						],
-						'counter_number'  => 890,
-						'counter_title'   => __( 'Happy Clients', 'ultra-elementor-addons' ),
-					],
-					[
-						'counter_icon'    => [
-							'value'   => 'fas fa-heart',
-							'library' => 'fa-solid',
-						],
-						'counter_number'  => 3200,
-						'counter_title'   => __( 'Likes Received', 'ultra-elementor-addons' ),
-					],
-				],
-				'title_field' => '{{{ counter_title }}}',
 			]
 		);
 
@@ -236,26 +351,23 @@ class Counter extends Widgets_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'container_gap',
+		/* ========================
+		 * Container Tabs
+		 * ======================== */
+		$this->start_controls_tabs( 'container_style_tabs' );
+
+		/* Box Tab */
+		$this->start_controls_tab(
+			'container_tab_box',
 			[
-				'label'      => __( 'Gap', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 100 ],
-				],
-				'default'    => [ 'unit' => 'px', 'size' => 30 ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-counter-blocks' => 'gap: {{SIZE}}{{UNIT}};',
-				],
+				'label' => __( 'Box', 'ultra-elementor-addons' ),
 			]
 		);
 
 		$this->add_responsive_control(
-			'item_padding',
+			'container_padding',
 			[
-				'label'      => __( 'Item Padding', 'ultra-elementor-addons' ),
+				'label'      => __( 'Padding', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'default'    => [
@@ -269,24 +381,6 @@ class Counter extends Widgets_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .orivo-counter-blocks__item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'     => 'item_background',
-				'label'    => __( 'Item Background', 'ultra-elementor-addons' ),
-				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .orivo-counter-blocks__item',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'item_border',
-				'selector' => '{{WRAPPER}} .orivo-counter-blocks__item',
 			]
 		);
 
@@ -310,11 +404,49 @@ class Counter extends Widgets_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		/* Style Tab */
+		$this->start_controls_tab(
+			'container_tab_style',
+			[
+				'label' => __( 'Style', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'item_background',
+				'label'    => __( 'Background', 'ultra-elementor-addons' ),
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .orivo-counter-blocks__item',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'item_border',
+				'selector' => '{{WRAPPER}} .orivo-counter-blocks__item',
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'item_box_shadow',
 				'selector' => '{{WRAPPER}} .orivo-counter-blocks__item',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/* Alignment Tab */
+		$this->start_controls_tab(
+			'container_tab_alignment',
+			[
+				'label' => __( 'Alignment', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -338,72 +470,12 @@ class Counter extends Widgets_Base {
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-counter-blocks__item' => 'text-align: {{VALUE}};',
-				],
 			]
 		);
 
-		$this->end_controls_section();
+		$this->end_controls_tab();
 
-		/* =======================
-		 * Style - Icon
-		 * ======================= */
-		$this->start_controls_section(
-			'section_style_icon',
-			[
-				'label'     => __( 'Icon', 'ultra-elementor-addons' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'layout' => 'layout-1',
-				],
-			]
-		);
-
-		$this->add_control(
-			'icon_color',
-			[
-				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6366F1',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .orivo-counter-blocks__icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'icon_size',
-			[
-				'label'      => __( 'Icon Size', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [ 'min' => 10, 'max' => 100 ],
-				],
-				'default'    => [ 'unit' => 'px', 'size' => 48 ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'icon_spacing',
-			[
-				'label'      => __( 'Icon Spacing', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 50 ],
-				],
-				'default'    => [ 'unit' => 'px', 'size' => 15 ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-counter-blocks__icon' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 
@@ -415,6 +487,19 @@ class Counter extends Widgets_Base {
 			[
 				'label' => __( 'Number', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		/* ========================
+		 * Number Tabs
+		 * ======================== */
+		$this->start_controls_tabs( 'number_style_tabs' );
+
+		/* Typography Tab */
+		$this->start_controls_tab(
+			'number_tab_typography',
+			[
+				'label' => __( 'Typography', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -439,21 +524,35 @@ class Counter extends Widgets_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		/* Spacing Tab */
+		$this->start_controls_tab(
+			'number_tab_spacing',
+			[
+				'label' => __( 'Spacing', 'ultra-elementor-addons' ),
+			]
+		);
+
 		$this->add_responsive_control(
 			'number_spacing',
 			[
-				'label'      => __( 'Number Spacing', 'ultra-elementor-addons' ),
+				'label'      => __( 'Top Spacing', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [
 					'px' => [ 'min' => 0, 'max' => 50 ],
 				],
-				'default'    => [ 'unit' => 'px', 'size' => 10 ],
+				'default'    => [ 'unit' => 'px', 'size' => 0 ],
 				'selectors'  => [
-					'{{WRAPPER}} .orivo-counter-blocks__number' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-counter-blocks__number' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 
@@ -465,6 +564,19 @@ class Counter extends Widgets_Base {
 			[
 				'label' => __( 'Title', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		/* ========================
+		 * Title Tabs
+		 * ======================== */
+		$this->start_controls_tabs( 'title_style_tabs' );
+
+		/* Typography Tab */
+		$this->start_controls_tab(
+			'title_tab_typography',
+			[
+				'label' => __( 'Typography', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -489,10 +601,20 @@ class Counter extends Widgets_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		/* Spacing Tab */
+		$this->start_controls_tab(
+			'title_tab_spacing',
+			[
+				'label' => __( 'Spacing', 'ultra-elementor-addons' ),
+			]
+		);
+
 		$this->add_responsive_control(
 			'title_spacing',
 			[
-				'label'      => __( 'Title Spacing', 'ultra-elementor-addons' ),
+				'label'      => __( 'Top Spacing', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [
@@ -504,6 +626,10 @@ class Counter extends Widgets_Base {
 				],
 			]
 		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 
@@ -518,6 +644,18 @@ class Counter extends Widgets_Base {
 				'condition' => [
 					'layout!' => 'layout-1',
 				],
+			]
+		);
+
+		/* ========================
+		 * Colors Tab
+		 * ======================== */
+		$this->start_controls_tabs( 'progress_style_tabs' );
+
+		$this->start_controls_tab(
+			'progress_tab_colors',
+			[
+				'label' => __( 'Colors', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -547,10 +685,71 @@ class Counter extends Widgets_Base {
 			]
 		);
 
+		$this->add_control(
+			'progress_number_color',
+			[
+				'label'     => __( 'Number Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#1F2937',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-counter-blocks__progress-number' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'layout' => 'layout-2',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/* ========================
+		 * Typography Tab (Layout 2)
+		 * ======================== */
+		$this->start_controls_tab(
+			'progress_tab_typography',
+			[
+				'label'     => __( 'Typography', 'ultra-elementor-addons' ),
+				'condition' => [
+					'layout' => 'layout-2',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'progress_number_font_size',
+			[
+				'label'      => __( 'Number Font Size', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [ 'min' => 12, 'max' => 48 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 24 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks__progress-number' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/* ========================
+		 * Size Tab (Layout 2)
+		 * ======================== */
+		$this->start_controls_tab(
+			'progress_tab_size',
+			[
+				'label'     => __( 'Size', 'ultra-elementor-addons' ),
+				'condition' => [
+					'layout' => 'layout-2',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'progress_size',
 			[
-				'label'      => __( 'Progress Size (Layout 2)', 'ultra-elementor-addons' ),
+				'label'      => __( 'Progress Size', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [
@@ -560,8 +759,37 @@ class Counter extends Widgets_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .orivo-counter-blocks__progress svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
-				'condition'  => [
-					'layout' => 'layout-2',
+			]
+		);
+
+		$this->add_responsive_control(
+			'progress_stroke_width',
+			[
+				'label'      => __( 'Stroke Width', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [ 'min' => 2, 'max' => 20 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 8 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks__circle-progress' => 'stroke-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-counter-blocks__circle-bg' => 'stroke-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/* ========================
+		 * Bar Tab (Layout 3)
+		 * ======================== */
+		$this->start_controls_tab(
+			'progress_tab_bar',
+			[
+				'label'     => __( 'Bar', 'ultra-elementor-addons' ),
+				'condition' => [
+					'layout' => 'layout-3',
 				],
 			]
 		);
@@ -569,7 +797,7 @@ class Counter extends Widgets_Base {
 		$this->add_responsive_control(
 			'progress_height',
 			[
-				'label'      => __( 'Progress Bar Height (Layout 3)', 'ultra-elementor-addons' ),
+				'label'      => __( 'Progress Height', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [
@@ -579,11 +807,57 @@ class Counter extends Widgets_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .orivo-counter-blocks--layout-3 .orivo-counter-blocks__progress' => 'height: {{SIZE}}{{UNIT}};',
 				],
-				'condition'  => [
-					'layout' => 'layout-3',
+			]
+		);
+
+		$this->add_responsive_control(
+			'progress_width',
+			[
+				'label'      => __( 'Progress Width', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [ 'min' => 50, 'max' => 500 ],
+					'%' => [ 'min' => 10, 'max' => 100 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 220 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks--layout-3 .orivo-counter-blocks__progress' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
+
+		$this->end_controls_tab();
+
+		/* ========================
+		 * Spacing Tab
+		 * ======================== */
+		$this->start_controls_tab(
+			'progress_tab_spacing',
+			[
+				'label' => __( 'Spacing', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'progress_spacing',
+			[
+				'label'      => __( 'Progress Top Spacing', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 15 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-counter-blocks__progress' => 'margin-top: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
@@ -591,109 +865,102 @@ class Counter extends Widgets_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$layout = ! empty( $settings['layout'] ) ? $settings['layout'] : 'layout-1';
-		$counters = ! empty( $settings['counters'] ) ? $settings['counters'] : [];
+
+		// Get alignment for responsive devices
+		$alignment = $settings['item_alignment'];
+		if ( is_array( $alignment ) ) {
+			$alignment = $alignment['size'] ?? 'center';
+		}
 
 		$container_classes = [
 			'orivo-counter-blocks',
 			'orivo-counter-blocks--' . $layout,
+			'orivo-counter-blocks__item',
+			'orivo-counter-blocks--align-' . $alignment,
 		];
 
 		echo '<div class="' . esc_attr( implode( ' ', $container_classes ) ) . '">';
 
-		if ( empty( $counters ) ) {
-			echo '</div>';
-			return;
+		// Link wrapper
+		if ( ! empty( $settings['counter_link']['url'] ) ) {
+			$this->add_link_attributes( 'counter_link', $settings['counter_link'] );
+			echo '<a ' . $this->get_render_attribute_string( 'counter_link' ) . ' class="orivo-counter-blocks--align-' . esc_attr( $alignment ) . '">';
 		}
 
-		foreach ( $counters as $index => $counter ) {
-			$item_classes = [ 'orivo-counter-blocks__item' ];
-			$item_classes[] = 'elementor-repeater-item-' . ( $counter['_id'] ?? $index );
-
-			echo '<div class="' . esc_attr( implode( ' ', $item_classes ) ) . '">';
-
-			// Link wrapper
-			if ( ! empty( $counter['counter_link']['url'] ) ) {
-				$link_key = 'counter_link_' . $index;
-				$this->add_link_attributes( $link_key, $counter['counter_link'] );
-				echo '<a ' . $this->get_render_attribute_string( $link_key ) . '>';
-			}
-
-			// Layout 1: Icon + Number + Title
-			if ( 'layout-1' === $layout ) {
-				// Icon
-				if ( ! empty( $counter['counter_icon']['value'] ) ) {
-					echo '<div class="orivo-counter-blocks__icon">';
-					Icons_Manager::render_icon( $counter['counter_icon'], [ 'aria-hidden' => 'true' ] );
-					echo '</div>';
-				}
-
-				// Number
-				$prefix = ! empty( $counter['counter_prefix'] ) ? '<span class="orivo-counter-blocks__prefix">' . esc_html( $counter['counter_prefix'] ) . '</span>' : '';
-				$suffix = ! empty( $counter['counter_suffix'] ) ? '<span class="orivo-counter-blocks__suffix">' . esc_html( $counter['counter_suffix'] ) . '</span>' : '';
-				$number = ! empty( $counter['counter_number'] ) ? $counter['counter_number'] : 0;
-
-				echo '<div class="orivo-counter-blocks__number" data-target="' . esc_attr( $number ) . '">';
-				echo $prefix . '<span class="orivo-counter-blocks__count">0</span>' . $suffix;
+		// Layout 1: Icon + Number + Title
+		if ( 'layout-1' === $layout ) {
+			// Icon - always render if layout is 1, use default if not set
+			$icon_value = isset( $settings['counter_icon']['value'] ) ? $settings['counter_icon']['value'] : '';
+			if ( ! empty( $icon_value ) ) {
+				echo '<div class="orivo-counter-blocks__icon">';
+				Icons_Manager::render_icon( $settings['counter_icon'], [ 'aria-hidden' => 'true' ] );
 				echo '</div>';
-
-				// Title
-				if ( ! empty( $counter['counter_title'] ) ) {
-					echo '<div class="orivo-counter-blocks__title">' . esc_html( $counter['counter_title'] ) . '</div>';
-				}
 			}
 
-			// Layout 2: Circular Progress
-			elseif ( 'layout-2' === $layout ) {
-				$percent = isset( $counter['counter_percent']['size'] ) ? $counter['counter_percent']['size'] : 85;
-				$number = ! empty( $counter['counter_number'] ) ? $counter['counter_number'] : 0;
+			// Number
+			$prefix = ! empty( $settings['counter_prefix'] ) ? '<span class="orivo-counter-blocks__prefix">' . esc_html( $settings['counter_prefix'] ) . '</span>' : '';
+			$suffix = ! empty( $settings['counter_suffix'] ) ? '<span class="orivo-counter-blocks__suffix">' . esc_html( $settings['counter_suffix'] ) . '</span>' : '';
+			$number = ! empty( $settings['counter_number'] ) ? $settings['counter_number'] : 0;
 
-				echo '<div class="orivo-counter-blocks__progress" data-percent="' . esc_attr( $percent ) . '">';
-				echo '<svg viewBox="0 0 160 160">';
-				echo '<circle class="orivo-counter-blocks__circle-bg" cx="80" cy="80" r="70"></circle>';
-				echo '<circle class="orivo-counter-blocks__circle-progress" cx="80" cy="80" r="70"></circle>';
-				echo '</svg>';
-				echo '<span class="orivo-counter-blocks__progress-number">';
-				echo '<span class="orivo-counter-blocks__count">0</span>';
-				if ( ! empty( $counter['counter_suffix'] ) ) {
-					echo '<span class="orivo-counter-blocks__suffix">' . esc_html( $counter['counter_suffix'] ) . '</span>';
-				}
-				echo '</span>';
-				echo '</div>';
-
-				if ( ! empty( $counter['counter_title'] ) ) {
-					echo '<div class="orivo-counter-blocks__title">' . esc_html( $counter['counter_title'] ) . '</div>';
-				}
-			}
-
-			// Layout 3: Number + Bar Progress
-			elseif ( 'layout-3' === $layout ) {
-				$number = ! empty( $counter['counter_number'] ) ? $counter['counter_number'] : 0;
-				$percent = isset( $counter['counter_percent']['size'] ) ? $counter['counter_percent']['size'] : 85;
-
-				// Number
-				$prefix = ! empty( $counter['counter_prefix'] ) ? '<span class="orivo-counter-blocks__prefix">' . esc_html( $counter['counter_prefix'] ) . '</span>' : '';
-				$suffix = ! empty( $counter['counter_suffix'] ) ? '<span class="orivo-counter-blocks__suffix">' . esc_html( $counter['counter_suffix'] ) . '</span>' : '';
-
-				echo '<div class="orivo-counter-blocks__number" data-target="' . esc_attr( $number ) . '">';
-				echo $prefix . '<span class="orivo-counter-blocks__count">0</span>' . $suffix;
-				echo '</div>';
-
-				// Progress Bar (no extra wrapper)
-				echo '<div class="orivo-counter-blocks__progress" data-percent="' . esc_attr( $percent ) . '">';
-				echo '<div class="orivo-counter-blocks__progress-bar"></div>';
-				echo '</div>';
-
-				// Title
-				if ( ! empty( $counter['counter_title'] ) ) {
-					echo '<div class="orivo-counter-blocks__title">' . esc_html( $counter['counter_title'] ) . '</div>';
-				}
-			}
-
-			if ( ! empty( $counter['counter_link']['url'] ) ) {
-				echo '</a>';
-			}
-
+			echo '<div class="orivo-counter-blocks__number" data-target="' . esc_attr( $number ) . '">';
+			echo $prefix . '<span class="orivo-counter-blocks__count">0</span>' . $suffix;
 			echo '</div>';
+
+			// Title
+			if ( ! empty( $settings['counter_title'] ) ) {
+				echo '<div class="orivo-counter-blocks__title">' . esc_html( $settings['counter_title'] ) . '</div>';
+			}
+		}
+
+		// Layout 2: Circular Progress
+		elseif ( 'layout-2' === $layout ) {
+			$percent = isset( $settings['counter_percent']['size'] ) ? $settings['counter_percent']['size'] : 85;
+			$number = ! empty( $settings['counter_number'] ) ? $settings['counter_number'] : 0;
+
+			echo '<div class="orivo-counter-blocks__progress" data-percent="' . esc_attr( $percent ) . '">';
+			echo '<svg viewBox="0 0 160 160">';
+			echo '<circle class="orivo-counter-blocks__circle-bg" cx="80" cy="80" r="70"></circle>';
+			echo '<circle class="orivo-counter-blocks__circle-progress" cx="80" cy="80" r="70"></circle>';
+			echo '</svg>';
+			echo '<span class="orivo-counter-blocks__progress-number">';
+			echo '<span class="orivo-counter-blocks__count">0</span>';
+			if ( ! empty( $settings['counter_suffix'] ) ) {
+				echo '<span class="orivo-counter-blocks__suffix">' . esc_html( $settings['counter_suffix'] ) . '</span>';
+			}
+			echo '</span>';
+			echo '</div>';
+
+			if ( ! empty( $settings['counter_title'] ) ) {
+				echo '<div class="orivo-counter-blocks__title">' . esc_html( $settings['counter_title'] ) . '</div>';
+			}
+		}
+
+		// Layout 3: Number + Bar Progress
+		elseif ( 'layout-3' === $layout ) {
+			$number = ! empty( $settings['counter_number'] ) ? $settings['counter_number'] : 0;
+			$percent = isset( $settings['counter_percent']['size'] ) ? $settings['counter_percent']['size'] : 85;
+
+			// Number
+			$prefix = ! empty( $settings['counter_prefix'] ) ? '<span class="orivo-counter-blocks__prefix">' . esc_html( $settings['counter_prefix'] ) . '</span>' : '';
+			$suffix = ! empty( $settings['counter_suffix'] ) ? '<span class="orivo-counter-blocks__suffix">' . esc_html( $settings['counter_suffix'] ) . '</span>' : '';
+
+			echo '<div class="orivo-counter-blocks__number" data-target="' . esc_attr( $number ) . '">';
+			echo $prefix . '<span class="orivo-counter-blocks__count">0</span>' . $suffix;
+			echo '</div>';
+
+			// Progress Bar
+			echo '<div class="orivo-counter-blocks__progress" data-percent="' . esc_attr( $percent ) . '">';
+			echo '<div class="orivo-counter-blocks__progress-bar"></div>';
+			echo '</div>';
+
+			// Title
+			if ( ! empty( $settings['counter_title'] ) ) {
+				echo '<div class="orivo-counter-blocks__title">' . esc_html( $settings['counter_title'] ) . '</div>';
+			}
+		}
+
+		if ( ! empty( $settings['counter_link']['url'] ) ) {
+			echo '</a>';
 		}
 
 		echo '</div>';
