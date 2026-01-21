@@ -38,7 +38,6 @@
 .orivo-tabs--blocks__tab {
   flex: 1;
   padding: 14px 22px;
-  background: none;
   border: none;
   border-radius: 14px;
   font-size: 14px;
@@ -51,6 +50,16 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+}
+
+/* When indicator is ON, hide tab background */
+.ua-show-indicator-yes .orivo-tabs--blocks__tab {
+  background: none !important;
+}
+
+/* When indicator is OFF, allow tab background from Elementor inline styles */
+.ua-show-indicator-no .orivo-tabs--blocks__tab {
+  /* No background rule here - let Elementor inline styles work */
 }
 .orivo-tabs--blocks__tab:hover {
   color: #ffffff;

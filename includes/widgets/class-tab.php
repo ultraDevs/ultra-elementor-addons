@@ -408,11 +408,14 @@ class Tab extends Widgets_Base {
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'tab_background',
-				'label' => __( 'Background', 'ultra-elementor-addons' ),
-				'types' => [ 'classic', 'gradient' ],
-				'exclude' => [ 'image' ],
-				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__tab',
+				'name'      => 'tab_background',
+				'label'     => __( 'Background', 'ultra-elementor-addons' ),
+				'types'     => [ 'classic', 'gradient' ],
+				'exclude'   => [ 'image' ],
+				'selector'  => '{{WRAPPER}} .orivo-tabs--blocks__tab',
+				'condition' => [
+					'show_indicator' => [ '', 'no' ],
+				],
 			]
 		);
 
@@ -473,11 +476,14 @@ class Tab extends Widgets_Base {
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'tab_active_background',
-				'label' => __( 'Background', 'ultra-elementor-addons' ),
-				'types' => [ 'classic', 'gradient' ],
-				'exclude' => [ 'image' ],
-				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__tab.is-active',
+				'name'      => 'tab_active_background',
+				'label'     => __( 'Background', 'ultra-elementor-addons' ),
+				'types'     => [ 'classic', 'gradient' ],
+				'exclude'   => [ 'image' ],
+				'selector'  => '{{WRAPPER}} .orivo-tabs--blocks__tab.is-active',
+				'condition' => [
+					'show_indicator' => [ '', 'no' ],
+				],
 			]
 		);
 
@@ -506,11 +512,14 @@ class Tab extends Widgets_Base {
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'tab_hover_background',
-				'label' => __( 'Background', 'ultra-elementor-addons' ),
-				'types' => [ 'classic', 'gradient' ],
-				'exclude' => [ 'image' ],
-				'selector' => '{{WRAPPER}} .orivo-tabs--blocks__tab:hover',
+				'name'      => 'tab_hover_background',
+				'label'     => __( 'Background', 'ultra-elementor-addons' ),
+				'types'     => [ 'classic', 'gradient' ],
+				'exclude'   => [ 'image' ],
+				'selector'  => '{{WRAPPER}} .orivo-tabs--blocks__tab:hover',
+				'condition' => [
+					'show_indicator' => [ '', 'no' ],
+				],
 			]
 		);
 
@@ -938,7 +947,9 @@ class Tab extends Widgets_Base {
 		echo '<div class="' . esc_attr( implode( ' ', $container_classes ) ) . '" data-tabs--blocks>';
 
 		echo '<div class="orivo-tabs--blocks__nav" role="tablist">';
-		echo '<span class="orivo-tabs--blocks__indicator"></span>';
+		if ( ! empty( $settings['show_indicator'] ) && 'yes' === $settings['show_indicator'] ) {
+			echo '<span class="orivo-tabs--blocks__indicator"></span>';
+		}
 
 		foreach ( $tabs as $index => $tab ) {
 			$is_active = $index === 0 ? 'is-active' : '';
