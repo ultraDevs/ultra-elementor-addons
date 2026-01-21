@@ -51,10 +51,11 @@ class Flip_Box extends Widgets_Base {
 			]
 		);
 
+		// Layout Selection for Single Card
 		$this->add_control(
 			'layout',
 			[
-				'label'   => __( 'Preset Layout', 'ultra-elementor-addons' ),
+				'label'   => __( 'Layout', 'ultra-elementor-addons' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'layout-1',
 				'options' => [
@@ -70,66 +71,38 @@ class Flip_Box extends Widgets_Base {
 			]
 		);
 
-		/**
-		 * Grid Controls: Columns + Rows
-		 * Visible items = rows * columns (0 rows => show all)
-		 */
-		$this->add_responsive_control(
-			'grid_columns',
+		// Animation Direction for Single Card
+		$this->add_control(
+			'animation_direction',
 			[
-				'label' => __( 'Columns', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => '2',
+				'label'   => __( 'Animation Direction', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'positive',
 				'options' => [
-					'1' => '1',
-					'2' => '2',
-					'3' => '3',
-					'4' => '4',
-					'5' => '5',
-					'6' => '6',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-flip-blocks-grid' => 'grid-template-columns: repeat({{VALUE}}, minmax(0, 1fr));',
+					'positive' => __( 'Positive', 'ultra-elementor-addons' ),
+					'negative' => __( 'Negative', 'ultra-elementor-addons' ),
 				],
 			]
 		);
 
-		$this->add_responsive_control(
-			'grid_rows',
+		// Scale Animation Toggle
+		$this->add_control(
+			'scale_animation',
 			[
-				'label' => __( 'Rows (Visible)', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => '0',
-				'description' => __( '0 = Show all cards', 'ultra-elementor-addons' ),
-				'options' => [
-					'0' => __( 'All', 'ultra-elementor-addons' ),
-					'1' => '1',
-					'2' => '2',
-					'3' => '3',
-					'4' => '4',
-					'5' => '5',
-					'6' => '6',
-				],
+				'label'   => __( 'Scale Animation', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'return_value' => 'yes',
+				'label_on' => __( 'Yes', 'ultra-elementor-addons' ),
+				'label_off' => __( 'No', 'ultra-elementor-addons' ),
 			]
 		);
 
-		$repeater = new Repeater();
-
-		/* ---------- Repeater Tabs: Front / Back ---------- */
-		$repeater->start_controls_tabs( 'orivo_flip_item_tabs' );
-
-		/* ================= FRONT TAB ================= */
-		$repeater->start_controls_tab(
-			'orivo_flip_item_front_tab',
-			[
-				'label' => __( 'Front', 'ultra-elementor-addons' ),
-			]
-		);
-
-		$repeater->add_control(
+		/* ================= FRONT CONTENT ================= */
+		$this->add_control(
 			'front_icon',
 			[
-				'label' => __( 'Icon', 'ultra-elementor-addons' ),
+				'label' => __( 'Front Icon', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-palette',
@@ -138,36 +111,36 @@ class Flip_Box extends Widgets_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'front_title',
 			[
-				'label' => __( 'Title', 'ultra-elementor-addons' ),
+				'label' => __( 'Front Title', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'UI/UX Design', 'ultra-elementor-addons' ),
 				'label_block' => true,
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'front_desc',
 			[
-				'label' => __( 'Description', 'ultra-elementor-addons' ),
+				'label' => __( 'Front Description', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'default' => __( 'আকর্ষণীয় এবং ব্যবহারবান্ধব ইন্টারফেস তৈরি করি', 'ultra-elementor-addons' ),
 			]
 		);
 
-		$repeater->end_controls_tab();
-
-		/* ================= BACK TAB ================= */
-		$repeater->start_controls_tab(
-			'orivo_flip_item_back_tab',
+		/* ================= BACK CONTENT ================= */
+		$this->add_control(
+			'back_icon_heading',
 			[
-				'label' => __( 'Back', 'ultra-elementor-addons' ),
+				'label'     => __( 'Back Content', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'back_icon_same',
 			[
 				'label' => __( 'Use Same Icon', 'ultra-elementor-addons' ),
@@ -177,7 +150,7 @@ class Flip_Box extends Widgets_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'back_icon',
 			[
 				'label' => __( 'Back Icon', 'ultra-elementor-addons' ),
@@ -192,60 +165,32 @@ class Flip_Box extends Widgets_Base {
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'back_title',
 			[
-				'label' => __( 'Title', 'ultra-elementor-addons' ),
+				'label' => __( 'Back Title', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'UI/UX Design', 'ultra-elementor-addons' ),
 				'label_block' => true,
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'back_desc',
 			[
-				'label' => __( 'Description', 'ultra-elementor-addons' ),
+				'label' => __( 'Back Description', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'default' => __( 'ব্যবহারকারীদের অভিজ্ঞতা উন্নত করতে আকর্ষণীয় এবং কার্যকরী ইন্টারফেস ডিজাইন করি।', 'ultra-elementor-addons' ),
 			]
 		);
 
-		$repeater->add_control(
+		$this->add_control(
 			'link',
 			[
 				'label' => __( 'Link', 'ultra-elementor-addons' ),
 				'type' => Controls_Manager::URL,
 				'placeholder' => 'https://example.com',
 				'options' => [ 'url', 'is_external', 'nofollow' ],
-			]
-		);
-
-		$repeater->end_controls_tab();
-
-		$repeater->end_controls_tabs();
-
-		$this->add_control(
-			'items',
-			[
-				'label' => __( 'Cards', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::REPEATER,
-				'fields' => $repeater->get_controls(),
-				'default' => [
-					[
-						'front_title' => 'UI/UX Design',
-						'front_desc'  => 'আকর্ষণীয় এবং ব্যবহারবান্ধব ইন্টারফেস তৈরি করি',
-						'back_title'  => 'UI/UX Design',
-						'back_desc'   => 'ব্যবহারকারীদের অভিজ্ঞতা উন্নত করতে আকর্ষণীয় এবং কার্যকরী ইন্টারফেস ডিজাইন করি।',
-					],
-					[
-						'front_title' => 'Business Strategy',
-						'front_desc'  => 'লাভজনক কৌশল তৈরি করি',
-						'back_title'  => 'Business Strategy',
-						'back_desc'   => 'আপনার ব্যবসার জন্য কার্যকরী এবং লাভজনক কৌশল তৈরি করি।',
-					],
-				],
-				'title_field' => '{{{ front_title }}}',
 			]
 		);
 
@@ -307,15 +252,6 @@ class Flip_Box extends Widgets_Base {
 		);
 
 		// Front Icon
-		$this->add_control(
-			'front_icon_heading',
-			[
-				'label' => __( 'Icon Style', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
 		$this->add_control(
 			'front_icon_color',
 			[
@@ -388,15 +324,6 @@ class Flip_Box extends Widgets_Base {
 		);
 
 		// Front Border
-		$this->add_control(
-			'front_border_heading',
-			[
-				'label' => __( 'Border', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -406,15 +333,6 @@ class Flip_Box extends Widgets_Base {
 		);
 
 		// Front Background
-		$this->add_control(
-			'front_bg_heading',
-			[
-				'label' => __( 'Front Background', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -604,15 +522,6 @@ class Flip_Box extends Widgets_Base {
 		);
 
 		// Back Border
-		$this->add_control(
-			'back_border_heading',
-			[
-				'label' => __( 'Border', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -622,15 +531,6 @@ class Flip_Box extends Widgets_Base {
 		);
 
 		// Back Background
-		$this->add_control(
-			'back_bg_heading',
-			[
-				'label' => __( 'Back Background', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -725,15 +625,6 @@ class Flip_Box extends Widgets_Base {
 		);
 
 		// Border Radius for all layouts
-		$this->add_control(
-			'card_border_radius_heading',
-			[
-				'label' => __( 'Border Radius', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
 		$this->add_responsive_control(
 			'card_border_radius',
 			[
@@ -769,21 +660,14 @@ class Flip_Box extends Widgets_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
+		// Get layout from widget settings
 		$layout = ! empty( $settings['layout'] ) ? $settings['layout'] : 'layout-1';
 
-		// Rows x Columns = visible items limit (0 rows means show all)
-		$cols = isset( $settings['grid_columns'] ) ? (int) $settings['grid_columns'] : 2;
-		$rows = isset( $settings['grid_rows'] ) ? (int) $settings['grid_rows'] : 0;
+		// Get animation direction from widget settings
+		$animation_dir = ! empty( $settings['animation_direction'] ) ? $settings['animation_direction'] : 'positive';
 
-		$max_items = 0;
-		if ( $rows > 0 && $cols > 0 ) {
-			$max_items = $rows * $cols;
-		}
-
-		$items = ! empty( $settings['items'] ) ? $settings['items'] : [];
-		if ( $max_items > 0 ) {
-			$items = array_slice( $items, 0, $max_items );
-		}
+		// Get scale animation setting
+		$scale_enabled = ! empty( $settings['scale_animation'] ) && 'yes' === $settings['scale_animation'];
 
 		$wrap_classes = [
 			'orivo-flip-blocks-wrapper',
@@ -792,115 +676,110 @@ class Flip_Box extends Widgets_Base {
 		echo '<div class="' . esc_attr( implode( ' ', $wrap_classes ) ) . '">';
 		echo '<div class="orivo-flip-blocks-grid">';
 
-		if ( empty( $items ) ) {
-			echo '</div></div>';
-			return;
+		$card_key = 'card_link_0';
+
+		// Combine layout and direction into single class for CSS targeting
+		$card_classes = [
+			'orivo-flip-blocks',
+			'orivo-flip-blocks--' . esc_attr( $layout ),
+			'orivo-flip-blocks--' . esc_attr( $layout ) . '--' . esc_attr( $animation_dir ),
+		];
+
+		// Add scale animation class (only for layouts 1, 2, 7, 8 that use scale)
+		if ( $scale_enabled && in_array( $layout, [ 'layout-1', 'layout-2', 'layout-7', 'layout-8' ] ) ) {
+			$card_classes[] = 'orivo-flip-blocks--scale-enabled';
 		}
 
-		foreach ( $items as $index => $item ) {
+		$open_tag  = '<div class="' . esc_attr( implode( ' ', $card_classes ) ) . '">';
+		$close_tag = '</div>';
 
-			$card_key = 'card_link_' . $index;
-
-			$card_classes = [
-				'orivo-flip-blocks',
-				'orivo-flip-blocks--' . esc_attr( $layout ),
-			];
-
-			// Enable {{CURRENT_ITEM}} selectors for repeater controls
-			$item_id = ! empty( $item['_id'] ) ? $item['_id'] : $index;
-			$card_classes[] = 'elementor-repeater-item-' . $item_id;
-
-			$open_tag  = '<div class="' . esc_attr( implode( ' ', $card_classes ) ) . '">';
-			$close_tag = '</div>';
-
-			if ( ! empty( $item['link']['url'] ) ) {
-				$this->add_link_attributes( $card_key, $item['link'] );
-				$open_tag  = '<a class="' . esc_attr( implode( ' ', $card_classes ) ) . '" ' . $this->get_render_attribute_string( $card_key ) . '>';
-				$close_tag = '</a>';
-			}
-
-			$back_icon = ( ! empty( $item['back_icon_same'] ) && 'yes' === $item['back_icon_same'] )
-				? ( $item['front_icon'] ?? [] )
-				: ( $item['back_icon'] ?? [] );
-
-			echo $open_tag;
-
-			if ( 'layout-5' === $layout ) {
-				$front_icon_class = empty( $item['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
-				$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
-				?>
-				<div class="orivo-flip-blocks__left"></div>
-				<div class="orivo-flip-blocks__right"></div>
-
-				<div class="orivo-flip-blocks__back orivo-flip-blocks__content">
-					<div class="<?php echo esc_attr( $back_icon_class ); ?>">
-						<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
-					</div>
-					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['back_title'] ?? '' ); ?></h3>
-					<p class="orivo-flip-blocks__desc"><?php echo esc_html( $item['back_desc'] ?? '' ); ?></p>
-				</div>
-
-				<div class="orivo-flip-blocks__front orivo-flip-blocks__content">
-					<div class="<?php echo esc_attr( $front_icon_class ); ?>">
-						<?php if ( ! empty( $item['front_icon']['value'] ) ) { Icons_Manager::render_icon( $item['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
-					</div>
-					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['front_title'] ?? '' ); ?></h3>
-					<p class="orivo-flip-blocks__desc"><?php echo esc_html( $item['front_desc'] ?? '' ); ?></p>
-				</div>
-				<?php
-			} elseif ( 'layout-6' === $layout ) {
-				$front_icon_class = empty( $item['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
-				$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
-				?>
-				<div class="orivo-flip-blocks__top"></div>
-				<div class="orivo-flip-blocks__bottom"></div>
-
-				<div class="orivo-flip-blocks__back orivo-flip-blocks__content">
-					<div class="<?php echo esc_attr( $back_icon_class ); ?>">
-						<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
-					</div>
-					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['back_title'] ?? '' ); ?></h3>
-					<p class="orivo-flip-blocks__desc"><?php echo esc_html( $item['back_desc'] ?? '' ); ?></p>
-				</div>
-
-				<div class="orivo-flip-blocks__front orivo-flip-blocks__content">
-					<div class="<?php echo esc_attr( $front_icon_class ); ?>">
-						<?php if ( ! empty( $item['front_icon']['value'] ) ) { Icons_Manager::render_icon( $item['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
-					</div>
-					<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['front_title'] ?? '' ); ?></h3>
-					<p class="orivo-flip-blocks__desc"><?php echo esc_html( $item['front_desc'] ?? '' ); ?></p>
-				</div>
-				<?php
-			} else {
-				$front_icon_class = empty( $item['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
-				$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
-				?>
-				<div class="orivo-flip-blocks__inner">
-					<div class="orivo-flip-blocks__front">
-						<div class="orivo-flip-blocks__content">
-							<div class="<?php echo esc_attr( $front_icon_class ); ?>">
-								<?php if ( ! empty( $item['front_icon']['value'] ) ) { Icons_Manager::render_icon( $item['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
-							</div>
-							<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['front_title'] ?? '' ); ?></h3>
-							<p class="orivo-flip-blocks__desc"><?php echo esc_html( $item['front_desc'] ?? '' ); ?></p>
-						</div>
-					</div>
-
-					<div class="orivo-flip-blocks__back">
-						<div class="orivo-flip-blocks__content">
-							<div class="<?php echo esc_attr( $back_icon_class ); ?>">
-								<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
-							</div>
-							<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $item['back_title'] ?? '' ); ?></h3>
-							<p class="orivo-flip-blocks__desc"><?php echo esc_html( $item['back_desc'] ?? '' ); ?></p>
-						</div>
-					</div>
-				</div>
-				<?php
-			}
-
-			echo $close_tag;
+		if ( ! empty( $settings['link']['url'] ) ) {
+			$this->add_link_attributes( $card_key, $settings['link'] );
+			$open_tag  = '<a class="' . esc_attr( implode( ' ', $card_classes ) ) . '" ' . $this->get_render_attribute_string( $card_key ) . '>';
+			$close_tag = '</a>';
 		}
+
+		$back_icon = ( ! empty( $settings['back_icon_same'] ) && 'yes' === $settings['back_icon_same'] )
+			? ( $settings['front_icon'] ?? [] )
+			: ( $settings['back_icon'] ?? [] );
+
+		echo $open_tag;
+
+		if ( 'layout-5' === $layout ) {
+			$front_icon_class = empty( $settings['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+			$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+			?>
+			<div class="orivo-flip-blocks__left"></div>
+			<div class="orivo-flip-blocks__right"></div>
+
+			<div class="orivo-flip-blocks__back orivo-flip-blocks__content">
+				<div class="<?php echo esc_attr( $back_icon_class ); ?>">
+					<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
+				</div>
+				<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $settings['back_title'] ?? '' ); ?></h3>
+				<p class="orivo-flip-blocks__desc"><?php echo esc_html( $settings['back_desc'] ?? '' ); ?></p>
+			</div>
+
+			<div class="orivo-flip-blocks__front orivo-flip-blocks__content">
+				<div class="<?php echo esc_attr( $front_icon_class ); ?>">
+					<?php if ( ! empty( $settings['front_icon']['value'] ) ) { Icons_Manager::render_icon( $settings['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
+				</div>
+				<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $settings['front_title'] ?? '' ); ?></h3>
+				<p class="orivo-flip-blocks__desc"><?php echo esc_html( $settings['front_desc'] ?? '' ); ?></p>
+			</div>
+			<?php
+		} elseif ( 'layout-6' === $layout ) {
+			$front_icon_class = empty( $settings['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+			$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+			?>
+			<div class="orivo-flip-blocks__top"></div>
+			<div class="orivo-flip-blocks__bottom"></div>
+
+			<div class="orivo-flip-blocks__back orivo-flip-blocks__content">
+				<div class="<?php echo esc_attr( $back_icon_class ); ?>">
+					<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
+				</div>
+				<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $settings['back_title'] ?? '' ); ?></h3>
+				<p class="orivo-flip-blocks__desc"><?php echo esc_html( $settings['back_desc'] ?? '' ); ?></p>
+			</div>
+
+			<div class="orivo-flip-blocks__front orivo-flip-blocks__content">
+				<div class="<?php echo esc_attr( $front_icon_class ); ?>">
+					<?php if ( ! empty( $settings['front_icon']['value'] ) ) { Icons_Manager::render_icon( $settings['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
+				</div>
+				<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $settings['front_title'] ?? '' ); ?></h3>
+				<p class="orivo-flip-blocks__desc"><?php echo esc_html( $settings['front_desc'] ?? '' ); ?></p>
+			</div>
+			<?php
+		} else {
+			$front_icon_class = empty( $settings['front_icon']['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+			$back_icon_class = empty( $back_icon['value'] ) ? 'orivo-flip-blocks__icon no-icon' : 'orivo-flip-blocks__icon';
+			?>
+			<div class="orivo-flip-blocks__inner">
+				<div class="orivo-flip-blocks__front">
+					<div class="orivo-flip-blocks__content">
+						<div class="<?php echo esc_attr( $front_icon_class ); ?>">
+							<?php if ( ! empty( $settings['front_icon']['value'] ) ) { Icons_Manager::render_icon( $settings['front_icon'], [ 'aria-hidden' => 'true' ] ); } ?>
+						</div>
+						<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $settings['front_title'] ?? '' ); ?></h3>
+						<p class="orivo-flip-blocks__desc"><?php echo esc_html( $settings['front_desc'] ?? '' ); ?></p>
+					</div>
+				</div>
+
+				<div class="orivo-flip-blocks__back">
+					<div class="orivo-flip-blocks__content">
+						<div class="<?php echo esc_attr( $back_icon_class ); ?>">
+							<?php if ( ! empty( $back_icon['value'] ) ) { Icons_Manager::render_icon( $back_icon, [ 'aria-hidden' => 'true' ] ); } ?>
+						</div>
+						<h3 class="orivo-flip-blocks__title"><?php echo esc_html( $settings['back_title'] ?? '' ); ?></h3>
+						<p class="orivo-flip-blocks__desc"><?php echo esc_html( $settings['back_desc'] ?? '' ); ?></p>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+
+		echo $close_tag;
 
 		echo '</div></div>';
 	}

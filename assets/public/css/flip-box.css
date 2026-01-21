@@ -5,6 +5,38 @@
   gap: 20px;
 }
 
+.orivo-flip-blocks {
+  width: 100%;
+  min-width: 0;
+}
+
+.orivo-flip-blocks__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-style: preserve-3d;
+}
+
+.orivo-flip-blocks--layout-3 .orivo-flip-blocks__inner,
+.orivo-flip-blocks--layout-4 .orivo-flip-blocks__inner {
+  transition: transform 0.6s ease-in-out;
+}
+
+.orivo-flip-blocks--layout-7 .orivo-flip-blocks__inner,
+.orivo-flip-blocks--layout-8 .orivo-flip-blocks__inner {
+  transition: transform 0.8s ease;
+}
+
+.orivo-flip-blocks__front,
+.orivo-flip-blocks__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.5);
+}
+
 .orivo-flip-blocks__content {
   display: flex;
   flex-direction: column;
@@ -39,41 +71,9 @@
   margin-bottom: 15px;
 }
 
-.orivo-flip-blocks__front .orivo-flip-blocks__title,
-.orivo-flip-blocks__back .orivo-flip-blocks__title {
-  margin-bottom: 15px;
-}
-
 .orivo-flip-blocks__desc {
   font-size: 15px;
   line-height: 1.7;
-}
-
-.orivo-flip-blocks__inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transform-style: preserve-3d;
-}
-
-.orivo-flip-blocks--layout-3 .orivo-flip-blocks__inner,
-.orivo-flip-blocks--layout-4 .orivo-flip-blocks__inner {
-  transition: transform 0.6s ease-in-out;
-}
-
-.orivo-flip-blocks--layout-7 .orivo-flip-blocks__inner,
-.orivo-flip-blocks--layout-8 .orivo-flip-blocks__inner {
-  transition: transform 0.8s ease;
-}
-
-.orivo-flip-blocks__front,
-.orivo-flip-blocks__back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* Layout 1 */
@@ -82,12 +82,28 @@
   perspective: 1500px;
 }
 
-.orivo-flip-blocks--layout-1 .orivo-flip-blocks__back {
+.orivo-flip-blocks--layout-1--positive .orivo-flip-blocks__back {
   transform: rotateY(180deg);
 }
 
-.orivo-flip-blocks--layout-1:hover .orivo-flip-blocks__inner {
+.orivo-flip-blocks--layout-1--positive.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
   transform: rotateY(180deg) scale(1.05);
+}
+
+.orivo-flip-blocks--layout-1--positive:hover .orivo-flip-blocks__inner {
+  transform: rotateY(180deg);
+}
+
+.orivo-flip-blocks--layout-1--negative .orivo-flip-blocks__back {
+  transform: rotateY(-180deg);
+}
+
+.orivo-flip-blocks--layout-1--negative.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
+  transform: rotateY(-180deg) scale(1.05);
+}
+
+.orivo-flip-blocks--layout-1--negative:hover .orivo-flip-blocks__inner {
+  transform: rotateY(-180deg);
 }
 
 /* Layout 2 */
@@ -96,12 +112,28 @@
   perspective: 1500px;
 }
 
-.orivo-flip-blocks--layout-2 .orivo-flip-blocks__back {
+.orivo-flip-blocks--layout-2--positive .orivo-flip-blocks__back {
   transform: rotateX(180deg);
 }
 
-.orivo-flip-blocks--layout-2:hover .orivo-flip-blocks__inner {
+.orivo-flip-blocks--layout-2--positive.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
   transform: rotateX(-180deg) scale(1.05);
+}
+
+.orivo-flip-blocks--layout-2--positive:hover .orivo-flip-blocks__inner {
+  transform: rotateX(-180deg);
+}
+
+.orivo-flip-blocks--layout-2--negative .orivo-flip-blocks__back {
+  transform: rotateX(-180deg);
+}
+
+.orivo-flip-blocks--layout-2--negative.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
+  transform: rotateX(180deg) scale(1.05);
+}
+
+.orivo-flip-blocks--layout-2--negative:hover .orivo-flip-blocks__inner {
+  transform: rotateX(180deg);
 }
 
 /* Layout 3 */
@@ -117,13 +149,22 @@
   box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
 }
 
-.orivo-flip-blocks--layout-3 .orivo-flip-blocks__back {
+.orivo-flip-blocks--layout-3--positive .orivo-flip-blocks__back {
   transform: rotateY(180deg);
   border-color: #ff00ff;
 }
 
-.orivo-flip-blocks--layout-3:hover .orivo-flip-blocks__inner {
+.orivo-flip-blocks--layout-3--positive:hover .orivo-flip-blocks__inner {
   transform: rotateY(180deg);
+}
+
+.orivo-flip-blocks--layout-3--negative .orivo-flip-blocks__back {
+  transform: rotateY(-180deg);
+  border-color: #ff00ff;
+}
+
+.orivo-flip-blocks--layout-3--negative:hover .orivo-flip-blocks__inner {
+  transform: rotateY(-180deg);
 }
 
 /* Layout 4 */
@@ -139,13 +180,22 @@
   box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
 }
 
-.orivo-flip-blocks--layout-4 .orivo-flip-blocks__back {
+.orivo-flip-blocks--layout-4--positive .orivo-flip-blocks__back {
   transform: rotateX(180deg);
   border-color: #ff00ff;
 }
 
-.orivo-flip-blocks--layout-4:hover .orivo-flip-blocks__inner {
+.orivo-flip-blocks--layout-4--positive:hover .orivo-flip-blocks__inner {
   transform: rotateX(-180deg);
+}
+
+.orivo-flip-blocks--layout-4--negative .orivo-flip-blocks__back {
+  transform: rotateX(-180deg);
+  border-color: #ff00ff;
+}
+
+.orivo-flip-blocks--layout-4--negative:hover .orivo-flip-blocks__inner {
+  transform: rotateX(180deg);
 }
 
 /* Layout 5 */
@@ -175,6 +225,14 @@
   right: 0;
 }
 
+.orivo-flip-blocks--layout-5:hover .orivo-flip-blocks__left {
+  transform: translateX(-100%);
+}
+
+.orivo-flip-blocks--layout-5:hover .orivo-flip-blocks__right {
+  transform: translateX(100%);
+}
+
 .orivo-flip-blocks--layout-5 .orivo-flip-blocks__front {
   z-index: 4;
   opacity: 1;
@@ -188,14 +246,6 @@
   opacity: 0;
   transition: opacity 0.5s ease 0.3s;
   pointer-events: none;
-}
-
-.orivo-flip-blocks--layout-5:hover .orivo-flip-blocks__left {
-  transform: translateX(-100%);
-}
-
-.orivo-flip-blocks--layout-5:hover .orivo-flip-blocks__right {
-  transform: translateX(100%);
 }
 
 .orivo-flip-blocks--layout-5:hover .orivo-flip-blocks__front {
@@ -233,6 +283,14 @@
   bottom: 0;
 }
 
+.orivo-flip-blocks--layout-6:hover .orivo-flip-blocks__top {
+  transform: translateY(-100%);
+}
+
+.orivo-flip-blocks--layout-6:hover .orivo-flip-blocks__bottom {
+  transform: translateY(100%);
+}
+
 .orivo-flip-blocks--layout-6 .orivo-flip-blocks__front {
   z-index: 4;
   opacity: 1;
@@ -246,14 +304,6 @@
   opacity: 0;
   transition: opacity 0.5s ease 0.3s;
   pointer-events: none;
-}
-
-.orivo-flip-blocks--layout-6:hover .orivo-flip-blocks__top {
-  transform: translateY(-100%);
-}
-
-.orivo-flip-blocks--layout-6:hover .orivo-flip-blocks__bottom {
-  transform: translateY(100%);
 }
 
 .orivo-flip-blocks--layout-6:hover .orivo-flip-blocks__front {
@@ -276,12 +326,28 @@
   box-shadow: 0 20px 15px rgba(0, 0, 0, 0.4);
 }
 
-.orivo-flip-blocks--layout-7 .orivo-flip-blocks__back {
+.orivo-flip-blocks--layout-7--positive .orivo-flip-blocks__back {
   transform: rotateY(180deg);
 }
 
-.orivo-flip-blocks--layout-7:hover .orivo-flip-blocks__inner {
+.orivo-flip-blocks--layout-7--positive.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
   transform: rotateY(-180deg) scale(1.1);
+}
+
+.orivo-flip-blocks--layout-7--positive:hover .orivo-flip-blocks__inner {
+  transform: rotateY(-180deg);
+}
+
+.orivo-flip-blocks--layout-7--negative .orivo-flip-blocks__back {
+  transform: rotateY(-180deg);
+}
+
+.orivo-flip-blocks--layout-7--negative.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
+  transform: rotateY(180deg) scale(1.1);
+}
+
+.orivo-flip-blocks--layout-7--negative:hover .orivo-flip-blocks__inner {
+  transform: rotateY(180deg);
 }
 
 /* Layout 8 */
@@ -296,12 +362,28 @@
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.4);
 }
 
-.orivo-flip-blocks--layout-8 .orivo-flip-blocks__back {
+.orivo-flip-blocks--layout-8--positive .orivo-flip-blocks__back {
   transform: rotateX(180deg);
 }
 
-.orivo-flip-blocks--layout-8:hover .orivo-flip-blocks__inner {
+.orivo-flip-blocks--layout-8--positive.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
+  transform: rotateX(-180deg) scale(1.1);
+}
+
+.orivo-flip-blocks--layout-8--positive:hover .orivo-flip-blocks__inner {
+  transform: rotateX(-180deg);
+}
+
+.orivo-flip-blocks--layout-8--negative .orivo-flip-blocks__back {
+  transform: rotateX(-180deg);
+}
+
+.orivo-flip-blocks--layout-8--negative.orivo-flip-blocks--scale-enabled:hover .orivo-flip-blocks__inner {
   transform: rotateX(180deg) scale(1.1);
+}
+
+.orivo-flip-blocks--layout-8--negative:hover .orivo-flip-blocks__inner {
+  transform: rotateX(180deg);
 }
 
 /* Responsive */

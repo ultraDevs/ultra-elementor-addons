@@ -30,9 +30,11 @@
 			// Remove active from all
 			$btns.removeClass('is-active');
 			$panels.removeClass('is-active');
+			$indicator.removeClass('is-active');
 
 			// Add active to clicked
 			$clickedBtn.addClass('is-active');
+			$indicator.addClass('is-active');
 
 			var tabId = $clickedBtn.data('tab');
 			$('#' + tabId).addClass('is-active');
@@ -40,11 +42,19 @@
 			moveIndicator($clickedBtn);
 		});
 
+		// Hover effect for indicator
+		$btns.on('mouseenter', function() {
+			$indicator.addClass('is-hover');
+		}).on('mouseleave', function() {
+			$indicator.removeClass('is-hover');
+		});
+
 		// Initialize
 		var $activeBtn = $btns.filter('.is-active');
 		if ($activeBtn.length > 0) {
 			setTimeout(function() {
 				moveIndicator($activeBtn);
+				$indicator.addClass('is-active');
 			}, 10);
 		}
 
