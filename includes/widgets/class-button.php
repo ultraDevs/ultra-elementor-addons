@@ -216,225 +216,21 @@ class Button extends Widgets_Base {
 			]
 		);
 
+		// --- Typography ---
 		$this->add_control(
-			'button_padding_heading',
+			'button_typography_heading',
 			[
-				'label'     => __( 'Padding', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'button_padding',
-			[
-				'label' => __( 'Padding', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem' ],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-btn-blocks' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_border_heading',
-			[
-				'label'     => __( 'Border', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'button_border_width',
-			[
-				'label'      => __( 'Border Width', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 10,
-					],
-				],
-				'default'    => [
-					'unit' => 'px',
-					'size' => 0,
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-btn-blocks' => 'border-width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_border_color',
-			[
-				'label'     => __( 'Border Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#000000',
-				'global'    => [
-					'active' => true,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-btn-blocks' => 'border-color: {{VALUE}};',
-				],
-				'condition' => [
-					'button_border_width[size]!' => '0',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_border_heading_radius',
-			[
-				'label'     => __( 'Border Radius', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'button_border_radius',
-			[
-				'label'      => __( 'Border Radius', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'default'    => [
-					'top'      => '5',
-					'right'    => '5',
-					'bottom'   => '5',
-					'left'     => '5',
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-btn-blocks' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_box_shadow_heading',
-			[
-				'label'     => __( 'Box Shadow', 'ultra-elementor-addons' ),
+				'label'     => __( 'Typography', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
 		);
 
 		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
+			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'button_box_shadow',
+				'name'     => 'button_typography',
 				'selector' => '{{WRAPPER}} .orivo-btn-blocks',
-			]
-		);
-
-		$this->add_control(
-			'button_alignment_heading',
-			[
-				'label'     => __( 'Button Alignment', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'button_alignment',
-			[
-				'label'     => __( 'Alignment', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'default'   => 'center',
-				'options'   => [
-					'left'   => [
-						'title' => __( 'Left', 'ultra-elementor-addons' ),
-						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'ultra-elementor-addons' ),
-						'icon'  => 'eicon-text-align-center',
-					],
-					'right'  => [
-						'title' => __( 'Right', 'ultra-elementor-addons' ),
-						'icon'  => 'eicon-text-align-right',
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}}' => 'display: flex; justify-content: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_icon_size_heading',
-			[
-				'label'     => __( 'Icon Size', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => [
-					'icon_type!' => 'none',
-				],
-			]
-		);
-
-		$this->add_control(
-			'icon_size',
-			[
-				'label'      => __( 'Icon Size', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [
-					'px' => [
-						'min' => 8,
-						'max' => 48,
-					],
-				],
-				'default'    => [
-					'unit' => 'px',
-					'size' => 20,
-				],
-				'condition'  => [
-					'icon_type!' => 'none',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-btn-blocks__icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_icon_spacing_heading',
-			[
-				'label'     => __( 'Icon Spacing', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => [
-					'icon_type!' => 'none',
-				],
-			]
-		);
-
-		$this->add_control(
-			'icon_spacing',
-			[
-				'label'      => __( 'Icon Spacing', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 32,
-					],
-				],
-				'default'    => [
-					'unit' => 'px',
-					'size' => 8,
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-btn-blocks' => 'gap: {{SIZE}}{{UNIT}};',
-				],
 			]
 		);
 
@@ -484,7 +280,7 @@ class Button extends Widgets_Base {
 		$this->add_control(
 			'button_hover_outline_bg_color',
 			[
-				'label'     => __( 'Outline BG Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Outline Background Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'global'    => [
 					'active' => true,
@@ -529,25 +325,181 @@ class Button extends Widgets_Base {
 
 		$this->end_controls_tab();
 
-		/* Typography Tab */
+		/* Layout Options Tab */
 		$this->start_controls_tab(
-			'button_tab_typography',
+			'button_tab_layout',
 			[
-				'label' => __( 'Typography', 'ultra-elementor-addons' ),
+				'label' => __( 'Layout', 'ultra-elementor-addons' ),
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		// --- Padding ---
+		$this->add_responsive_control(
+			'button_padding',
 			[
-				'name'     => 'button_typography',
+				'label' => __( 'Padding', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem' ],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-btn-blocks' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// --- Layout Options ---
+		$this->add_control(
+			'ua_layout_tab',
+			[
+				'label'        => __( 'Layout Options', 'ultra-elementor-addons' ),
+				'type'         => Controls_Manager::CHOOSE,
+				'default'      => 'alignment',
+				'toggle'       => false,
+				'label_block'  => true,
+				'selectors'    => [
+					'{{WRAPPER}}' => 'display:flex; justify-content:center;',
+				],
+				'options'      => [
+					'alignment'     => [
+						'title' => __( 'Alignment', 'ultra-elementor-addons' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'icon_size'     => [
+						'title' => __( 'Icon Size', 'ultra-elementor-addons' ),
+						'icon'  => 'eicon-image-bold',
+					],
+					'icon_spacing'  => [
+						'title' => __( 'Icon Spacing', 'ultra-elementor-addons' ),
+						'icon'  => 'eicon-h-align-stretch',
+					],
+				],
+			]
+		);
+
+		/* --- TAB 1: Alignment --- */
+		$this->add_responsive_control(
+			'button_alignment',
+			[
+				'label'   => __( 'Alignment', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'default' => 'center',
+				'options' => [
+					'left'   => [
+						'title' => __( 'Left', 'ultra-elementor-addons' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'ultra-elementor-addons' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'ultra-elementor-addons' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}}' => 'justify-content:{{VALUE}};',
+				],
+				'condition' => [
+					'ua_layout_tab' => 'alignment',
+				],
+			]
+		);
+
+		/* --- TAB 2: Icon Size --- */
+		$this->add_responsive_control(
+			'ua_icon_size',
+			[
+				'label'      => __( 'Icon Size', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => 8,
+						'max' => 48,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 20,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-btn-blocks__icon' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}}; display:inline-flex;',
+					'{{WRAPPER}} .orivo-btn-blocks__icon svg' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-btn-blocks__icon i' => 'font-size:{{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'ua_layout_tab' => 'icon_size',
+				],
+			]
+		);
+
+		/* --- TAB 3: Icon Spacing --- */
+		$this->add_responsive_control(
+			'ua_icon_spacing',
+			[
+				'label'      => __( 'Icon Spacing', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 32,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 8,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-btn-blocks' => 'gap:{{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'ua_layout_tab' => 'icon_spacing',
+				],
+			]
+		);
+
+		// --- Border ---
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'button_border',
+				'selector' => '{{WRAPPER}} .orivo-btn-blocks',
+			]
+		);
+
+		// --- Border Radius ---
+		$this->add_responsive_control(
+			'button_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'default'    => [
+					'top'      => '5',
+					'right'    => '5',
+					'bottom'   => '5',
+					'left'     => '5',
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-btn-blocks' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'separator' => 'before',
+			]
+		);
+
+		// --- Box Shadow ---
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'button_box_shadow',
 				'selector' => '{{WRAPPER}} .orivo-btn-blocks',
 			]
 		);
 
 		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
