@@ -522,6 +522,710 @@ class Info_Box extends Widgets_Base {
 			]
 		);
 
+		// Icon Before/After Pseudo Elements
+		$this->add_control(
+			'icon_before_after_heading',
+			[
+				'label' => __( 'Icon Shapes (Before/After)', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'icon_before_content',
+			[
+				'label' => __( 'Before Content', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::TEXT,
+				'placeholder' => __( 'Enter text or symbol', 'ultra-elementor-addons' ),
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'content: "{{VALUE}}" !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_content',
+			[
+				'label' => __( 'After Content', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::TEXT,
+				'placeholder' => __( 'Enter text or symbol', 'ultra-elementor-addons' ),
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'content: "{{VALUE}}" !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_size',
+			[
+				'label' => __( 'Before Element Size', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 5,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_size',
+			[
+				'label' => __( 'After Element Size', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 5,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_bg',
+			[
+				'label' => __( 'Before Background', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_bg',
+			[
+				'label' => __( 'After Background', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_position',
+			[
+				'label' => __( 'Before Position', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'' => __( 'Default', 'ultra-elementor-addons' ),
+					'absolute' => __( 'Absolute', 'ultra-elementor-addons' ),
+				],
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'position: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_position',
+			[
+				'label' => __( 'After Position', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'' => __( 'Default', 'ultra-elementor-addons' ),
+					'absolute' => __( 'Absolute', 'ultra-elementor-addons' ),
+				],
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'position: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_location',
+			[
+				'label' => __( 'Before Location', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'' => __( 'Default', 'ultra-elementor-addons' ),
+					'top-left' => __( 'Top Left', 'ultra-elementor-addons' ),
+					'top-right' => __( 'Top Right', 'ultra-elementor-addons' ),
+					'bottom-left' => __( 'Bottom Left', 'ultra-elementor-addons' ),
+					'bottom-right' => __( 'Bottom Right', 'ultra-elementor-addons' ),
+					'top-center' => __( 'Top Center', 'ultra-elementor-addons' ),
+					'bottom-center' => __( 'Bottom Center', 'ultra-elementor-addons' ),
+				],
+				'default' => '',
+				'selectors' => [
+					'top-left' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'top: 0 !important; left: 0 !important;',
+					],
+					'top-right' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'top: 0 !important; right: 0 !important;',
+					],
+					'bottom-left' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'bottom: 0 !important; left: 0 !important;',
+					],
+					'bottom-right' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'bottom: 0 !important; right: 0 !important;',
+					],
+					'top-center' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'top: 0 !important; left: 50% !important; transform: translateX(-50%) !important;',
+					],
+					'bottom-center' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'bottom: 0 !important; left: 50% !important; transform: translateX(-50%) !important;',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_location',
+			[
+				'label' => __( 'After Location', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'' => __( 'Default', 'ultra-elementor-addons' ),
+					'top-left' => __( 'Top Left', 'ultra-elementor-addons' ),
+					'top-right' => __( 'Top Right', 'ultra-elementor-addons' ),
+					'bottom-left' => __( 'Bottom Left', 'ultra-elementor-addons' ),
+					'bottom-right' => __( 'Bottom Right', 'ultra-elementor-addons' ),
+					'top-center' => __( 'Top Center', 'ultra-elementor-addons' ),
+					'bottom-center' => __( 'Bottom Center', 'ultra-elementor-addons' ),
+				],
+				'default' => '',
+				'selectors' => [
+					'top-left' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'top: 0 !important; left: 0 !important;',
+					],
+					'top-right' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'top: 0 !important; right: 0 !important;',
+					],
+					'bottom-left' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'bottom: 0 !important; left: 0 !important;',
+					],
+					'bottom-right' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'bottom: 0 !important; right: 0 !important;',
+					],
+					'top-center' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'top: 0 !important; left: 50% !important; transform: translateX(-50%) !important;',
+					],
+					'bottom-center' => [
+						'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'bottom: 0 !important; left: 50% !important; transform: translateX(-50%) !important;',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_border_radius',
+			[
+				'label' => __( 'Before Border Radius', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'border-radius: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_border_radius',
+			[
+				'label' => __( 'After Border Radius', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'border-radius: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_z_index',
+			[
+				'label' => __( 'Before Z-Index', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::NUMBER,
+				'min' => -99,
+				'max' => 99,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'z-index: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_z_index',
+			[
+				'label' => __( 'After Z-Index', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::NUMBER,
+				'min' => -99,
+				'max' => 99,
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'z-index: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		// Icon Position Sliders
+		$this->add_control(
+			'icon_position_sliders_heading',
+			[
+				'label' => __( 'Icon Position (Sliders)', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'icon_pos_top',
+			[
+				'label' => __( 'Icon Top', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => -500,
+						'max' => 500,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'top: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_pos_right',
+			[
+				'label' => __( 'Icon Right', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => -500,
+						'max' => 500,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'right: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_pos_bottom',
+			[
+				'label' => __( 'Icon Bottom', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => -500,
+						'max' => 500,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'bottom: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_pos_left',
+			[
+				'label' => __( 'Icon Left', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => -500,
+						'max' => 500,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'left: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		// Before/After Position Sliders
+		$this->add_control(
+			'icon_before_pos_sliders_heading',
+			[
+				'label' => __( 'Before Position (Sliders)', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'icon_before_pos_top',
+			[
+				'label' => __( 'Before Top', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'top: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_pos_right',
+			[
+				'label' => __( 'Before Right', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'right: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_pos_bottom',
+			[
+				'label' => __( 'Before Bottom', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'bottom: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_before_pos_left',
+			[
+				'label' => __( 'Before Left', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::before' => 'left: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_pos_sliders_heading',
+			[
+				'label' => __( 'After Position (Sliders)', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'icon_after_pos_top',
+			[
+				'label' => __( 'After Top', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'top: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_pos_right',
+			[
+				'label' => __( 'After Right', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'right: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_pos_bottom',
+			[
+				'label' => __( 'After Bottom', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'bottom: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_after_pos_left',
+			[
+				'label' => __( 'After Left', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img::after' => 'left: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		// Icon Transform
+		$this->add_control(
+			'icon_transform_heading',
+			[
+				'label' => __( 'Icon Transform', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'icon_scale',
+			[
+				'label' => __( 'Icon Scale', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 3,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'transform: scale({{SIZE}}) !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_rotate_custom',
+			[
+				'label' => __( 'Icon Rotate', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -180,
+						'max' => 180,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'transform: rotate({{SIZE}}deg) !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_skew_x',
+			[
+				'label' => __( 'Icon Skew X', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -90,
+						'max' => 90,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'transform: skewX({{SIZE}}deg) !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_skew_y',
+			[
+				'label' => __( 'Icon Skew Y', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -90,
+						'max' => 90,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'transform: skewY({{SIZE}}deg) !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_translate_x',
+			[
+				'label' => __( 'Icon Translate X', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'transform: translateX({{SIZE}}{{UNIT}}) !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_translate_y',
+			[
+				'label' => __( 'Icon Translate Y', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => -200,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'transform: translateY({{SIZE}}{{UNIT}}) !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon_opacity',
+			[
+				'label' => __( 'Icon Opacity', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1,
+						'step' => 0.01,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-blocks-info-box__img' => 'opacity: {{SIZE}} !important;',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		// Style Section - Layout & Positioning
