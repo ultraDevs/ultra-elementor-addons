@@ -42,6 +42,8 @@
   flex-direction: column;
   padding: 40px;
   border-radius: 12px;
+  position: relative;
+  overflow: hidden;
 }
 @media (max-width: 1024px) {
   .info-boxes .orivo-blocks-info-box {
@@ -60,6 +62,8 @@
   padding: 20px;
   border-radius: 24px;
   margin-top: 30px;
+  overflow: hidden;
+  position: relative;
 }
 .info-boxes .orivo-blocks-info-box__gradient-bg .orivo-blocks-info-box__img {
   padding: 10px;
@@ -83,6 +87,8 @@
   padding: 20px;
   border-radius: 20px;
   padding-bottom: 50px;
+  overflow: hidden;
+  position: relative;
 }
 .info-boxes .orivo-blocks-info-box__img--bg i,
 .info-boxes .orivo-blocks-info-box__img--bg svg,
@@ -309,6 +315,8 @@
   border-radius: 8px;
   border: 1px solid gray;
   background: white;
+  overflow: hidden;
+  position: relative;
   padding: 30px;
 }
 .info-boxes .orivo-blocks-info-box--seven .orivo-blocks-info-box__btn a {
@@ -444,6 +452,7 @@
   background: transparent;
   padding: 20px;
   position: relative;
+  overflow: hidden;
 }
 .info-boxes .orivo-blocks-info-box--half-bg .orivo-blocks-info-box__tag {
   background: var(--orivo-blocks-info-box-primary-color);
