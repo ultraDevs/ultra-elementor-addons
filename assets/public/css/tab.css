@@ -8,6 +8,22 @@
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
 }
 
+/* Tab Position Alignment */
+.ua-tab-align-left .orivo-tabs--blocks {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.ua-tab-align-center .orivo-tabs--blocks {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ua-tab-align-right .orivo-tabs--blocks {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 /* Hide Indicator */
 .ua-show-indicator-no .orivo-tabs--blocks__indicator {
   display: none !important;

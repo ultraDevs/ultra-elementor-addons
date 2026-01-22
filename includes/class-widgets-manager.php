@@ -169,6 +169,14 @@ class Widgets_Manager {
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Counter',
+			],
+			'info_box'    => [
+				'title'   => __( 'Info Box', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-info-box',
+				'demo'    => ultra_addons_get_addons_demo_link( 'info-box' ),
+				'enqueue' => [ 'css', 'js' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Info_Box',
 			]
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );

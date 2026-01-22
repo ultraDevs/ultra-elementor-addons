@@ -229,21 +229,28 @@ class Tab extends Widgets_Base {
 		);
 
 		$this->add_responsive_control(
-			'container_margin',
+			'tab_position_alignment',
 			[
-				'label' => __( 'Margin', 'ultra-elementor-addons' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'default' => [
-					'top' => 0,
-					'right' => 'auto',
-					'bottom' => 80,
-					'left' => 'auto',
-					'unit' => 'px',
-					'isLinked' => false,
+				'label' => __( 'Tab Position Alignment', 'ultra-elementor-addons' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'ultra-elementor-addons' ),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'ultra-elementor-addons' ),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => __( 'Right', 'ultra-elementor-addons' ),
+						'icon' => 'eicon-text-align-right',
+					],
 				],
+				'default' => 'center',
+				'prefix_class' => 'ua-tab-align-',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-tabs--blocks' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-tabs--blocks' => 'margin-bottom: 80px;',
 				],
 			]
 		);
