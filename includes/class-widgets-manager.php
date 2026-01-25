@@ -198,7 +198,7 @@ class Widgets_Manager {
 				'title'   => __( 'Navigation', 'ultra-elementor-addons' ),
 				'icon'    => 'eicon-menu-bar',
 				'demo'    => ultra_addons_get_addons_demo_link( 'navigation' ),
-				'enqueue' => [ 'css' ],
+				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Navbar',
 			],

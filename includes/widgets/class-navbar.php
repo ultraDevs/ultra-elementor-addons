@@ -2,23 +2,22 @@
 
 namespace UltraElementorAddons\Widgets;
 
-use Elementor\Repeater;
 use UltraElementorAddons\Widgets_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Background;
-use Elementor\Icons_Manager;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
 
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || die();
 
 class Navbar extends Widgets_Base {
 
 	public function get_name() {
-		return 'ua_navigation';
+		return 'orivo_navigation';
 	}
 
 	public function get_title() {
-		return __( 'Navigation', 'ultra-elementor-addons' );
+		return __( 'Orivo Navigation', 'ultra-elementor-addons' );
 	}
 
 	public function get_icon() {
@@ -29,16 +28,39 @@ class Navbar extends Widgets_Base {
 		return [ 'ultra_addons_category' ];
 	}
 
+	public function get_keywords() {
+		return [ 'nav', 'menu', 'navigation', 'navbar' ];
+	}
+
 	public function get_script_depends() {
-		return [];
+		return [ 'ua-script-navigation' ];
 	}
 
 	public function get_style_depends() {
 		return [ 'ua-style-navigation' ];
 	}
 
+	private function get_available_menus() {
+		$menus = wp_get_nav_menus();
+		$options = [];
+		if ( ! empty( $menus ) ) {
+			foreach ( $menus as $menu ) {
+				$options[ (string) $menu->term_id ] = $menu->name;
+			}
+		}
+		return $options;
+	}
+
+	private function get_menu_locations() {
+		$locations = get_registered_nav_menus();
+		return is_array( $locations ) ? $locations : [];
+	}
+
 	protected function ua_register_controls() {
 
+		/* ========================
+		 * Content Section
+		 * ======================== */
 		$this->start_controls_section(
 			'section_content',
 			[
@@ -53,428 +75,144 @@ class Navbar extends Widgets_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'layout-3',
 				'options' => [
-					'layout-1' => __( 'Layout 1: Left Underline + Left Mobile', 'ultra-elementor-addons' ),
-					'layout-2' => __( 'Layout 2: Right Underline + Right Mobile', 'ultra-elementor-addons' ),
-					'layout-3' => __( 'Layout 3: Center Underline + Fullscreen Mobile', 'ultra-elementor-addons' ),
+					'layout-1' => __( 'Left', 'ultra-elementor-addons' ),
+					'layout-2' => __( 'Right', 'ultra-elementor-addons' ),
+					'layout-3' => __( 'Center', 'ultra-elementor-addons' ),
 				],
-			]
-		);
-
-		$repeater = new Repeater();
-
-		// Basic Info
-		$repeater->add_control(
-			'nav_text',
-			[
-				'label'   => __( 'Menu Text', 'ultra-elementor-addons' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Home', 'ultra-elementor-addons' ),
-			]
-		);
-
-		$repeater->add_control(
-			'nav_link',
-			[
-				'label'       => __( 'Link', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::URL,
-				'placeholder' => __( 'https://your-link.com', 'ultra-elementor-addons' ),
-				'default'     => [
-					'url'         => '#',
-					'is_external' => false,
-					'nofollow'    => false,
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_is_active',
-			[
-				'label'        => __( 'Active', 'ultra-elementor-addons' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'default'      => '',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_disable',
-			[
-				'label'        => __( 'Disable Link', 'ultra-elementor-addons' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'description'   => __( 'Disable the link for this menu item', 'ultra-elementor-addons' ),
-			]
-		);
-
-		// Icon Section
-		$repeater->add_control(
-			'nav_icon_heading',
-			[
-				'label'     => __( 'Icon', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_icon',
-			[
-				'label'            => __( 'Select Icon', 'ultra-elementor-addons' ),
-				'type'             => Controls_Manager::ICONS,
-				'fa4compatibility' => 'nav_icon_old',
-				'default'          => [
-					'value'   => '',
-					'library' => 'fa-solid',
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_icon_size',
-			[
-				'label'      => __( 'Icon Size', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [ 'min' => 10, 'max' => 50 ],
-					'em' => [ 'min' => 0.5, 'max' => 3 ],
-				],
-				'default'    => [
-					'size' => 14,
-					'unit' => 'px',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__icon' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_icon_color',
-			[
-				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__icon' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_icon_bg',
-			[
-				'label'     => __( 'Icon Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__icon' => 'background-color: {{VALUE}}; padding: 5px; border-radius: 4px;',
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_icon_spacing',
-			[
-				'label'      => __( 'Icon Spacing', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 30 ],
-					'em' => [ 'min' => 0, 'max' => 2 ],
-				],
-				'default'    => [
-					'size' => 6,
-					'unit' => 'px',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__icon' => 'margin-right: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		// Badge Section
-		$repeater->add_control(
-			'nav_badge_heading',
-			[
-				'label'     => __( 'Badge', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_badge',
-			[
-				'label'   => __( 'Badge Text', 'ultra-elementor-addons' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => '',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_badge_position',
-			[
-				'label'   => __( 'Badge Position', 'ultra-elementor-addons' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'after',
-				'options' => [
-					'after'  => __( 'After Text', 'ultra-elementor-addons' ),
-					'before' => __( 'Before Text', 'ultra-elementor-addons' ),
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_badge_bg',
-			[
-				'label'   => __( 'Badge Background', 'ultra-elementor-addons' ),
-				'type'    => Controls_Manager::COLOR,
-				'default' => '#667eea',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_badge_color',
-			[
-				'label'   => __( 'Badge Text Color', 'ultra-elementor-addons' ),
-				'type'    => Controls_Manager::COLOR,
-				'default' => '#ffffff',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_badge_padding',
-			[
-				'label'      => __( 'Badge Padding', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'default'    => [
-					'top'      => 2,
-					'right'    => 8,
-					'bottom'   => 2,
-					'left'     => 8,
-					'unit'     => 'px',
-					'isLinked' => false,
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_badge_radius',
-			[
-				'label'      => __( 'Badge Border Radius', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 30 ],
-					'%'  => [ 'min' => 0, 'max' => 50 ],
-				],
-				'default'    => [
-					'size' => 12,
-					'unit' => 'px',
-				],
-			]
-		);
-
-		// Custom Style Section
-		$repeater->add_control(
-			'nav_custom_style',
-			[
-				'label'        => __( 'Enable Custom Style', 'ultra-elementor-addons' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'description'   => __( 'Enable custom colors and typography for this item', 'ultra-elementor-addons' ),
-				'separator'    => 'before',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_color',
-			[
-				'label'     => __( 'Text Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'condition' => [ 'nav_custom_style' => 'yes' ],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_bg_color',
-			[
-				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'condition' => [ 'nav_custom_style' => 'yes' ],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_font_size',
-			[
-				'label'      => __( 'Font Size', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px'  => [ 'min' => 10, 'max' => 40 ],
-					'em'  => [ 'min' => 0.5, 'max' => 3 ],
-					'rem' => [ 'min' => 0.5, 'max' => 3 ],
-				],
-				'default'    => [
-					'size' => 15,
-					'unit' => 'px',
-				],
-				'condition'   => [ 'nav_custom_style' => 'yes' ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__link' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_font_weight',
-			[
-				'label'     => __( 'Font Weight', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'    => '',
-				'options'    => [
-					''        => __( 'Default', 'ultra-elementor-addons' ),
-					'300'    => __( 'Light (300)', 'ultra-elementor-addons' ),
-					'400'    => __( 'Normal (400)', 'ultra-elementor-addons' ),
-					'500'    => __( 'Medium (500)', 'ultra-elementor-addons' ),
-					'600'    => __( 'Semi Bold (600)', 'ultra-elementor-addons' ),
-					'700'    => __( 'Bold (700)', 'ultra-elementor-addons' ),
-				],
-				'condition' => [ 'nav_custom_style' => 'yes' ],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__link' => 'font-weight: {{VALUE}};',
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'nav_padding',
-			[
-				'label'      => __( 'Padding', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'default'    => [
-					'top'      => 2,
-					'right'    => 0,
-					'bottom'   => 2,
-					'left'     => 0,
-					'unit'     => 'px',
-					'isLinked' => false,
-				],
-				'condition'   => [ 'nav_custom_style' => 'yes' ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__link' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		// Advanced Options
-		$repeater->add_control(
-			'nav_custom_id',
-			[
-				'label'       => __( 'Custom ID', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::TEXT,
-				'description' => __( 'Add a custom ID attribute to this menu item', 'ultra-elementor-addons' ),
-				'separator'    => 'before',
-			]
-		);
-
-		$repeater->add_control(
-			'nav_custom_class',
-			[
-				'label'       => __( 'Custom CSS Class', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::TEXT,
-				'description' => __( 'Add custom CSS class(es) to this menu item', 'ultra-elementor-addons' ),
-			]
-		);
-
-		$repeater->add_control(
-			'nav_hide_desktop',
-			[
-				'label'        => __( 'Hide on Desktop', 'ultra-elementor-addons' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'description'   => __( 'Hide this menu item on desktop screens', 'ultra-elementor-addons' ),
-			]
-		);
-
-		$repeater->add_control(
-			'nav_hide_mobile',
-			[
-				'label'        => __( 'Hide on Mobile', 'ultra-elementor-addons' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'description'   => __( 'Hide this menu item on mobile devices', 'ultra-elementor-addons' ),
-			]
-		);
-
-		$repeater->add_control(
-			'nav_tooltip',
-			[
-				'label'       => __( 'Tooltip', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::TEXT,
-				'description' => __( 'Add tooltip text that appears on hover', 'ultra-elementor-addons' ),
 			]
 		);
 
 		$this->add_control(
-			'menu_items',
+			'source_type',
 			[
-				'label'       => __( 'Menu Items', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ nav_text }}}',
-				'default'     => [
-					[
-						'nav_text'      => __( 'Home', 'ultra-elementor-addons' ),
-						'nav_link'      => [ 'url' => '#' ],
-						'nav_is_active' => 'yes',
-					],
-					[
-						'nav_text' => __( 'About', 'ultra-elementor-addons' ),
-						'nav_link' => [ 'url' => '#' ],
-					],
-					[
-						'nav_text' => __( 'Services', 'ultra-elementor-addons' ),
-						'nav_link' => [ 'url' => '#' ],
-					],
-					[
-						'nav_text' => __( 'Contact', 'ultra-elementor-addons' ),
-						'nav_link' => [ 'url' => '#' ],
-					],
+				'label'   => __( 'Menu Source', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'menu',
+				'options' => [
+					'menu'     => __( 'Select by Menu', 'ultra-elementor-addons' ),
+					'location' => __( 'Select by Location', 'ultra-elementor-addons' ),
+				],
+			]
+		);
+
+		$menus = $this->get_available_menus();
+		$this->add_control(
+			'nav_menu',
+			[
+				'label'     => __( 'Select Menu', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => $menus,
+				'default'   => ! empty( $menus ) ? array_key_first( $menus ) : '',
+				'condition' => [ 'source_type' => 'menu' ],
+			]
+		);
+
+		$locations = $this->get_menu_locations();
+		$this->add_control(
+			'nav_location',
+			[
+				'label'     => __( 'Select Location', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => $locations,
+				'default'   => ! empty( $locations ) ? array_key_first( $locations ) : '',
+				'condition' => [ 'source_type' => 'location' ],
+			]
+		);
+
+		$this->add_control(
+			'mobile_breakpoint',
+			[
+				'label'   => __( 'Mobile Breakpoint (px)', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 768,
+				'min'     => 320,
+				'max'     => 1920,
+			]
+		);
+
+		$this->add_control(
+			'close_on_outside',
+			[
+				'label'        => __( 'Close on Outside Click', 'ultra-elementor-addons' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'dropdown_indicator',
+			[
+				'label'   => __( 'Dropdown Indicator', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'arrow',
+				'options' => [
+					'none'  => __( 'None', 'ultra-elementor-addons' ),
+					'arrow' => __( 'Arrow', 'ultra-elementor-addons' ),
+					'plus'  => __( 'Plus', 'ultra-elementor-addons' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'mobile_menu_position',
+			[
+				'label'   => __( 'Mobile Menu Position', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'top',
+				'options' => [
+					'top'    => __( 'Top', 'ultra-elementor-addons' ),
+					'bottom' => __( 'Bottom', 'ultra-elementor-addons' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'mobile_full_width',
+			[
+				'label'        => __( 'Mobile Full Width', 'ultra-elementor-addons' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'no',
+			]
+		);
+
+		$this->add_control(
+			'dropdown_animation',
+			[
+				'label'   => __( 'Dropdown Animation', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'fade',
+				'options' => [
+					'none'       => __( 'None', 'ultra-elementor-addons' ),
+					'fade'       => __( 'Fade', 'ultra-elementor-addons' ),
+					'slide'      => __( 'Slide', 'ultra-elementor-addons' ),
+					'fade-slide' => __( 'Fade + Slide', 'ultra-elementor-addons' ),
 				],
 			]
 		);
 
 		$this->end_controls_section();
 
-		// STYLE SECTION - Container
+		/* ========================
+		 * Container Style Section
+		 * ======================== */
 		$this->start_controls_section(
 			'section_container_style',
 			[
-				'label' => __( 'Container Style', 'ultra-elementor-addons' ),
+				'label' => __( 'Container', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
-		$this->add_responsive_control(
-			'container_height',
+		$this->add_control(
+			'container_bg_color',
 			[
-				'label'      => __( 'Container Height', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [ 'min' => 40, 'max' => 150 ],
-					'em' => [ 'min' => 3, 'max' => 10 ],
-				],
-				'default'    => [
-					'size' => 70,
-					'unit' => 'px',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__container' => 'height: {{SIZE}}{{UNIT}};',
+				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => 'rgba(255,255,255,.95)',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__container' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -482,14 +220,14 @@ class Navbar extends Widgets_Base {
 		$this->add_responsive_control(
 			'container_padding',
 			[
-				'label'      => __( 'Container Padding', 'ultra-elementor-addons' ),
+				'label'      => __( 'Padding', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'default'    => [
-					'top'      => 0,
-					'right'    => 24,
-					'bottom'   => 0,
-					'left'     => 24,
+					'top'      => '0',
+					'right'    => '24',
+					'bottom'   => '0',
+					'left'     => '24',
 					'unit'     => 'px',
 					'isLinked' => false,
 				],
@@ -499,76 +237,92 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
+		$this->add_responsive_control(
+			'container_margin',
 			[
-				'name'     => 'container_bg',
-				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__container',
+				'label'      => __( 'Margin', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'default'    => [
+					'top'      => '0',
+					'right'    => '0',
+					'bottom'   => '60',
+					'left'     => '0',
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
 		$this->add_control(
-			'border_radius',
+			'container_border_radius',
 			[
 				'label'      => __( 'Border Radius', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 50 ],
+					'px' => [ 'min' => 0, 'max' => 100 ],
 					'%'  => [ 'min' => 0, 'max' => 50 ],
 				],
-				'default'    => [
-					'size' => 16,
-					'unit' => 'px',
-				],
+				'default'    => [ 'unit' => 'px', 'size' => 16 ],
 				'selectors'  => [
 					'{{WRAPPER}} .orivo-navbar-blocks__container' => 'border-radius: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
-		$this->add_control(
-			'z_index',
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
 			[
-				'label'     => __( 'Z Index', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::NUMBER,
-				'default'   => 100,
-				'min'       => 1,
-				'max'       => 9999,
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__container' => 'z-index: {{VALUE}};',
+				'name'     => 'container_box_shadow',
+				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__container',
+			]
+		);
+
+		$this->add_control(
+			'container_height',
+			[
+				'label'      => __( 'Container Height', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [ 'px' => [ 'min' => 40, 'max' => 150 ] ],
+				'default'    => [ 'unit' => 'px', 'size' => 70 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__container' => 'min-height: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'container_max_width',
+			[
+				'label'      => __( 'Container Max Width', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [ 'min' => 300, 'max' => 1920 ],
+					'%'  => [ 'min' => 10, 'max' => 100 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 1200 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__container' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
 		$this->end_controls_section();
 
-		// MENU ITEMS STYLE
+		/* ========================
+		 * Menu Items Style Section
+		 * ======================== */
 		$this->start_controls_section(
-			'section_menu_style',
+			'section_menu_items_style',
 			[
 				'label' => __( 'Menu Items', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_responsive_control(
-			'menu_gap',
-			[
-				'label'      => __( 'Menu Gap', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 100 ],
-					'em' => [ 'min' => 0, 'max' => 5 ],
-				],
-				'default'    => [
-					'size' => 40,
-					'unit' => 'px',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu' => 'gap: {{SIZE}}{{UNIT}};',
-				],
 			]
 		);
 
@@ -576,18 +330,18 @@ class Navbar extends Widgets_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'menu_typography',
-				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__link',
+				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__menu > li > a',
 			]
 		);
 
 		$this->add_control(
 			'menu_color',
 			[
-				'label'     => __( 'Menu Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#333333',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__link' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -599,7 +353,7 @@ class Navbar extends Widgets_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#667eea',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__link:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a:hover' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -607,11 +361,49 @@ class Navbar extends Widgets_Base {
 		$this->add_control(
 			'active_color',
 			[
-				'label'     => __( 'Active Menu Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Active Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#667eea',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__link.ua-nav-active' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu .current-menu-item > a,
+					{{WRAPPER}} .orivo-navbar-blocks__menu .current-menu-ancestor > a' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'menu_gap',
+			[
+				'label'      => __( 'Menu Gap', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 0, 'max' => 100 ],
+					'em' => [ 'min' => 0, 'max' => 10 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 40 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'menu_item_padding',
+			[
+				'label'      => __( 'Item Padding', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => '2',
+					'right'    => '0',
+					'bottom'   => '2',
+					'left'     => '0',
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -623,91 +415,294 @@ class Navbar extends Widgets_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#667eea',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__link::after' => 'background: linear-gradient(90deg, {{VALUE}}, {{VALUE}});',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a::after' => 'background: {{VALUE}} !important;',
 				],
+			]
+		);
+
+		$this->add_control(
+			'underline_height',
+			[
+				'label'      => __( 'Underline Height', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [ 'px' => [ 'min' => 1, 'max' => 10 ] ],
+				'default'    => [ 'unit' => 'px', 'size' => 2 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a::after' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'underline_width',
+			[
+				'label'   => __( 'Underline Width on Hover', 'ultra-elementor-addons' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range'   => [ '%' => [ 'min' => 10, 'max' => 100 ] ],
+				'default' => [ 'unit' => '%', 'size' => 80 ],
 			]
 		);
 
 		$this->end_controls_section();
 
-		// BADGE STYLE
+		/* ========================
+		 * Submenu Style Section
+		 * ======================== */
 		$this->start_controls_section(
-			'section_badge_style',
+			'section_submenu_style',
 			[
-				'label' => __( 'Badge', 'ultra-elementor-addons' ),
+				'label' => __( 'Submenu', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'submenu_bg_color',
+			[
+				'label'     => __( 'Background Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'background: {{VALUE}};',
+				],
 			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'badge_typography',
-				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__badge',
+				'name'     => 'submenu_typography',
+				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__menu ul li a',
 			]
 		);
 
 		$this->add_control(
-			'badge_color',
+			'submenu_item_color',
 			[
-				'label'     => __( 'Badge Text Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Item Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#ffffff',
+				'default'   => '#333333',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__badge' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a' => 'color: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'badge_bg',
+			'submenu_item_hover_color',
 			[
-				'label'     => __( 'Badge Background', 'ultra-elementor-addons' ),
+				'label'     => __( 'Hover Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#667eea',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__badge' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'submenu_item_hover_bg',
+			[
+				'label'     => __( 'Hover Background', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => 'rgba(102,126,234,.10)',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'background: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_responsive_control(
-			'badge_padding',
+			'submenu_padding',
 			[
-				'label'      => __( 'Badge Padding', 'ultra-elementor-addons' ),
+				'label'      => __( 'Padding', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
+				'size_units' => [ 'px', 'em' ],
 				'default'    => [
-					'top'      => 2,
-					'right'    => 8,
-					'bottom'   => 2,
-					'left'     => 8,
+					'top'      => '8',
+					'right'    => '0',
+					'bottom'   => '8',
+					'left'     => '0',
 					'unit'     => 'px',
 					'isLinked' => false,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__badge' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'submenu_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+					'%'  => [ 'min' => 0, 'max' => 50 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 12 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'border-radius: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'submenu_box_shadow',
+				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__menu ul',
+			]
+		);
+
+		$this->add_control(
+			'submenu_min_width',
+			[
+				'label'      => __( 'Minimum Width', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [ 'px' => [ 'min' => 100, 'max' => 400 ] ],
+				'default'    => [ 'unit' => 'px', 'size' => 200 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'min-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'submenu_item_padding',
+			[
+				'label'      => __( 'Item Padding', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => '10',
+					'right'    => '16',
+					'bottom'   => '10',
+					'left'     => '16',
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/* ========================
+		 * Mobile Menu Style Section
+		 * ======================== */
+		$this->start_controls_section(
+			'section_mobile_style',
+			[
+				'label' => __( 'Mobile Menu', 'ultra-elementor-addons' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'toggle_button_color',
+			[
+				'label'     => __( 'Toggle Button Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#333333',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__toggle-btn span' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'mobile_menu_bg',
+			[
+				'label'     => __( 'Mobile Menu Background', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu' => 'background: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_responsive_control(
-			'badge_radius',
+			'mobile_menu_padding',
 			[
-				'label'      => __( 'Badge Border Radius', 'ultra-elementor-addons' ),
+				'label'      => __( 'Mobile Menu Padding', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => '32',
+					'right'    => '24',
+					'bottom'   => '32',
+					'left'     => '24',
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'mobile_menu_typography',
+				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__menu > li > a',
+			]
+		);
+
+		$this->add_control(
+			'mobile_menu_item_color',
+			[
+				'label'     => __( 'Mobile Item Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#333333',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'mobile_menu_item_bg',
+			[
+				'label'     => __( 'Mobile Item Background', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => 'transparent',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'mobile_menu_item_radius',
+			[
+				'label'      => __( 'Mobile Item Radius', 'ultra-elementor-addons' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 30 ],
+					'px' => [ 'min' => 0, 'max' => 50 ],
 					'%'  => [ 'min' => 0, 'max' => 50 ],
 				],
-				'default'    => [
-					'size' => 12,
-					'unit' => 'px',
-				],
+				'default'    => [ 'unit' => 'px', 'size' => 12 ],
 				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__badge' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'border-radius: {{SIZE}}{{UNIT}};',
 				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'mobile_menu_box_shadow',
+				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__menu',
 			]
 		);
 
@@ -715,206 +710,98 @@ class Navbar extends Widgets_Base {
 	}
 
 	protected function render() {
-		$settings   = $this->get_settings_for_display();
-		$layout     = $settings['layout'] ?? 'layout-3';
-		$menu_items = $settings['menu_items'] ?? [];
+		$s = $this->get_settings_for_display();
 
-		$toggle_id = 'ua-nav-toggle-' . $this->get_id();
+		$layout              = $s['layout'] ?? 'layout-3';
+		$source              = $s['source_type'] ?? 'menu';
+		$menu_id             = $s['nav_menu'] ?? '';
+		$location            = $s['nav_location'] ?? '';
+		$breakpoint          = (int) ( $s['mobile_breakpoint'] ?? 768 );
+		$close_outside       = ( $s['close_on_outside'] ?? 'yes' );
+		$dropdown_indicator  = $s['dropdown_indicator'] ?? 'arrow';
+		$mobile_position     = $s['mobile_menu_position'] ?? 'top';
+		$mobile_full_width   = ( $s['mobile_full_width'] ?? 'no' ) === 'yes';
+		$dropdown_animation  = $s['dropdown_animation'] ?? 'fade';
 
-		// Wrapper/container/menu attributes
-		$this->add_render_attribute( 'nav_wrapper', 'class', [ 'orivo-navbar-blocks', 'orivo-navbar-blocks--' . $layout ] );
-		$this->add_render_attribute( 'nav_container', 'class', 'orivo-navbar-blocks__container' );
+		// Handle underline width - slider returns array with 'size' and 'unit' keys
+		$underline_width_setting = $s['underline_width'] ?? [];
+		if ( is_array( $underline_width_setting ) && isset( $underline_width_setting['size'] ) ) {
+			$underline_width = $underline_width_setting['size'];
+		} else {
+			$underline_width = 80;
+		}
 
-		$this->add_render_attribute( 'nav_toggle', 'type', 'checkbox' );
-		$this->add_render_attribute( 'nav_toggle', 'id', $toggle_id );
-		$this->add_render_attribute( 'nav_toggle', 'class', 'orivo-navbar-blocks__toggle' );
+		$wrap_id   = 'orivo-nav-' . $this->get_id();
+		$toggle_id = 'orivo-toggle-' . $this->get_id();
 
-		$this->add_render_attribute( 'toggle_label', 'for', $toggle_id );
-		$this->add_render_attribute( 'toggle_label', 'class', 'orivo-navbar-blocks__toggle-btn' );
+		// Build class array
+		$nav_classes   = [ 'orivo-navbar-blocks', 'orivo-navbar-blocks--' . $layout ];
+		$nav_classes[] = 'dropdown-animation-' . $dropdown_animation;
+		$nav_classes[] = 'dropdown-indicator-' . $dropdown_indicator;
+		$nav_classes[] = 'mobile-position-' . $mobile_position;
+		if ( $mobile_full_width ) {
+			$nav_classes[] = 'mobile-full-width';
+		}
+		$nav_class_string = implode( ' ', $nav_classes );
 
-		$this->add_render_attribute( 'nav_menu', 'class', 'orivo-navbar-blocks__menu' );
+		// Menu args
+		$args = [
+			'container'      => false,
+			'fallback_cb'    => false,
+			'menu_class'     => 'orivo-navbar-blocks__menu',
+			'depth'          => 3,
+		];
+
+		if ( $source === 'location' && ! empty( $location ) ) {
+			$args['theme_location'] = $location;
+		} elseif ( ! empty( $menu_id ) ) {
+			$args['menu'] = (int) $menu_id;
+		}
+
+		$has_menu = ( ! empty( $args['menu'] ) || ! empty( $args['theme_location'] ) );
+
+		// Dynamic CSS for underline width
+		$width_css = '';
+		if ( 'layout-1' === $layout ) {
+			$width_css = 'width: 100%;';
+		} elseif ( 'layout-2' === $layout ) {
+			$width_css = 'width: 100%;';
+		} elseif ( 'layout-3' === $layout ) {
+			$width_css = 'width: ' . $underline_width . '%;';
+		}
 		?>
-		<nav <?php $this->print_render_attribute_string( 'nav_wrapper' ); ?>>
-			<div <?php $this->print_render_attribute_string( 'nav_container' ); ?>>
 
-				<input <?php $this->print_render_attribute_string( 'nav_toggle' ); ?> />
-				<label <?php $this->print_render_attribute_string( 'toggle_label' ); ?> aria-label="<?php echo esc_attr__( 'Toggle navigation', 'ultra-elementor-addons' ); ?>">
+		<nav
+			id="<?php echo esc_attr( $wrap_id ); ?>"
+			class="<?php echo esc_attr( $nav_class_string ); ?>"
+			data-breakpoint="<?php echo esc_attr( (string) $breakpoint ); ?>"
+			data-close-outside="<?php echo esc_attr( $close_outside ); ?>"
+		>
+			<div class="orivo-navbar-blocks__container">
+				<input type="checkbox" id="<?php echo esc_attr( $toggle_id ); ?>" class="orivo-navbar-blocks__toggle">
+				<label for="<?php echo esc_attr( $toggle_id ); ?>" class="orivo-navbar-blocks__toggle-btn" aria-label="<?php echo esc_attr__( 'Toggle Menu', 'ultra-elementor-addons' ); ?>">
 					<span></span><span></span><span></span>
 				</label>
 
-				<ul <?php $this->print_render_attribute_string( 'nav_menu' ); ?>>
-					<?php if ( ! empty( $menu_items ) ) : ?>
-						<?php foreach ( $menu_items as $index => $item ) :
-
-							$text           = $item['nav_text'] ?? '';
-							$link           = $item['nav_link'] ?? [];
-							$is_active      = ( $item['nav_is_active'] ?? '' ) === 'yes';
-							$is_disabled    = ( $item['nav_disable'] ?? '' ) === 'yes';
-							$icon           = $item['nav_icon'] ?? [];
-							$badge          = $item['nav_badge'] ?? '';
-
-							// Custom style options
-							$custom_style   = ( $item['nav_custom_style'] ?? '' ) === 'yes';
-							$nav_color      = $item['nav_color'] ?? '';
-							$nav_bg         = $item['nav_bg_color'] ?? '';
-							$nav_font_size   = $item['nav_font_size'] ?? '';
-							$nav_font_weight = $item['nav_font_weight'] ?? '';
-							$nav_padding    = $item['nav_padding'] ?? '';
-
-							// Icon options
-							$icon_size      = $item['nav_icon_size'] ?? '';
-							$icon_color     = $item['nav_icon_color'] ?? '';
-							$icon_bg        = $item['nav_icon_bg'] ?? '';
-							$icon_spacing   = $item['nav_icon_spacing'] ?? '';
-
-							// Badge options
-							$badge_bg       = $item['nav_badge_bg'] ?? '';
-							$badge_color    = $item['nav_badge_color'] ?? '';
-							$badge_padding  = $item['nav_badge_padding'] ?? '';
-							$badge_radius   = $item['nav_badge_radius'] ?? '';
-							$badge_position = $item['nav_badge_position'] ?? 'after';
-
-							// Advanced options
-							$custom_id      = $item['nav_custom_id'] ?? '';
-							$custom_class   = $item['nav_custom_class'] ?? '';
-							$hide_desktop   = ( $item['nav_hide_desktop'] ?? '' ) === 'yes';
-							$hide_mobile    = ( $item['nav_hide_mobile'] ?? '' ) === 'yes';
-							$tooltip        = $item['nav_tooltip'] ?? '';
-
-							$active_class = $is_active ? ' ua-nav-active' : '';
-
-							// Build item classes
-							$item_classes = [ 'orivo-navbar-blocks__item' ];
-							if ( $hide_desktop ) {
-								$item_classes[] = 'ua-hide-desktop';
-							}
-							if ( $hide_mobile ) {
-								$item_classes[] = 'ua-hide-mobile';
-							}
-							if ( $is_disabled ) {
-								$item_classes[] = 'ua-disabled';
-							}
-
-							// Build link attributes using Elementor helper
-							$link_key = 'nav_link_' . $index;
-							$this->add_link_attributes( $link_key, $link );
-
-							// Add custom ID if provided
-							if ( $custom_id ) {
-								$this->add_render_attribute( 'link_item_' . $index, 'id', $custom_id );
-							}
-
-							// Add custom classes if provided
-							if ( $custom_class ) {
-								$this->add_render_attribute( 'link_item_' . $index, 'class', explode( ' ', $custom_class ), true );
-							}
-
-							// Add tooltip if provided
-							if ( $tooltip ) {
-								$this->add_render_attribute( 'link_item_' . $index, 'title', $tooltip );
-							}
-
-							// Disable link if needed
-							if ( $is_disabled ) {
-								$this->add_render_attribute( 'link_item_' . $index, 'tabindex', '-1' );
-							}
-
-							// Build inline styles
-							$item_style = '';
-							if ( $custom_style ) {
-								if ( $nav_color ) {
-									$item_style .= 'color:' . $nav_color . ';';
-								}
-								if ( $nav_bg ) {
-									$item_style .= 'background-color:' . $nav_bg . ';';
-								}
-								if ( $nav_font_size ) {
-									$item_style .= 'font-size:' . $nav_font_size['size'] . $nav_font_size['unit'] . ';';
-								}
-								if ( $nav_font_weight ) {
-									$item_style .= 'font-weight:' . $nav_font_weight . ';';
-								}
-								if ( $nav_padding && isset( $nav_padding['top'] ) ) {
-									$item_style .= 'padding:' . $nav_padding['top'] . $nav_padding['unit'] . ' ' . $nav_padding['right'] . $nav_padding['unit'] . ' ' . $nav_padding['bottom'] . $nav_padding['unit'] . ' ' . $nav_padding['left'] . $nav_padding['unit'] . ';';
-								}
-							}
-
-							// Icon styles
-							$icon_style = '';
-							if ( $icon_color ) {
-								$icon_style .= 'color:' . $icon_color . ';';
-							}
-							if ( $icon_bg ) {
-								$icon_style .= 'background-color:' . $icon_bg . '; padding: 5px; border-radius: 4px;';
-							}
-							if ( $icon_spacing ) {
-								$icon_style .= 'margin-right:' . $icon_spacing['size'] . $icon_spacing['unit'] . ';';
-							}
-
-							// Badge styles
-							$badge_style = '';
-							if ( $badge_bg ) {
-								$badge_style .= 'background-color:' . $badge_bg . ';';
-							}
-							if ( $badge_color ) {
-								$badge_style .= 'color:' . $badge_color . ';';
-							}
-							if ( $badge_padding && isset( $badge_padding['top'] ) ) {
-								$badge_style .= 'padding:' . $badge_padding['top'] . $badge_padding['unit'] . ' ' . $badge_padding['right'] . $badge_padding['unit'] . ' ' . $badge_padding['bottom'] . $badge_padding['unit'] . ' ' . $badge_padding['left'] . $badge_padding['unit'] . ';';
-							}
-							if ( $badge_radius ) {
-								$badge_style .= 'border-radius:' . $badge_radius['size'] . $badge_radius['unit'] . ';';
-							}
-
-							$migrated = isset( $item['__fa4_migrated']['nav_icon'] );
-							$is_new   = empty( $item['nav_icon_old'] );
-							?>
-							<li class="<?php echo esc_attr( implode( ' ', $item_classes ) ); ?>">
-								<?php if ( $is_disabled ) : ?>
-									<span class="orivo-navbar-blocks__link-wrapper">
-								<?php endif; ?>
-
-								<a <?php $this->print_render_attribute_string( 'link_item_' . $index ); ?>
-									class="orivo-navbar-blocks__link<?php echo esc_attr( $active_class ); ?>"
-									<?php echo $item_style ? ' style="' . esc_attr( $item_style ) . '"' : ''; ?>>
-
-									<?php if ( ! empty( $icon['value'] ) ) : ?>
-										<span class="orivo-navbar-blocks__icon" aria-hidden="true"<?php echo $icon_style ? ' style="' . esc_attr( $icon_style ) . '"' : ''; ?>>
-											<?php
-											if ( $is_new || $migrated ) {
-												Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
-											} else {
-												echo '<i class="' . esc_attr( $item['nav_icon_old'] ) . '" aria-hidden="true"></i>';
-											}
-											?>
-										</span>
-									<?php endif; ?>
-
-									<span class="orivo-navbar-blocks__text"><?php echo esc_html( $text ); ?></span>
-
-									<?php if ( $badge !== '' && $badge_position === 'before' ) : ?>
-										<span class="orivo-navbar-blocks__badge"<?php echo $badge_style ? ' style="' . esc_attr( $badge_style ) . '"' : ''; ?>>
-											<?php echo esc_html( $badge ); ?>
-										</span>
-									<?php endif; ?>
-								</a>
-
-								<?php if ( $badge !== '' && $badge_position === 'after' ) : ?>
-									<span class="orivo-navbar-blocks__badge"<?php echo $badge_style ? ' style="' . esc_attr( $badge_style ) . '"' : ''; ?>>
-										<?php echo esc_html( $badge ); ?>
-									</span>
-								<?php endif; ?>
-
-								<?php if ( $is_disabled ) : ?>
-									</span>
-								<?php endif; ?>
-							</li>
-						<?php endforeach; ?>
-					<?php endif; ?>
-				</ul>
-
+				<?php
+				if ( $has_menu ) {
+					wp_nav_menu( $args );
+				} else {
+					echo '<ul class="orivo-navbar-blocks__menu">
+						<li><a href="#" class="orivo-navbar-blocks__link">' . esc_html__( 'Select a menu first', 'ultra-elementor-addons' ) . '</a></li>
+					</ul>';
+				}
+				?>
 			</div>
 		</nav>
+
+		<style>
+			/* Underline width override */
+			#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__menu > li > a:hover::after {
+				<?php echo esc_attr( $width_css ); ?>
+			}
+		</style>
+
 		<?php
 	}
 }
