@@ -177,7 +177,31 @@ class Widgets_Manager {
 				'enqueue' => [ 'css', 'js' ],
 				'is_pro'  => false,
 				'class'   => 'UltraElementorAddons\Widgets\Info_Box',
-			]
+			],
+			'list'        => [
+				'title'   => __( 'List', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-bullet-list',
+				'demo'    => ultra_addons_get_addons_demo_link( 'list' ),
+				'enqueue' => [ 'css' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Lists',
+			],
+			'marquee'     => [
+				'title'   => __( 'Marquee', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-animation',
+				'demo'    => ultra_addons_get_addons_demo_link( 'marquee' ),
+				'enqueue' => [ 'css', 'js' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Marquee',
+			],
+			'navigation'  => [
+				'title'   => __( 'Navigation', 'ultra-elementor-addons' ),
+				'icon'    => 'eicon-menu-bar',
+				'demo'    => ultra_addons_get_addons_demo_link( 'navigation' ),
+				'enqueue' => [ 'css' ],
+				'is_pro'  => false,
+				'class'   => 'UltraElementorAddons\Widgets\Navbar',
+			],
 		];
 		uksort( $widgets, [ __CLASS__, 'ua_custom_sort' ] );
 		return $widgets;

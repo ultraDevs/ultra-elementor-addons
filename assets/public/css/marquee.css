@@ -1,0 +1,93 @@
+/* =====================
+   MARQUEE BASE STYLES
+   ===================== */
+.orivo-marquee-blocks {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.orivo-marquee-blocks__inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Pause on Hover */
+.orivo-marquee-blocks[data-pause="true"]:hover .orivo-marquee-blocks__inner {
+  animation-play-state: paused;
+}
+
+/* =====================
+   TEXT MARQUEE (LAYOUT 1)
+   ===================== */
+.orivo-marquee-blocks--layout-1 .orivo-marquee-blocks__item {
+  white-space: nowrap;
+}
+
+/* =====================
+   IMAGE MARQUEE (LAYOUT 2)
+   ===================== */
+.orivo-marquee-blocks--layout-2 .orivo-marquee-blocks__item {
+  display: flex;
+  align-items: center;
+}
+
+.orivo-marquee-blocks--layout-2 .orivo-marquee-blocks__item img {
+  display: block;
+  object-fit: cover;
+}
+
+/* =====================
+   VIDEO MARQUEE (LAYOUT 3)
+   ===================== */
+.orivo-marquee-blocks--layout-3 .orivo-marquee-blocks__item {
+  display: flex;
+  align-items: center;
+}
+
+.orivo-marquee-blocks--layout-3 .orivo-marquee-blocks__item video {
+  display: block;
+  object-fit: cover;
+}
+
+/* =====================
+   ANIMATIONS (Left to Right)
+   ===================== */
+.orivo-marquee-blocks[data-direction="left"] .orivo-marquee-blocks__inner {
+  animation-name: marquee-scroll-left;
+}
+
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* =====================
+   ANIMATIONS (Right to Left)
+   ===================== */
+.orivo-marquee-blocks[data-direction="right"] .orivo-marquee-blocks__inner {
+  animation-name: marquee-scroll-right;
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Animation duration will be set via inline style from widget settings */
+.orivo-marquee-blocks__inner {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
