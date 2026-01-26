@@ -247,37 +247,131 @@
 }
 
 /* ============ DROPDOWN INDICATORS ============ */
-/* Arrow indicator */
-.orivo-navbar-blocks.dropdown-indicator-arrow .orivo-navbar-blocks__menu > li.menu-item-has-children > a::after{
-  content:"";
-  position:static;
-  width:0;
-  height:0;
-  margin-left:6px;
-  border-left:4px solid transparent;
-  border-right:4px solid transparent;
-  border-top:4px solid currentColor;
-  background:none;
-  transition:transform .2s ease;
+/* Icon indicator */
+.orivo-navbar-blocks.dropdown-indicator-icon .orivo-navbar-blocks__menu > li.menu-item-has-children > a::after{
+  display: none;
 }
 
-.orivo-navbar-blocks.dropdown-indicator-arrow .orivo-navbar-blocks__menu > li.menu-item-has-children:hover > a::after{
-  transform:rotate(180deg);
+.orivo-navbar-blocks.dropdown-indicator-icon .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  margin-left: 6px;
+  line-height: 1;
+  transition: transform .2s ease, color .2s ease;
 }
 
-/* Plus indicator */
-.orivo-navbar-blocks.dropdown-indicator-plus .orivo-navbar-blocks__menu > li.menu-item-has-children > a::after{
-  content:"+";
-  position:static;
-  width:auto;
-  height:auto;
-  margin-left:6px;
+.orivo-navbar-blocks.dropdown-indicator-icon .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon i,
+.orivo-navbar-blocks.dropdown-indicator-icon .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon svg{
+  display: block;
+  width: 1em;
+  height: 1em;
+  max-width: 1em;
+  max-height: 1em;
+}
+
+/* ============ UNDERLINE ANIMATIONS ============ */
+/* None */
+.orivo-navbar-blocks.underline-animation-none .orivo-navbar-blocks__menu > li > a::after{
+  display:none;
+}
+
+/* Grow from Center */
+.orivo-navbar-blocks.underline-animation-grow-from-center .orivo-navbar-blocks__menu > li > a::after{
+  left:50%;
+  transform:translateX(-50%);
+  transition:width .25s ease, transform .25s ease;
+}
+
+/* Grow from Left */
+.orivo-navbar-blocks.underline-animation-grow-from-left .orivo-navbar-blocks__menu > li > a::after{
+  left:0;
+  transform:translateX(0);
+  transition:width .25s ease, transform .25s ease;
+}
+
+/* Grow from Right */
+.orivo-navbar-blocks.underline-animation-grow-from-right .orivo-navbar-blocks__menu > li > a::after{
+  left:auto;
+  right:0;
+  transform:translateX(0);
+  transition:width .25s ease, transform .25s ease;
+}
+
+/* Slide from Top */
+.orivo-navbar-blocks.underline-animation-slide-from-top .orivo-navbar-blocks__menu > li > a::after{
+  top:0;
+  bottom:auto;
+  height:100%;
+  width:100%;
+  left:0;
+  transform:translateY(-100%);
+  transition:transform .25s ease;
+}
+.orivo-navbar-blocks.underline-animation-slide-from-top .orivo-navbar-blocks__menu > li > a:hover::after{
+  transform:translateY(0);
+}
+
+/* Slide from Bottom */
+.orivo-navbar-blocks.underline-animation-slide-from-bottom .orivo-navbar-blocks__menu > li > a::after{
+  top:0;
+  bottom:auto;
+  height:100%;
+  width:100%;
+  left:0;
+  transform:translateY(100%);
+  transition:transform .25s ease;
+}
+.orivo-navbar-blocks.underline-animation-slide-from-bottom .orivo-navbar-blocks__menu > li > a:hover::after{
+  transform:translateY(0);
+}
+
+/* Fade In */
+.orivo-navbar-blocks.underline-animation-fade-in .orivo-navbar-blocks__menu > li > a::after{
+  opacity:0;
+  width:100%;
+  transition:opacity .25s ease;
+}
+.orivo-navbar-blocks.underline-animation-fade-in .orivo-navbar-blocks__menu > li > a:hover::after{
+  opacity:1;
+}
+
+/* Scale In */
+.orivo-navbar-blocks.underline-animation-scale-in .orivo-navbar-blocks__menu > li > a::after{
+  left:50%;
+  transform:translateX(-50%) scale(0);
+  transition:transform .25s ease;
+}
+.orivo-navbar-blocks.underline-animation-scale-in .orivo-navbar-blocks__menu > li > a:hover::after{
+  transform:translateX(-50%) scale(1);
+}
+
+/* Underline Position - Top */
+.orivo-navbar-blocks.underline-position-top .orivo-navbar-blocks__menu > li > a::after{
+  top:0;
+  bottom:auto;
+}
+
+/* Underline Position - Bottom (default) */
+.orivo-navbar-blocks.underline-position-bottom .orivo-navbar-blocks__menu > li > a::after{
+  bottom:0;
+  top:auto;
+}
+
+/* ============ MENU ICONS ============ */
+.orivo-navbar-blocks.orivo-nav-icons-yes .orivo-navbar-blocks__menu > li > a{
+  gap:0;
+}
+
+.orivo-navbar-blocks.orivo-nav-icons-yes .orivo-navbar-blocks__menu > li > a .orivo-menu-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:16px;
+  height:16px;
   font-size:16px;
-  line-height:1;
-  background:none;
-  transition:transform .2s ease;
-}
-
-.orivo-navbar-blocks.dropdown-indicator-plus .orivo-navbar-blocks__menu > li.menu-item-has-children:hover > a::after{
-  transform:rotate(45deg);
+  margin-right:8px;
 }

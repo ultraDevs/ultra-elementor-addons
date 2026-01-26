@@ -7,6 +7,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Icons_Manager;
 
 defined( 'ABSPATH' ) || die();
 
@@ -145,11 +146,25 @@ class Navbar extends Widgets_Base {
 			[
 				'label'   => __( 'Dropdown Indicator', 'ultra-elementor-addons' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'arrow',
+				'default' => 'icon',
 				'options' => [
-					'none'  => __( 'None', 'ultra-elementor-addons' ),
-					'arrow' => __( 'Arrow', 'ultra-elementor-addons' ),
-					'plus'  => __( 'Plus', 'ultra-elementor-addons' ),
+					'none' => __( 'None', 'ultra-elementor-addons' ),
+					'icon' => __( 'Icon', 'ultra-elementor-addons' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'dropdown_icon',
+			[
+				'label'     => __( 'Dropdown Icon', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => [
+					'value'   => 'fas fa-chevron-down',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+					'dropdown_indicator' => 'icon',
 				],
 			]
 		);
@@ -316,12 +331,12 @@ class Navbar extends Widgets_Base {
 		$this->end_controls_section();
 
 		/* ========================
-		 * Menu Items Style Section
+		 * Menu Style Section
 		 * ======================== */
 		$this->start_controls_section(
-			'section_menu_items_style',
+			'section_menu_style',
 			[
-				'label' => __( 'Menu Items', 'ultra-elementor-addons' ),
+				'label' => __( 'Menu', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -441,6 +456,133 @@ class Navbar extends Widgets_Base {
 				'type'    => Controls_Manager::SLIDER,
 				'range'   => [ '%' => [ 'min' => 10, 'max' => 100 ] ],
 				'default' => [ 'unit' => '%', 'size' => 80 ],
+			]
+		);
+
+		$this->add_control(
+			'underline_animation',
+			[
+				'label'     => __( 'Underline Animation', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'grow-from-center',
+				'options'   => [
+					'none'              => __( 'None', 'ultra-elementor-addons' ),
+					'grow-from-center'  => __( 'Grow from Center', 'ultra-elementor-addons' ),
+					'grow-from-left'    => __( 'Grow from Left', 'ultra-elementor-addons' ),
+					'grow-from-right'   => __( 'Grow from Right', 'ultra-elementor-addons' ),
+					'slide-from-top'    => __( 'Slide from Top', 'ultra-elementor-addons' ),
+					'slide-from-bottom' => __( 'Slide from Bottom', 'ultra-elementor-addons' ),
+					'fade-in'           => __( 'Fade In', 'ultra-elementor-addons' ),
+					'scale-in'          => __( 'Scale In', 'ultra-elementor-addons' ),
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'underline_position',
+			[
+				'label'     => __( 'Underline Position', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'bottom',
+				'options'   => [
+					'top'    => __( 'Top', 'ultra-elementor-addons' ),
+					'bottom' => __( 'Bottom', 'ultra-elementor-addons' ),
+				],
+				'condition' => [
+					'underline_animation!' => [ 'slide-from-top', 'slide-from-bottom' ],
+				],
+			]
+		);
+
+		$this->add_control(
+			'menu_item_icon_heading',
+			[
+				'label'     => __( 'Menu Icons', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'menu_item_enable_icon',
+			[
+				'label'        => __( 'Enable Menu Icons', 'ultra-elementor-addons' ),
+				'description'  => __( 'Show icons before menu items. Icons are set in WordPress menu settings.', 'ultra-elementor-addons' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'no',
+				'return_value' => 'yes',
+				'prefix_class' => 'orivo-nav-icons-',
+			]
+		);
+
+		$this->add_control(
+			'menu_item_icon_size',
+			[
+				'label'      => __( 'Icon Size', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 10, 'max' => 50 ],
+					'em' => [ 'min' => 1, 'max' => 5 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 16 ],
+				'condition'  => [
+					'menu_item_enable_icon' => 'yes',
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a .orivo-menu-icon' => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'menu_item_icon_gap',
+			[
+				'label'      => __( 'Icon Gap', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 0, 'max' => 30 ],
+					'em' => [ 'min' => 0, 'max' => 3 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 8 ],
+				'condition'  => [
+					'menu_item_enable_icon' => 'yes',
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a .orivo-menu-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'menu_item_icon_color',
+			[
+				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'condition' => [
+					'menu_item_enable_icon' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a .orivo-menu-icon' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'menu_item_icon_hover_color',
+			[
+				'label'     => __( 'Icon Hover Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'condition' => [
+					'menu_item_enable_icon' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a:hover .orivo-menu-icon' => 'color: {{VALUE}};',
+				],
 			]
 		);
 
@@ -595,10 +737,124 @@ class Navbar extends Widgets_Base {
 		$this->end_controls_section();
 
 		/* ========================
+		 * Dropdown Icon Style Section
+		 * ======================== */
+		$this->start_controls_section(
+			'section_dropdown_icon_style',
+			[
+				'label'     => __( 'Dropdown Icon', 'ultra-elementor-addons' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'dropdown_indicator' => 'icon',
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_dropdown_icon_style' );
+
+		$this->start_controls_tab(
+			'tab_dropdown_icon_normal',
+			[
+				'label' => __( 'Normal', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_responsive_control(
+			'dropdown_icon_size',
+			[
+				'label'      => __( 'Size', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 8, 'max' => 32 ],
+					'em' => [ 'min' => 0.5, 'max' => 2 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 14 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important; font-size: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dropdown_icon_color',
+			[
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dropdown_icon_spacing',
+			[
+				'label'      => __( 'Spacing', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range'      => [
+					'px' => [ 'min' => 0, 'max' => 30 ],
+					'em' => [ 'min' => 0, 'max' => 2 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 6 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_dropdown_icon_hover',
+			[
+				'label' => __( 'Hover', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'dropdown_icon_hover_color',
+			[
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children:hover > a .orivo-dropdown-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children:hover > a .orivo-dropdown-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dropdown_icon_hover_rotate',
+			[
+				'label'      => __( 'Rotation', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range'      => [
+					'deg' => [ 'min' => 0, 'max' => 360, 'step' => 15 ],
+				],
+				'default'    => [ 'unit' => 'deg', 'size' => 180 ],
+				'selectors'  => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children:hover > a .orivo-dropdown-icon' => 'transform: rotate({{SIZE}}{{UNIT}});',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
+		/* ========================
 		 * Mobile Menu Style Section
 		 * ======================== */
 		$this->start_controls_section(
-			'section_mobile_style',
+			'section_mobile_menu_style',
 			[
 				'label' => __( 'Mobile Menu', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
@@ -712,16 +968,20 @@ class Navbar extends Widgets_Base {
 	protected function render() {
 		$s = $this->get_settings_for_display();
 
-		$layout              = $s['layout'] ?? 'layout-3';
-		$source              = $s['source_type'] ?? 'menu';
-		$menu_id             = $s['nav_menu'] ?? '';
-		$location            = $s['nav_location'] ?? '';
-		$breakpoint          = (int) ( $s['mobile_breakpoint'] ?? 768 );
-		$close_outside       = ( $s['close_on_outside'] ?? 'yes' );
-		$dropdown_indicator  = $s['dropdown_indicator'] ?? 'arrow';
-		$mobile_position     = $s['mobile_menu_position'] ?? 'top';
-		$mobile_full_width   = ( $s['mobile_full_width'] ?? 'no' ) === 'yes';
-		$dropdown_animation  = $s['dropdown_animation'] ?? 'fade';
+		$layout                = $s['layout'] ?? 'layout-3';
+		$source                = $s['source_type'] ?? 'menu';
+		$menu_id               = $s['nav_menu'] ?? '';
+		$location              = $s['nav_location'] ?? '';
+		$breakpoint            = (int) ( $s['mobile_breakpoint'] ?? 768 );
+		$close_outside         = ( $s['close_on_outside'] ?? 'yes' );
+		$dropdown_indicator    = $s['dropdown_indicator'] ?? 'arrow';
+		$mobile_position       = $s['mobile_menu_position'] ?? 'top';
+		$mobile_full_width     = ( $s['mobile_full_width'] ?? 'no' ) === 'yes';
+		$dropdown_animation    = $s['dropdown_animation'] ?? 'fade';
+		$underline_animation   = $s['underline_animation'] ?? 'grow-from-center';
+		$underline_position    = $s['underline_position'] ?? 'bottom';
+		$enable_menu_icons     = ( $s['menu_item_enable_icon'] ?? 'no' ) === 'yes';
+		$dropdown_icon         = $s['dropdown_icon'] ?? '';
 
 		// Handle underline width - slider returns array with 'size' and 'unit' keys
 		$underline_width_setting = $s['underline_width'] ?? [];
@@ -739,8 +999,13 @@ class Navbar extends Widgets_Base {
 		$nav_classes[] = 'dropdown-animation-' . $dropdown_animation;
 		$nav_classes[] = 'dropdown-indicator-' . $dropdown_indicator;
 		$nav_classes[] = 'mobile-position-' . $mobile_position;
+		$nav_classes[] = 'underline-animation-' . $underline_animation;
+		$nav_classes[] = 'underline-position-' . $underline_position;
 		if ( $mobile_full_width ) {
 			$nav_classes[] = 'mobile-full-width';
+		}
+		if ( $enable_menu_icons ) {
+			$nav_classes[] = 'orivo-nav-icons-yes';
 		}
 		$nav_class_string = implode( ' ', $nav_classes );
 
@@ -750,6 +1015,10 @@ class Navbar extends Widgets_Base {
 			'fallback_cb'    => false,
 			'menu_class'     => 'orivo-navbar-blocks__menu',
 			'depth'          => 3,
+			'echo'           => true,
+			'walker'         => new Orivo_Nav_Menu_Icon_Walker(),
+			'dropdown_indicator' => $dropdown_indicator,
+			'dropdown_icon'     => $dropdown_icon,
 		];
 
 		if ( $source === 'location' && ! empty( $location ) ) {
@@ -759,6 +1028,10 @@ class Navbar extends Widgets_Base {
 		}
 
 		$has_menu = ( ! empty( $args['menu'] ) || ! empty( $args['theme_location'] ) );
+
+		// Store widget instance for walker (for menu icons)
+		global $orivo_nav_widget_instance;
+		$orivo_nav_widget_instance = $this;
 
 		// Dynamic CSS for underline width
 		$width_css = '';
@@ -803,5 +1076,106 @@ class Navbar extends Widgets_Base {
 		</style>
 
 		<?php
+	}
+}
+
+/**
+ * Custom Nav Menu Walker for Icons
+ */
+class Orivo_Nav_Menu_Icon_Walker extends \Walker_Nav_Menu {
+
+	/**
+	 * Start the element output.
+	 *
+	 * @param string  $output Used to append additional content (passed by reference).
+	 * @param WP_Post $item   Menu item data object.
+	 * @param int     $depth  Depth of menu item. Used for padding.
+	 * @param array   $args   An array of wp_nav_menu() arguments.
+	 * @param int     $id     Current item ID.
+	 */
+	public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+			$t = '';
+			$n = '';
+		} else {
+			$t = "\t";
+			$n = "\n";
+		}
+		$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
+
+		$classes   = empty( $item->classes ) ? [] : (array) $item->classes;
+		$classes[] = 'menu-item-' . $item->ID;
+
+		$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
+
+		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
+		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+		$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
+		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+
+		$output .= $indent . '<li' . $id . $class_names . '>';
+
+		$atts           = array();
+		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
+		$atts['target'] = ! empty( $item->target ) ? $item->target : '';
+		if ( '_blank' === $item->target && empty( $item->xfn ) ) {
+			$atts['rel'] = 'noopener noreferrer';
+		} else {
+			$atts['rel'] = $item->xfn;
+		}
+		$atts['href']         = ! empty( $item->url ) ? $item->url : '';
+		$atts['aria-current'] = $item->current ? 'page' : '';
+
+		// Add icon before title if exists
+		$icon_output = '';
+		$icon_class = get_post_meta( $item->ID, '_menu_item_icon', true );
+
+		// Check description for icon format: icon:fas fa-home
+		$description = $item->description ?? '';
+		if ( empty( $icon_class ) && ! empty( $description ) && strpos( $description, 'icon:' ) === 0 ) {
+			$icon_class = str_replace( 'icon:', '', $description );
+		}
+
+		if ( ! empty( $icon_class ) ) {
+			$icon_output = '<span class="orivo-menu-icon ' . esc_attr( $icon_class ) . '"></span>';
+		}
+
+		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
+
+		$attributes = '';
+		foreach ( $atts as $attr => $value ) {
+			if ( is_scalar( $value ) && '' !== $value && false !== $value ) {
+				$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+				$attributes .= ' ' . $attr . '="' . $value . '"';
+			}
+		}
+
+		$item_output = isset( $args->before ) ? $args->before : '';
+		$item_output .= '<a' . $attributes . '>';
+		$item_output .= $icon_output . ( isset( $args->link_before ) ? $args->link_before : '' );
+		/** This filter is documented in wp-includes/post-template.php */
+		$item_output .= apply_filters( 'the_title', $item->title, $item->ID );
+
+		// Add dropdown icon for items with children
+		if ( in_array( 'menu-item-has-children', $item->classes ) && $depth === 0 ) {
+			$dropdown_indicator = isset( $args->dropdown_indicator ) ? $args->dropdown_indicator : 'icon';
+			$dropdown_icon = isset( $args->dropdown_icon ) ? $args->dropdown_icon : '';
+
+			if ( 'icon' === $dropdown_indicator && ! empty( $dropdown_icon ) && isset( $dropdown_icon['value'] ) && ! empty( $dropdown_icon['value'] ) ) {
+				ob_start();
+				\Elementor\Icons_Manager::render_icon( $dropdown_icon, [ 'aria-hidden' => 'true' ] );
+				$icon_html = ob_get_clean();
+				if ( ! empty( $icon_html ) ) {
+					$item_output .= '<span class="orivo-dropdown-icon">' . $icon_html . '</span>';
+				}
+			}
+		}
+
+		$item_output .= ( isset( $args->link_after ) ? $args->link_after : '' );
+		$item_output .= '</a>';
+		$item_output .= ( isset( $args->after ) ? $args->after : '' );
+
+		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
 }

@@ -96,7 +96,7 @@ class Lists extends Widgets_Base {
 				'default' => 'icon-left',
 				'options' => [
 					'icon-left'       => __( 'Icon Left', 'ultra-elementor-addons' ),
-					'icon-top-center' => __( 'Icon Top Center', 'ultra-elementor-addons' ),
+					'icon-top-center' => __( 'Icon Top', 'ultra-elementor-addons' ),
 				],
 			]
 		);
@@ -168,30 +168,6 @@ class Lists extends Widgets_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .orivo-blocks-list' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			self::W_NAME . 'container_padding',
-			[
-				'label'      => __( 'Padding', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-blocks-list' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			self::W_NAME . 'container_margin',
-			[
-				'label'      => __( 'Margin', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-blocks-list' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -360,7 +336,7 @@ class Lists extends Widgets_Base {
 			]
 		);
 
-		// Content Position for Icon Top Center layout (horizontal alignment of items)
+		// Content Position for Icon Top layout (horizontal alignment of items)
 		$this->add_responsive_control(
 			self::W_NAME . 'content_position_horizontal',
 			[

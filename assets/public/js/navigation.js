@@ -10,6 +10,8 @@
     const closeOutside = (nav.dataset.closeOutside || "yes") === "yes";
     const bp = parseInt(nav.dataset.breakpoint || "768", 10);
 
+    // Dropdown icons are handled by PHP walker - no JS needed
+
     function isMobile() {
       return window.innerWidth <= bp;
     }
