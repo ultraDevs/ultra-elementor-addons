@@ -341,47 +341,24 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->start_controls_tabs( 'tabs_menu_style' );
+
+		// Normal Tab
+		$this->start_controls_tab(
+			'tab_menu_normal',
 			[
-				'name'     => 'menu_typography',
-				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__menu > li > a',
+				'label' => __( 'Normal', 'ultra-elementor-addons' ),
 			]
 		);
 
 		$this->add_control(
 			'menu_color',
 			[
-				'label'     => __( 'Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Menu Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#333333',
 				'selectors' => [
 					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'color: {{VALUE}} !important;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'hover_color',
-			[
-				'label'     => __( 'Hover Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#667eea',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a:hover' => 'color: {{VALUE}} !important;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'active_color',
-			[
-				'label'     => __( 'Active Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#667eea',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu .current-menu-item > a,
-					{{WRAPPER}} .orivo-navbar-blocks__menu .current-menu-ancestor > a' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -420,6 +397,15 @@ class Navbar extends Widgets_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+			]
+		);
+
+		$this->add_control(
+			'underline_heading',
+			[
+				'label'     => __( 'Underline', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
@@ -475,7 +461,6 @@ class Navbar extends Widgets_Base {
 					'fade-in'           => __( 'Fade In', 'ultra-elementor-addons' ),
 					'scale-in'          => __( 'Scale In', 'ultra-elementor-addons' ),
 				],
-				'separator' => 'before',
 			]
 		);
 
@@ -556,35 +541,54 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
-		$this->add_control(
-			'menu_item_icon_color',
+		$this->end_controls_tab();
+
+		// Hover Tab
+		$this->start_controls_tab(
+			'tab_menu_hover',
 			[
-				'label'     => __( 'Icon Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'condition' => [
-					'menu_item_enable_icon' => 'yes',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a .orivo-menu-icon' => 'color: {{VALUE}};',
-				],
+				'label' => __( 'Hover', 'ultra-elementor-addons' ),
 			]
 		);
 
 		$this->add_control(
-			'menu_item_icon_hover_color',
+			'hover_color',
 			[
-				'label'     => __( 'Icon Hover Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Menu Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'condition' => [
-					'menu_item_enable_icon' => 'yes',
-				],
+				'default'   => '#667eea',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a:hover .orivo-menu-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a:hover' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
+
+		$this->end_controls_tab();
+
+		// Active Tab
+		$this->start_controls_tab(
+			'tab_menu_active',
+			[
+				'label' => __( 'Active', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'active_color',
+			[
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#667eea',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu .current-menu-item > a,
+					{{WRAPPER}} .orivo-navbar-blocks__menu .current-menu-ancestor > a' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 
@@ -596,6 +600,16 @@ class Navbar extends Widgets_Base {
 			[
 				'label' => __( 'Submenu', 'ultra-elementor-addons' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_submenu_style' );
+
+		// Normal Tab
+		$this->start_controls_tab(
+			'tab_submenu_normal',
+			[
+				'label' => __( 'Normal', 'ultra-elementor-addons' ),
 			]
 		);
 
@@ -611,46 +625,14 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'submenu_typography',
-				'selector' => '{{WRAPPER}} .orivo-navbar-blocks__menu ul li a',
-			]
-		);
-
 		$this->add_control(
 			'submenu_item_color',
 			[
-				'label'     => __( 'Item Color', 'ultra-elementor-addons' ),
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#333333',
 				'selectors' => [
 					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'submenu_item_hover_color',
-			[
-				'label'     => __( 'Hover Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#667eea',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'submenu_item_hover_bg',
-			[
-				'label'     => __( 'Hover Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => 'rgba(102,126,234,.10)',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -734,6 +716,44 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+
+		// Hover Tab
+		$this->start_controls_tab(
+			'tab_submenu_hover',
+			[
+				'label' => __( 'Hover', 'ultra-elementor-addons' ),
+			]
+		);
+
+		$this->add_control(
+			'submenu_item_hover_color',
+			[
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#667eea',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'submenu_item_hover_bg',
+			[
+				'label'     => __( 'Background', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => 'rgba(102,126,234,.10)',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
 		$this->end_controls_section();
 
 		/* ========================
@@ -759,7 +779,20 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
-		$this->add_responsive_control(
+		$this->add_control(
+			'dropdown_icon_color',
+			[
+				'label'     => __( 'Color', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'dropdown_icon_size',
 			[
 				'label'      => __( 'Size', 'ultra-elementor-addons' ),
@@ -772,19 +805,6 @@ class Navbar extends Widgets_Base {
 				'default'    => [ 'unit' => 'px', 'size' => 14 ],
 				'selectors'  => [
 					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important; font-size: {{SIZE}}{{UNIT}} !important;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'dropdown_icon_color',
-			[
-				'label'     => __( 'Color', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li.menu-item-has-children > a .orivo-dropdown-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}};',
 				],
 			]
 		);
