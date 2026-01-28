@@ -855,18 +855,6 @@ class Navbar extends Widgets_Base {
 		);
 
 		$this->add_control(
-			'mobile_menu_bg',
-			[
-				'label'     => __( 'Mobile Menu Background (on Toggle Open)', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#ffffff',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__menu' => 'background: {{VALUE}} !important;',
-				],
-			]
-		);
-
-		$this->add_control(
 			'container_bg_on_toggle_open',
 			[
 				'label'     => __( 'Container Background on Menu Open', 'ultra-elementor-addons' ),
