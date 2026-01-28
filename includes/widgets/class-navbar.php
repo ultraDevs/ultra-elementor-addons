@@ -220,6 +220,17 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
+		$this->add_control(
+			'toggle_menu_top_position_content',
+			[
+				'label'      => __( 'Toggle Menu Position', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [ 'px' => [ 'min' => 0, 'max' => 300 ] ],
+				'default'    => [ 'unit' => 'px', 'size' => 80 ],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/* ========================
@@ -1042,9 +1053,18 @@ class Navbar extends Widgets_Base {
 			$underline_width = 80;
 		}
 
-		// Mobile menu top position
-		$mobile_menu_top_position_setting = $s['mobile_menu_top_position'] ?? [];
-		$mobile_menu_top_position = isset( $mobile_menu_top_position_setting['size'] ) ? (int) $mobile_menu_top_position_setting['size'] : 80;
+		// Mobile menu top position - check Content section first, then Style section
+		$toggle_menu_top_position_content = $s['toggle_menu_top_position_content'] ?? [];
+		$mobile_menu_top_position_style = $s['mobile_menu_top_position'] ?? [];
+
+		// Use Content section value if set, otherwise use Style section value
+		if ( isset( $toggle_menu_top_position_content['size'] ) && $toggle_menu_top_position_content['size'] !== '' ) {
+			$mobile_menu_top_position = (int) $toggle_menu_top_position_content['size'];
+		} elseif ( isset( $mobile_menu_top_position_style['size'] ) ) {
+			$mobile_menu_top_position = (int) $mobile_menu_top_position_style['size'];
+		} else {
+			$mobile_menu_top_position = 80;
+		}
 
 		// Mobile submenu padding - for submenu container (not items)
 		$mobile_submenu_padding = $s['mobile_submenu_padding'] ?? [];
