@@ -193,6 +193,19 @@ class Navbar extends Widgets_Base {
 		);
 
 		$this->add_control(
+			'mobile_submenu_behavior',
+			[
+				'label'     => __( 'Mobile Submenu Behavior', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'always-open',
+				'options'   => [
+					'always-open' => __( 'Always Open', 'ultra-elementor-addons' ),
+					'collapsed'   => __( 'Collapsed (Hidden)', 'ultra-elementor-addons' ),
+				],
+			]
+		);
+
+		$this->add_control(
 			'dropdown_animation',
 			[
 				'label'   => __( 'Dropdown Animation', 'ultra-elementor-addons' ),
@@ -298,20 +311,6 @@ class Navbar extends Widgets_Base {
 		);
 
 		$this->add_control(
-			'container_height',
-			[
-				'label'      => __( 'Container Height', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [ 'px' => [ 'min' => 40, 'max' => 150 ] ],
-				'default'    => [ 'unit' => 'px', 'size' => 70 ],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__container' => 'min-height: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
 			'container_max_width',
 			[
 				'label'      => __( 'Container Max Width', 'ultra-elementor-addons' ),
@@ -363,6 +362,16 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
+		$this->add_control(
+			'menu_background',
+			[
+				'label'       => __( 'Menu Background (Desktop)', 'ultra-elementor-addons' ),
+				'description' => __( 'Background color for menu on desktop only. Mobile uses "Mobile Menu Background" option below.', 'ultra-elementor-addons' ),
+				'type'        => Controls_Manager::COLOR,
+				'default'     => 'transparent',
+			]
+		);
+
 		$this->add_responsive_control(
 			'menu_gap',
 			[
@@ -380,7 +389,7 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
-		$this->add_responsive_control(
+		$this->add_control(
 			'menu_item_padding',
 			[
 				'label'      => __( 'Item Padding', 'ultra-elementor-addons' ),
@@ -395,7 +404,7 @@ class Navbar extends Widgets_Base {
 					'isLinked' => false,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -476,67 +485,6 @@ class Navbar extends Widgets_Base {
 				],
 				'condition' => [
 					'underline_animation!' => [ 'slide-from-top', 'slide-from-bottom' ],
-				],
-			]
-		);
-
-		$this->add_control(
-			'menu_item_icon_heading',
-			[
-				'label'     => __( 'Menu Icons', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'menu_item_enable_icon',
-			[
-				'label'        => __( 'Enable Menu Icons', 'ultra-elementor-addons' ),
-				'description'  => __( 'Show icons before menu items. Icons are set in WordPress menu settings.', 'ultra-elementor-addons' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'default'      => 'no',
-				'return_value' => 'yes',
-				'prefix_class' => 'orivo-nav-icons-',
-			]
-		);
-
-		$this->add_control(
-			'menu_item_icon_size',
-			[
-				'label'      => __( 'Icon Size', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [ 'min' => 10, 'max' => 50 ],
-					'em' => [ 'min' => 1, 'max' => 5 ],
-				],
-				'default'    => [ 'unit' => 'px', 'size' => 16 ],
-				'condition'  => [
-					'menu_item_enable_icon' => 'yes',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a .orivo-menu-icon' => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'menu_item_icon_gap',
-			[
-				'label'      => __( 'Icon Gap', 'ultra-elementor-addons' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [ 'min' => 0, 'max' => 30 ],
-					'em' => [ 'min' => 0, 'max' => 3 ],
-				],
-				'default'    => [ 'unit' => 'px', 'size' => 8 ],
-				'condition'  => [
-					'menu_item_enable_icon' => 'yes',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu > li > a .orivo-menu-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -652,7 +600,7 @@ class Navbar extends Widgets_Base {
 					'isLinked' => false,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -669,7 +617,7 @@ class Navbar extends Widgets_Base {
 				],
 				'default'    => [ 'unit' => 'px', 'size' => 12 ],
 				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'border-radius: {{SIZE}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -711,7 +659,7 @@ class Navbar extends Widgets_Base {
 					'isLinked' => false,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -734,18 +682,6 @@ class Navbar extends Widgets_Base {
 				'default'   => '#667eea',
 				'selectors' => [
 					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'submenu_item_hover_bg',
-			[
-				'label'     => __( 'Background', 'ultra-elementor-addons' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => 'rgba(102,126,234,.10)',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a:hover' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -899,9 +835,6 @@ class Navbar extends Widgets_Base {
 				'label'     => __( 'Mobile Menu Background', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
-				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu' => 'background: {{VALUE}};',
-				],
 			]
 		);
 
@@ -982,6 +915,74 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
+		$this->add_control(
+			'mobile_menu_top_position',
+			[
+				'label'      => __( 'Menu Top Position', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [ 'px' => [ 'min' => 0, 'max' => 300 ] ],
+				'default'    => [ 'unit' => 'px', 'size' => 80 ],
+			]
+		);
+
+		$this->add_control(
+			'mobile_submenu_spacing_heading',
+			[
+				'label'     => __( 'Mobile Submenu Spacing', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'mobile_submenu_padding',
+			[
+				'label'      => __( 'Submenu Padding', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => '8',
+					'right'    => '0',
+					'bottom'   => '8',
+					'left'     => '0',
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+			]
+		);
+
+		$this->add_control(
+			'mobile_submenu_margin',
+			[
+				'label'      => __( 'Submenu Margin', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'default'    => [
+					'top'      => '6',
+					'right'    => '0',
+					'bottom'   => '0',
+					'left'     => '0',
+					'unit'     => 'px',
+					'isLinked' => false,
+				],
+			]
+		);
+
+		$this->add_control(
+			'mobile_submenu_item_radius',
+			[
+				'label'      => __( 'Submenu Item Border Radius', 'ultra-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [ 'min' => 0, 'max' => 50 ],
+					'%'  => [ 'min' => 0, 'max' => 50 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 8 ],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -997,6 +998,7 @@ class Navbar extends Widgets_Base {
 		$dropdown_indicator    = $s['dropdown_indicator'] ?? 'arrow';
 		$mobile_position       = $s['mobile_menu_position'] ?? 'top';
 		$mobile_full_width     = ( $s['mobile_full_width'] ?? 'no' ) === 'yes';
+		$mobile_submenu_behavior = $s['mobile_submenu_behavior'] ?? 'always-open';
 		$dropdown_animation    = $s['dropdown_animation'] ?? 'fade';
 		$underline_animation   = $s['underline_animation'] ?? 'grow-from-center';
 		$underline_position    = $s['underline_position'] ?? 'bottom';
@@ -1011,6 +1013,37 @@ class Navbar extends Widgets_Base {
 			$underline_width = 80;
 		}
 
+		// Mobile menu top position
+		$mobile_menu_top_position_setting = $s['mobile_menu_top_position'] ?? [];
+		$mobile_menu_top_position = isset( $mobile_menu_top_position_setting['size'] ) ? (int) $mobile_menu_top_position_setting['size'] : 80;
+
+		// Mobile submenu padding - for submenu container (not items)
+		$mobile_submenu_padding = $s['mobile_submenu_padding'] ?? [];
+		$pp_unit = isset( $mobile_submenu_padding['unit'] ) ? $mobile_submenu_padding['unit'] : 'px';
+		$mobile_submenu_padding_top = isset( $mobile_submenu_padding['top'] ) ? $mobile_submenu_padding['top'] . $pp_unit : '8px';
+		$mobile_submenu_padding_right = isset( $mobile_submenu_padding['right'] ) ? $mobile_submenu_padding['right'] . $pp_unit : '0';
+		$mobile_submenu_padding_bottom = isset( $mobile_submenu_padding['bottom'] ) ? $mobile_submenu_padding['bottom'] . $pp_unit : '8px';
+		$mobile_submenu_padding_left = isset( $mobile_submenu_padding['left'] ) ? $mobile_submenu_padding['left'] . $pp_unit : '0';
+
+		// Mobile submenu margin - for submenu container (not items)
+		$mobile_submenu_margin = $s['mobile_submenu_margin'] ?? [];
+		$pm_unit = isset( $mobile_submenu_margin['unit'] ) ? $mobile_submenu_margin['unit'] : 'px';
+		$mobile_submenu_margin_top = isset( $mobile_submenu_margin['top'] ) ? $mobile_submenu_margin['top'] . $pm_unit : '6px';
+		$mobile_submenu_margin_right = isset( $mobile_submenu_margin['right'] ) ? $mobile_submenu_margin['right'] . $pm_unit : '0';
+		$mobile_submenu_margin_bottom = isset( $mobile_submenu_margin['bottom'] ) ? $mobile_submenu_margin['bottom'] . $pm_unit : '0';
+		$mobile_submenu_margin_left = isset( $mobile_submenu_margin['left'] ) ? $mobile_submenu_margin['left'] . $pm_unit : '0';
+
+		// Mobile submenu item border radius - for mobile submenu items
+		$mobile_submenu_item_radius_setting = $s['mobile_submenu_item_radius'] ?? [];
+		$radius_unit = isset( $mobile_submenu_item_radius_setting['unit'] ) ? $mobile_submenu_item_radius_setting['unit'] : 'px';
+		$mobile_submenu_item_radius = isset( $mobile_submenu_item_radius_setting['size'] ) ? $mobile_submenu_item_radius_setting['size'] . $radius_unit : '8px';
+
+		// Mobile menu background
+		$mobile_menu_bg = $s['mobile_menu_bg'] ?? '#ffffff';
+
+		// Desktop menu background (separate from mobile)
+		$menu_background = $s['menu_background'] ?? 'transparent';
+
 		$wrap_id   = 'orivo-nav-' . $this->get_id();
 		$toggle_id = 'orivo-toggle-' . $this->get_id();
 
@@ -1019,6 +1052,7 @@ class Navbar extends Widgets_Base {
 		$nav_classes[] = 'dropdown-animation-' . $dropdown_animation;
 		$nav_classes[] = 'dropdown-indicator-' . $dropdown_indicator;
 		$nav_classes[] = 'mobile-position-' . $mobile_position;
+		$nav_classes[] = 'mobile-submenu-' . $mobile_submenu_behavior;
 		$nav_classes[] = 'underline-animation-' . $underline_animation;
 		$nav_classes[] = 'underline-position-' . $underline_position;
 		if ( $mobile_full_width ) {
@@ -1092,6 +1126,122 @@ class Navbar extends Widgets_Base {
 			/* Underline width override */
 			#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__menu > li > a:hover::after {
 				<?php echo esc_attr( $width_css ); ?>
+			}
+
+			/* Desktop menu background - always visible on desktop */
+			@media (min-width: <?php echo (int) $breakpoint + 1; ?>px) {
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__menu {
+					background: <?php echo esc_attr( $menu_background ); ?> !important;
+				}
+			}
+
+			/* Mobile breakpoint - dynamic based on user setting */
+			@media (max-width: <?php echo (int) $breakpoint; ?>px) {
+				/* Container */
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__container {
+					justify-content: flex-start;
+				}
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__toggle-btn {
+					display: block;
+				}
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__menu {
+					position: fixed;
+					top: <?php echo (int) $mobile_menu_top_position; ?>px;
+					left: 20px;
+					right: 20px;
+					width: calc(100% - 40px);
+					flex-direction: column;
+					row-gap: 16px;
+					background: transparent !important;
+					-webkit-backdrop-filter: blur(20px);
+					backdrop-filter: blur(20px);
+					box-shadow: 0 8px 32px rgba(0,0,0,.20);
+					border-radius: 16px;
+					opacity: 0;
+					visibility: hidden;
+					transform: translateY(-20px);
+					transition: all .3s ease;
+					z-index: 10001;
+				}
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__menu {
+					opacity: 1 !important;
+					visibility: visible !important;
+					transform: translateY(0) !important;
+					background: <?php echo esc_attr( $mobile_menu_bg ); ?> !important;
+					-webkit-backdrop-filter: none !important;
+					backdrop-filter: none !important;
+				}
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__menu > li > a {
+					display: block;
+					width: 100%;
+					font-size: 18px;
+					border-radius: 12px;
+					text-align: center;
+				}
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__menu > li > a::after {
+					display: none !important;
+				}
+
+				/* Mobile Submenu - Always Open (default) */
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-always-open .orivo-navbar-blocks__menu ul {
+					position: static;
+					opacity: 1;
+					visibility: visible;
+					transform: none;
+					box-shadow: 0 2px 8px rgba(0,0,0,.10);
+					padding: <?php echo esc_attr( $mobile_submenu_padding_top ); ?> <?php echo esc_attr( $mobile_submenu_padding_right ); ?> <?php echo esc_attr( $mobile_submenu_padding_bottom ); ?> <?php echo esc_attr( $mobile_submenu_padding_left ); ?>;
+					margin: <?php echo esc_attr( $mobile_submenu_margin_top ); ?> <?php echo esc_attr( $mobile_submenu_margin_right ); ?> <?php echo esc_attr( $mobile_submenu_margin_bottom ); ?> <?php echo esc_attr( $mobile_submenu_margin_left ); ?>;
+					background: rgba(0,0,0,.03);
+				}
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-always-open .orivo-navbar-blocks__menu ul li a {
+					font-size: 16px;
+					border-radius: <?php echo esc_attr( $mobile_submenu_item_radius ); ?> !important;
+				}
+
+				/* Mobile Submenu - Collapsed (Hidden by default) */
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-collapsed .orivo-navbar-blocks__menu ul {
+					position: static;
+					opacity: 0;
+					visibility: hidden;
+					transform: translateY(-10px);
+					box-shadow: 0 2px 8px rgba(0,0,0,.10);
+					max-height: 0;
+					overflow: hidden;
+					margin: 0;
+					padding: 0;
+					transition: all .3s ease;
+					background: rgba(0,0,0,.03);
+				}
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-collapsed .orivo-navbar-blocks__menu li:hover > ul,
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-collapsed .orivo-navbar-blocks__menu li > a:focus + ul {
+					opacity: 1;
+					visibility: visible;
+					transform: translateY(0);
+					max-height: 500px;
+					padding: <?php echo esc_attr( $mobile_submenu_padding_top ); ?> <?php echo esc_attr( $mobile_submenu_padding_right ); ?> <?php echo esc_attr( $mobile_submenu_padding_bottom ); ?> <?php echo esc_attr( $mobile_submenu_padding_left ); ?>;
+					margin: <?php echo esc_attr( $mobile_submenu_margin_top ); ?> <?php echo esc_attr( $mobile_submenu_margin_right ); ?> <?php echo esc_attr( $mobile_submenu_margin_bottom ); ?> <?php echo esc_attr( $mobile_submenu_margin_left ); ?>;
+				}
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-collapsed .orivo-navbar-blocks__menu ul li a {
+					font-size: 16px;
+					border-radius: <?php echo esc_attr( $mobile_submenu_item_radius ); ?> !important;
+				}
+
+				/* Mobile Position Bottom */
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-position-bottom .orivo-navbar-blocks__menu {
+					top: auto;
+					bottom: <?php echo (int) $mobile_menu_top_position; ?>px;
+					transform: translateY(20px);
+				}
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-position-bottom .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__menu {
+					transform: translateY(0) !important;
+				}
+
+				/* Mobile Full Width */
+				#<?php echo esc_attr( $wrap_id ); ?>.mobile-full-width .orivo-navbar-blocks__menu {
+					left: 0;
+					right: 0;
+					width: 100%;
+				}
 			}
 		</style>
 

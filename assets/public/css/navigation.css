@@ -57,12 +57,11 @@
 
 /* menu */
 .orivo-navbar-blocks__menu{
-  list-style:none;
-  display:flex;
-  gap:40px;
-  align-items:center;
-  margin:0;
-  padding:0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 !important;
 }
 
 /* ===== IMPORTANT: theme override fix ===== */
@@ -114,12 +113,12 @@
 /* dropdown support */
 .orivo-navbar-blocks__menu li{position:relative;}
 .orivo-navbar-blocks__menu ul{
+  overflow: hidden;
   position:absolute;
   top:100%;
   left:0;
   min-width:200px;
-  padding:8px 0;
-  margin:10px 0 0;
+  margin: 0;
   list-style:none;
   background:#fff;
   border-radius:12px;
@@ -146,61 +145,7 @@
 }
 
 /* ============ MOBILE ============ */
-@media (max-width:768px){
-  .orivo-navbar-blocks__container{
-    height:60px;
-    justify-content:flex-start;
-  }
-  .orivo-navbar-blocks__toggle-btn{display:block;}
-
-  .orivo-navbar-blocks__menu{
-    position:fixed;
-    top:80px;
-    left:20px;
-    right:20px;
-    width:calc(100% - 40px);
-    flex-direction:column;
-    row-gap:16px;
-    padding:32px 24px;
-    background:#fff;
-    -webkit-backdrop-filter:blur(20px);
-    backdrop-filter:blur(20px);
-    box-shadow:0 8px 32px rgba(0,0,0,.20);
-    border-radius:16px;
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(-20px);
-    transition:.3s ease;
-    z-index:10001;
-  }
-
-  .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__menu{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-  }
-
-  .orivo-navbar-blocks__menu > li > a{
-    display:block;
-    width:100%;
-    font-size:18px;
-    padding:12px;
-    border-radius:12px;
-    text-align:center;
-  }
-  .orivo-navbar-blocks__menu > li > a::after{display:none !important;}
-
-  /* submenus in mobile stack */
-  .orivo-navbar-blocks__menu ul{
-    position:static;
-    opacity:1;
-    visibility:visible;
-    transform:none;
-    box-shadow:none;
-    margin:6px 0 0;
-    padding-left:10px;
-  }
-}
+/* Mobile styles are now generated dynamically in PHP based on user's breakpoint setting */
 
 /* ============ DROPDOWN ANIMATIONS ============ */
 /* None */
@@ -224,26 +169,7 @@
 }
 
 /* ============ MOBILE POSITION ============ */
-@media (max-width:768px){
-  /* Mobile Position Bottom */
-  .orivo-navbar-blocks.mobile-position-bottom .orivo-navbar-blocks__menu{
-    top:auto;
-    bottom:80px;
-    transform:translateY(20px);
-  }
-
-  .orivo-navbar-blocks.mobile-position-bottom .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__menu{
-    transform:translateY(0);
-  }
-
-  /* Mobile Full Width */
-  .orivo-navbar-blocks.mobile-full-width .orivo-navbar-blocks__menu{
-    left:0;
-    right:0;
-    width:100%;
-    border-radius:16px 16px 0 0;
-  }
-}
+/* Mobile position styles are now generated dynamically in PHP based on user's breakpoint setting */
 
 /* ============ DROPDOWN INDICATORS ============ */
 /* Icon indicator */
