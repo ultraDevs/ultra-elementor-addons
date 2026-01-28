@@ -362,16 +362,6 @@ class Navbar extends Widgets_Base {
 			]
 		);
 
-		$this->add_control(
-			'menu_background',
-			[
-				'label'       => __( 'Menu Background (Desktop)', 'ultra-elementor-addons' ),
-				'description' => __( 'Background color for menu on desktop only. Mobile uses "Mobile Menu Background" option below.', 'ultra-elementor-addons' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'     => 'transparent',
-			]
-		);
-
 		$this->add_responsive_control(
 			'menu_gap',
 			[
@@ -538,6 +528,18 @@ class Navbar extends Widgets_Base {
 
 		$this->end_controls_tabs();
 
+		$this->add_control(
+			'mobile_menu_bg_toggle',
+			[
+				'label'     => __( 'Mobile Menu Background (on Toggle Open)', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__menu' => 'background: {{VALUE}} !important;',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/* ========================
@@ -568,7 +570,7 @@ class Navbar extends Widgets_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul' => 'background: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -581,6 +583,18 @@ class Navbar extends Widgets_Base {
 				'default'   => '#333333',
 				'selectors' => [
 					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'submenu_item_bg',
+			[
+				'label'     => __( 'Item Background', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => 'transparent',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__menu ul li a' => 'background: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -832,9 +846,24 @@ class Navbar extends Widgets_Base {
 		$this->add_control(
 			'mobile_menu_bg',
 			[
-				'label'     => __( 'Mobile Menu Background', 'ultra-elementor-addons' ),
+				'label'     => __( 'Mobile Menu Background (on Toggle Open)', 'ultra-elementor-addons' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__menu' => 'background: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'container_bg_on_toggle_open',
+			[
+				'label'     => __( 'Container Background on Menu Open', 'ultra-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__container' => 'background: {{VALUE}};',
+				],
 			]
 		);
 
@@ -1033,13 +1062,23 @@ class Navbar extends Widgets_Base {
 		$mobile_submenu_margin_bottom = isset( $mobile_submenu_margin['bottom'] ) ? $mobile_submenu_margin['bottom'] . $pm_unit : '0';
 		$mobile_submenu_margin_left = isset( $mobile_submenu_margin['left'] ) ? $mobile_submenu_margin['left'] . $pm_unit : '0';
 
+		// Submenu background (used for both desktop and mobile)
+		$submenu_bg_color = $s['submenu_bg_color'] ?? '#ffffff';
+
 		// Mobile submenu item border radius - for mobile submenu items
 		$mobile_submenu_item_radius_setting = $s['mobile_submenu_item_radius'] ?? [];
 		$radius_unit = isset( $mobile_submenu_item_radius_setting['unit'] ) ? $mobile_submenu_item_radius_setting['unit'] : 'px';
 		$mobile_submenu_item_radius = isset( $mobile_submenu_item_radius_setting['size'] ) ? $mobile_submenu_item_radius_setting['size'] . $radius_unit : '8px';
 
-		// Mobile menu background
-		$mobile_menu_bg = $s['mobile_menu_bg'] ?? '#ffffff';
+		// Mobile menu background - check both controls
+		$mobile_menu_bg_toggle = $s['mobile_menu_bg_toggle'] ?? '';
+		$mobile_menu_bg_from_setting = $s['mobile_menu_bg'] ?? '#ffffff';
+
+		// Use mobile_menu_bg_toggle if it's set, otherwise use mobile_menu_bg
+		$mobile_menu_bg = ! empty( $mobile_menu_bg_toggle ) ? $mobile_menu_bg_toggle : $mobile_menu_bg_from_setting;
+
+		// Container background on toggle open
+		$container_bg_on_toggle_open = $s['container_bg_on_toggle_open'] ?? '';
 
 		// Desktop menu background (separate from mobile)
 		$menu_background = $s['menu_background'] ?? 'transparent';
@@ -1144,6 +1183,12 @@ class Navbar extends Widgets_Base {
 				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__toggle-btn {
 					display: block;
 				}
+				/* Container background when toggle is open */
+				<?php if ( ! empty( $container_bg_on_toggle_open ) ): ?>
+				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__toggle:checked ~ .orivo-navbar-blocks__container {
+					background: <?php echo esc_attr( $container_bg_on_toggle_open ); ?> !important;
+				}
+				<?php endif; ?>
 				#<?php echo esc_attr( $wrap_id ); ?> .orivo-navbar-blocks__menu {
 					position: fixed;
 					top: <?php echo (int) $mobile_menu_top_position; ?>px;
@@ -1191,7 +1236,7 @@ class Navbar extends Widgets_Base {
 					box-shadow: 0 2px 8px rgba(0,0,0,.10);
 					padding: <?php echo esc_attr( $mobile_submenu_padding_top ); ?> <?php echo esc_attr( $mobile_submenu_padding_right ); ?> <?php echo esc_attr( $mobile_submenu_padding_bottom ); ?> <?php echo esc_attr( $mobile_submenu_padding_left ); ?>;
 					margin: <?php echo esc_attr( $mobile_submenu_margin_top ); ?> <?php echo esc_attr( $mobile_submenu_margin_right ); ?> <?php echo esc_attr( $mobile_submenu_margin_bottom ); ?> <?php echo esc_attr( $mobile_submenu_margin_left ); ?>;
-					background: rgba(0,0,0,.03);
+					background: <?php echo esc_attr( $submenu_bg_color ); ?> !important;
 				}
 				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-always-open .orivo-navbar-blocks__menu ul li a {
 					font-size: 16px;
@@ -1210,7 +1255,7 @@ class Navbar extends Widgets_Base {
 					margin: 0;
 					padding: 0;
 					transition: all .3s ease;
-					background: rgba(0,0,0,.03);
+					background: <?php echo esc_attr( $submenu_bg_color ); ?> !important;
 				}
 				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-collapsed .orivo-navbar-blocks__menu li:hover > ul,
 				#<?php echo esc_attr( $wrap_id ); ?>.mobile-submenu-collapsed .orivo-navbar-blocks__menu li > a:focus + ul {
